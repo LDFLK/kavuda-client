@@ -20,7 +20,7 @@ class TrendingListItem extends Component {
             primary="Presidential Election: Still not decided to contest - President"
             secondary={
               <React.Fragment>
-                {"Mon Aug 05 20 19"}
+                {"Mon Aug 05 2019"}
               </React.Fragment>
 
             }
