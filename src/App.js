@@ -6,7 +6,7 @@ import {
 import './App.css';
 import Header from "./components/header";
 import Footer from "./components/footer";
-import Container from "./components/container";
+import Home from "./components/home";
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
                  }
           />
           <Route path="/"
-                 render={(props) => <Container {...props}
+                 render={(props) => <Home {...props}
                  />
                  }
           />

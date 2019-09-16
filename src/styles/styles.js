@@ -1,17 +1,17 @@
 const Styles = theme => ({
   appBar: {
     backgroundColor: '#282c34',
-    padding: 10,
+    padding: theme.spacing(2),
   },
   container: {
     backgroundColor: '#eeeeee',
-    padding: '10px',
+    padding: theme.spacing(2),
     flexGrow: 1,
   },
   footer: {
     backgroundColor: '#282c34',
-    paddingTop: 20,
-    paddingBottom: 10,
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(2),
   },
   paper: {
     margin: 10,
@@ -25,6 +25,9 @@ const Styles = theme => ({
   },
   inline: {
     display: 'inline',
+  },
+  itemLink:{
+    textDecoration:'none',
   },
 });
 
