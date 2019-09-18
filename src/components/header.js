@@ -6,6 +6,8 @@ import InputBase from "@material-ui/core/InputBase/InputBase";
 import BeatLoader from 'react-spinners/BeatLoader';
 import {css} from '@emotion/core';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import {Link} from "react-router-dom";
 
 const override = css`
     display: block;
@@ -36,8 +38,12 @@ class Header extends Component {
     return (
       <AppBar className={classes.appBar} position="static">
         <Grid container width={1}>
-          <Grid item xs={3}>
+          <Grid item>
+            <Typography component={Link} to="/" style={{textDecoration: 'none'}}
+                        variant="h6"
+                        color="inherit" noWrap>
             Kavuda.lk
+            </Typography>
           </Grid>
           <Grid item xs={6}>
             <div className={classes.search}>
@@ -55,7 +61,7 @@ class Header extends Component {
               </form>
             </div>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item>
             <BeatLoader
               css={override}
               sizeUnit={"px"}

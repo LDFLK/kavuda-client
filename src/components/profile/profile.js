@@ -7,11 +7,22 @@ import TrendingList from "../trending/trendingList";
 import MainContentList from "../latest/mainContentList"
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
+import FormattedContent from "./formattedContent";
 
 class Profile extends Component {
 
+  componentDidMount() {
+    this.props.getEntity(this.props.match.params.title);
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.match.params.title !== this.props.match.params.title) {
+      this.props.getEntity(this.props.match.params.title);
+    }
+  }
+
   render() {
-    const {classes} = this.props;
+    const {classes, loadedEntity} = this.props;
     return (
       <Grid className={classes.container} container width={1}>
         <Grid item xs={3}>
@@ -24,18 +35,23 @@ class Profile extends Component {
           <Paper className={classes.paper}>
             <Grid container width={1}>
               <Grid item>
-                <Avatar alt="Profile Image" src="avatar.png" className={classes.bigAvatar}/>
+                {loadedEntity.image_url === "" ?
+                  <Avatar alt={loadedEntity.title} src="avatar.png" className={classes.bigAvatar}/>
+                  :<Avatar alt={loadedEntity.title} src={loadedEntity.image_url} className={classes.bigAvatar}/>
+                }
+
               </Grid>
               <Grid item xs={9}>
                 <Typography variant="h4" gutterBottom>
-                  Profile Name
+                  {loadedEntity.title}
                 </Typography>
-                <Typography variant="body1" gutterBottom>
-                  body1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
-                  unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam
-                  dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-                </Typography>
-
+                  <table>
+                    <tbody>
+                    {loadedEntity.attributes ? loadedEntity.attributes.map((attribute) => (
+                      <FormattedContent key={attribute.name} content={attribute}/>
+                    )) : null}
+                    </tbody>
+                  </table>
               </Grid>
             </Grid>
             <MainContentList/>

@@ -72,8 +72,8 @@ const Styles = theme => ({
   },
   bigAvatar: {
     margin: 10,
-    width: 60,
-    height: 60,
+    width: 100,
+    height: 100,
   },
 });
 

@@ -9,17 +9,20 @@ import Grid from "@material-ui/core/Grid/Grid";
 class RelatedLinkItem extends Component {
 
   render() {
-    const {classes} = this.props;
+    const {classes, imageUrl, title} = this.props;
     return (
       <Grid item>
-        <Link className={classes.link} to={'#'}>
-          <Avatar alt="No Image" src="avatar.png"/>
+        <Link className={classes.link} to={"/profile/"+title}>
+          {imageUrl === "" ?
+            <Avatar alt={title} src="avatar.png"/>
+            :<Avatar alt={title} src={imageUrl}/>
+          }
           <Typography
             component="span"
             variant="body2"
             className={classes.inline}
             color="textPrimary">
-            Long Entity Text 1
+            {title}
           </Typography>
         </Link>
       </Grid>

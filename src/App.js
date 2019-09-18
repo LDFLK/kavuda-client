@@ -98,9 +98,12 @@ class App extends Component {
                    />
                    }
             />
-            <Route path="/search"
+            <Route path="/search/:searchKey"
                    render={(props) => <SearchResult {...props}
                                                     searchKey={this.state.searchKey}
+                                                    handleChange={this.handleChange}
+                                                    searchResults={this.state.searchResults}
+                                                    getSearchResults={this.getSearchResults}
 
                    />
                    }

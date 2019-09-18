@@ -16,9 +16,6 @@ class Home extends Component {
           <Paper className={classes.paper}>
             Latest
             <MainContentList/>
-            <MainContentList/>
-            <MainContentList/>
-            <MainContentList/>
           </Paper>
         </Grid>
         <Grid item xs={3}>

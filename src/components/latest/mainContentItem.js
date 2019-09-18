@@ -14,26 +14,29 @@ import {Link} from "react-router-dom";
 class MainContentItem extends Component {
 
   render() {
-    const {classes} = this.props;
+    const {classes,imageUrl, title, subtitle, description, links} = this.props;
     return (
       <div>
         <Divider variant="inset" component="li"/>
         <ListItem alignItems="flex-start">
           <Grid container width={1} spacing={2}>
               <Grid item md={1}>
-                <Link className={classes.itemLink} to={'#'}>
+                <Link className={classes.itemLink} to={"profile/"+title}>
                 <ListItemAvatar>
-                  <Avatar alt="Remy Sharp" src="avatar.png"/>
+                  {imageUrl === "" ?
+                    <Avatar alt={title} src="avatar.png"/>
+                    :<Avatar alt={title} src={imageUrl}/>
+                  }
                 </ListItemAvatar>
                 </Link>
               </Grid>
               <Grid item md={11}>
-                <Link className={classes.itemLink} to={'#'}>
+                <Link className={classes.itemLink} to={"/profile/"+title}>
                 <ListItemText
-                  primary="Presidential Election: Still not decided to contest - President"
+                  primary={title}
                   secondary={
                     <React.Fragment>
-                      {"Mon Aug 05 20 19"}
+                      {subtitle}
                       <br/>
                       <Typography
                         component="span"
@@ -41,9 +44,7 @@ class MainContentItem extends Component {
                         className={classes.inline}
                         color="textPrimary"
                       >
-                        President Maithripala Sirisena said he has not yet decided whether to contest or not at the
-                        next
-                        presidential election although there are many requests for him to contest.
+                        {description}
                       </Typography>
                     </React.Fragment>
 
@@ -54,7 +55,7 @@ class MainContentItem extends Component {
             <Grid item md={1}>
             </Grid>
             <Grid item md={11}>
-              <RelatedLinkList/>
+              <RelatedLinkList links={links}/>
             </Grid>
           </Grid>
         </ListItem>
