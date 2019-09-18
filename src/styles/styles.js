@@ -75,6 +75,12 @@ const Styles = theme => ({
     width: 100,
     height: 100,
   },
+  searchAvatar: {
+    margin: 10,
+    width: "80%",
+    height: "80%",
+    maxHeight:100,
+  },
 });
 
 export default Styles;

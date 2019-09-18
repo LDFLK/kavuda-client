@@ -35,11 +35,7 @@ class Profile extends Component {
           <Paper className={classes.paper}>
             <Grid container width={1}>
               <Grid item>
-                {loadedEntity.image_url === "" ?
-                  <Avatar alt={loadedEntity.title} src="avatar.png" className={classes.bigAvatar}/>
-                  :<Avatar alt={loadedEntity.title} src={loadedEntity.image_url} className={classes.bigAvatar}/>
-                }
-
+                <Avatar alt={title} src={loadedEntity.image_url === "" ? "avatar.png" : loadedEntity.image_url} className={classes.bigAvatar}/>
               </Grid>
               <Grid item xs={9}>
                 <Typography variant="h4" gutterBottom>
@@ -54,9 +50,6 @@ class Profile extends Component {
                   </table>
               </Grid>
             </Grid>
-            <MainContentList/>
-            <MainContentList/>
-            <MainContentList/>
             <MainContentList/>
           </Paper>
         </Grid>
