@@ -8,28 +8,35 @@ import MainContentList from "../latest/mainContentList"
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import FormattedContent from "./formattedContent";
+import Box from '@material-ui/core/Box';
+import Divider from "@material-ui/core/Divider/Divider";
+import {Link} from "react-router-dom";
 
 class Profile extends Component {
 
   componentDidMount() {
     this.props.getEntity(this.props.match.params.title);
+    this.props.getRelatedResults(this.props.match.params.title);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.match.params.title !== this.props.match.params.title) {
       this.props.getEntity(this.props.match.params.title);
+      this.props.getRelatedResults(this.props.match.params.title);
     }
   }
 
   render() {
-    const {classes, loadedEntity, relatedResults, getRelatedResults} = this.props;
+    const {classes, loadedEntity, internalLinks, getInternalLinks, relatedResults} = this.props;
     return (
       <Grid className={classes.container} container width={1}>
         <Grid item xs={3}>
           <Paper className={classes.paper}>
-            Related
-            <TrendingList results={relatedResults} getResults={getRelatedResults}
-                          searchParam={loadedEntity ? loadedEntity.title : ""}/>
+            Internal Links
+            <Box height="90vh" overflow="auto">
+              <TrendingList results={internalLinks} getResults={getInternalLinks}
+                            searchParam={loadedEntity ? loadedEntity.title : ""}/>
+            </Box>
           </Paper>
         </Grid>
         <Grid item xs={9}>
@@ -40,20 +47,38 @@ class Profile extends Component {
                         src={loadedEntity.image_url === "" ? "avatar.png" : loadedEntity.image_url}
                         className={classes.bigAvatar}/>
               </Grid>
-              <Grid item xs={9}>
+              <Grid item xs={10}>
                 <Typography variant="h4" gutterBottom>
                   {loadedEntity.title}
                 </Typography>
-                <table>
-                  <tbody>
-                  {loadedEntity.attributes ? loadedEntity.attributes.map((attribute) => (
-                    <FormattedContent key={attribute.name} content={attribute}/>
-                  )) : null}
-                  </tbody>
-                </table>
+                <Box maxHeight="70vh" overflow="auto">
+                  <table>
+                    <tbody>
+                    {loadedEntity.attributes ? loadedEntity.attributes.map((attribute) => (
+                      <FormattedContent key={attribute.name} content={attribute}/>
+                    )) : null}
+                    </tbody>
+                  </table>
+                </Box>
+                <Typography variant="subtitle1">
+                  {loadedEntity.categories ? loadedEntity.categories.map((tag) =>
+                    <Link key={tag} className={classes.link} to={"/search/" + tag+":"}>
+                      {tag}
+                    </Link>
+                  ) : null}
+                </Typography>
               </Grid>
             </Grid>
-            <MainContentList/>
+            <Grid item xs={12}>
+              <Divider variant="inset" component="div"/>
+            </Grid>
+            <Grid item xs={11}>
+              <br/>
+              Related Articles
+              <Box maxHeight="70vh" overflow="auto">
+                <MainContentList listItems={relatedResults}/>
+              </Box>
+            </Grid>
           </Paper>
         </Grid>
       </Grid>

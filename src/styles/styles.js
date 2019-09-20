@@ -28,6 +28,9 @@ const Styles = theme => ({
   inline: {
     display: 'inline',
   },
+  link:{
+    paddingRight: '10px',
+  },
   itemLink:{
     textDecoration:'none',
   },

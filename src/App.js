@@ -22,6 +22,7 @@ class App extends Component {
       homeResults: [],
       loadedEntity: [],
       relatedResults: [],
+      internalLinks: [],
       loading: true
     };
 
@@ -31,6 +32,7 @@ class App extends Component {
     this.getSearchResults = this.getSearchResults.bind(this);
     this.getTrendingResults = this.getTrendingResults.bind(this);
     this.getRelatedResults = this.getRelatedResults.bind(this);
+    this.getInternalLinks = this.getInternalLinks.bind(this);
     this.getHomeResults = this.getHomeResults.bind(this);
     this.getEntity = this.getEntity.bind(this);
   }
@@ -78,17 +80,36 @@ class App extends Component {
   }
 
   getRelatedResults(title) {
-    this.startLoading();
-    let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/linked/' + title;
-    fetch(searchUrl, {
-      method: 'GET'
-    }).then(results => {
-      return results.json();
-    }).then(data => {
-      this.handleChange("relatedResults", data);
-    }).then(
-      end => this.endLoading()
-    );
+    if (title !== undefined) {
+      this.startLoading();
+      let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/relations/' + title;
+      fetch(searchUrl, {
+        method: 'GET'
+      }).then(results => {
+        return results.json();
+      }).then(data => {
+        this.handleChange("relatedResults", data);
+      }).then(
+        end => this.endLoading()
+      );
+    }
+
+  }
+
+  getInternalLinks(title) {
+    if (title !== undefined) {
+      this.startLoading();
+      let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/linked/' + title;
+      fetch(searchUrl, {
+        method: 'GET'
+      }).then(results => {
+        return results.json();
+      }).then(data => {
+        this.handleChange("internalLinks", data);
+      }).then(
+        end => this.endLoading()
+      );
+    }
 
   }
 
@@ -173,6 +194,8 @@ class App extends Component {
                                                handleChange={this.handleChange}
                                                relatedResults={this.state.relatedResults}
                                                getRelatedResults={this.getRelatedResults}
+                                               internalLinks={this.state.internalLinks}
+                                               getInternalLinks={this.getInternalLinks}
                    />}
             />
             <Route path="/"
