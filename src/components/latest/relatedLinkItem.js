@@ -4,7 +4,7 @@ import Styles from "../../styles/styles"
 import {Link} from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar/Avatar";
 import Grid from "@material-ui/core/Grid/Grid";
-import ReactTooltip from 'react-tooltip'
+import Tooltip from '@material-ui/core/Tooltip';
 
 class RelatedLinkItem extends Component {
 
@@ -12,10 +12,11 @@ class RelatedLinkItem extends Component {
     const {classes, imageUrl, title} = this.props;
     return (
       <Grid item>
-        <Link data-tip={title} className={classes.link} to={"/profile/" + title}>
-          <Avatar alt={title} src={imageUrl === "" ? "avatar.png" : imageUrl}/>
-          <ReactTooltip/>
-        </Link>
+        <Tooltip title={title} aria-label="add">
+          <Link data-tip={title} className={classes.link} to={"/profile/" + title}>
+            <Avatar alt={title} src={imageUrl === "" ? "avatar.png" : imageUrl}/>
+          </Link>
+        </Tooltip>
       </Grid>
     )
   }

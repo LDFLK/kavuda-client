@@ -8,14 +8,18 @@ import MainContentList from "./latest/mainContentList"
 
 class Home extends Component {
 
+  componentDidMount() {
+    this.props.getHomeResults(this.props.match.params.searchKey);
+  }
+
   render() {
-    const {classes} = this.props;
+    const {classes, homeResults} = this.props;
     return (
       <Grid className={classes.container} container width={1}>
         <Grid item xs={9}>
           <Paper className={classes.paper}>
             Latest
-            <MainContentList/>
+            <MainContentList listItems={homeResults}/>
           </Paper>
         </Grid>
         <Grid item xs={3}>

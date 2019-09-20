@@ -35,7 +35,7 @@ class Profile extends Component {
           <Paper className={classes.paper}>
             <Grid container width={1}>
               <Grid item>
-                <Avatar alt={title} src={loadedEntity.image_url === "" ? "avatar.png" : loadedEntity.image_url} className={classes.bigAvatar}/>
+                <Avatar alt={loadedEntity.title} src={loadedEntity.image_url === "" ? "avatar.png" : loadedEntity.image_url} className={classes.bigAvatar}/>
               </Grid>
               <Grid item xs={9}>
                 <Typography variant="h4" gutterBottom>

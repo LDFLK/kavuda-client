@@ -18,6 +18,7 @@ class App extends Component {
     this.state = {
       searchKey: "",
       searchResults: [],
+      homeResults: [],
       loadedEntity: [],
       loading: true
     };
@@ -26,6 +27,7 @@ class App extends Component {
     this.startLoading = this.startLoading.bind(this);
     this.endLoading = this.endLoading.bind(this);
     this.getSearchResults = this.getSearchResults.bind(this);
+    this.getHomeResults = this.getHomeResults.bind(this);
     this.getEntity = this.getEntity.bind(this);
   }
 
@@ -39,6 +41,21 @@ class App extends Component {
 
   handleChange(key, value) {
     this.setState({[key]: value});
+  }
+
+  getHomeResults() {
+    this.startLoading();
+    let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=&categories=News';
+    fetch(searchUrl, {
+      method: 'GET'
+    }).then(results => {
+      return results.json();
+    }).then(data => {
+      this.handleChange("homeResults", data);
+    }).then(
+      end => this.endLoading()
+    );
+
   }
 
   getSearchResults(searchKey) {
@@ -95,24 +112,26 @@ class App extends Component {
             />
             <Route exact path="/"
                    render={(props) => <Home {...props}
+                                            homeResults={this.state.homeResults}
+                                            getHomeResults={this.getHomeResults}
                    />
                    }
             />
-            <Route path="/search/:searchKey"
-                   render={(props) => <SearchResult {...props}
-                                                    searchKey={this.state.searchKey}
-                                                    handleChange={this.handleChange}
-                                                    searchResults={this.state.searchResults}
-                                                    getSearchResults={this.getSearchResults}
+            < Route path="/search/:searchKey"
+                    render={(props) => <SearchResult {...props}
+                                                     searchKey={this.state.searchKey}
+                                                     handleChange={this.handleChange}
+                                                     searchResults={this.state.searchResults}
+                                                     getSearchResults={this.getSearchResults}
 
-                   />
-                   }
+                    />
+                    }
             />
             <Route path="/profile/:title"
                    render={(props) => <Profile {...props}
-                                                  getEntity={this.getEntity}
-                                                  loadedEntity={this.state.loadedEntity}
-                                                  handleChange={this.handleChange}
+                                               getEntity={this.getEntity}
+                                               loadedEntity={this.state.loadedEntity}
+                                               handleChange={this.handleChange}
                    />}
             />
             <Route path="/"
