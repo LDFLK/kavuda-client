@@ -18,8 +18,10 @@ class App extends Component {
     this.state = {
       searchKey: "",
       searchResults: [],
+      trendingResults: [],
       homeResults: [],
       loadedEntity: [],
+      relatedResults: [],
       loading: true
     };
 
@@ -27,6 +29,8 @@ class App extends Component {
     this.startLoading = this.startLoading.bind(this);
     this.endLoading = this.endLoading.bind(this);
     this.getSearchResults = this.getSearchResults.bind(this);
+    this.getTrendingResults = this.getTrendingResults.bind(this);
+    this.getRelatedResults = this.getRelatedResults.bind(this);
     this.getHomeResults = this.getHomeResults.bind(this);
     this.getEntity = this.getEntity.bind(this);
   }
@@ -57,6 +61,37 @@ class App extends Component {
     );
 
   }
+
+  getTrendingResults() {
+    this.startLoading();
+    let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=&categories=News';
+    fetch(searchUrl, {
+      method: 'GET'
+    }).then(results => {
+      return results.json();
+    }).then(data => {
+      this.handleChange("trendingResults", data);
+    }).then(
+      end => this.endLoading()
+    );
+
+  }
+
+  getRelatedResults(title) {
+    this.startLoading();
+    let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/linked/' + title;
+    fetch(searchUrl, {
+      method: 'GET'
+    }).then(results => {
+      return results.json();
+    }).then(data => {
+      this.handleChange("relatedResults", data);
+    }).then(
+      end => this.endLoading()
+    );
+
+  }
+
 
   getSearchResults(searchKey) {
     this.startLoading();
@@ -114,6 +149,8 @@ class App extends Component {
                    render={(props) => <Home {...props}
                                             homeResults={this.state.homeResults}
                                             getHomeResults={this.getHomeResults}
+                                            trendingResults={this.state.trendingResults}
+                                            getTrendingResults={this.getTrendingResults}
                    />
                    }
             />
@@ -123,6 +160,8 @@ class App extends Component {
                                                      handleChange={this.handleChange}
                                                      searchResults={this.state.searchResults}
                                                      getSearchResults={this.getSearchResults}
+                                                     trendingResults={this.state.trendingResults}
+                                                     getTrendingResults={this.getTrendingResults}
 
                     />
                     }
@@ -132,6 +171,8 @@ class App extends Component {
                                                getEntity={this.getEntity}
                                                loadedEntity={this.state.loadedEntity}
                                                handleChange={this.handleChange}
+                                               relatedResults={this.state.relatedResults}
+                                               getRelatedResults={this.getRelatedResults}
                    />}
             />
             <Route path="/"

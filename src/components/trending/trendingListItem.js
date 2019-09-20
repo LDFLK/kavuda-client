@@ -5,30 +5,40 @@ import Avatar from "@material-ui/core/Avatar/Avatar";
 import ListItemText from "@material-ui/core/ListItemText/ListItemText";
 import ListItem from "@material-ui/core/ListItem/ListItem";
 import Divider from "@material-ui/core/Divider/Divider";
+import {Link} from "react-router-dom";
+import {withStyles} from "@material-ui/core";
+import Styles from "../../styles/styles";
 
 class TrendingListItem extends Component {
 
   render() {
+    const {classes, title, subtitle, imageUrl} = this.props;
+
     return (
       <div>
         <Divider variant="inset" component="li"/>
         <ListItem alignItems="flex-start">
           <ListItemAvatar>
-            <Avatar alt="Remy Sharp" src="avatar.png"/>
+            <Link className={classes.itemLink} to={"/profile/" + title}>
+              <Avatar alt={title} src={imageUrl === "" ? "avatar.png" : imageUrl}/>
+            </Link>
           </ListItemAvatar>
-          <ListItemText
-            primary="Presidential Election: Still not decided to contest - President"
-            secondary={
-              <React.Fragment>
-                {"Mon Aug 05 2019"}
-              </React.Fragment>
+          <Link className={classes.itemLink} to={"/profile/" + title}>
+            <ListItemText
+              primary={title}
+              secondary={
+                <React.Fragment>
+                  {subtitle}
+                </React.Fragment>
 
-            }
-          />
+              }
+            />
+          </Link>
         </ListItem>
       </div>
     )
   }
 }
 
-export default TrendingListItem;
+export default withStyles(Styles)(TrendingListItem);
+

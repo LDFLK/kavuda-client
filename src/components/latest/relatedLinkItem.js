@@ -13,7 +13,7 @@ class RelatedLinkItem extends Component {
     return (
       <Grid item>
         <Tooltip title={title} aria-label="add">
-          <Link data-tip={title} className={classes.link} to={"/profile/" + title}>
+          <Link className={classes.link} to={"/profile/" + title}>
             <Avatar alt={title} src={imageUrl === "" ? "avatar.png" : imageUrl}/>
           </Link>
         </Tooltip>

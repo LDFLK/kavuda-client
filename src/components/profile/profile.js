@@ -22,32 +22,35 @@ class Profile extends Component {
   }
 
   render() {
-    const {classes, loadedEntity} = this.props;
+    const {classes, loadedEntity, relatedResults, getRelatedResults} = this.props;
     return (
       <Grid className={classes.container} container width={1}>
         <Grid item xs={3}>
           <Paper className={classes.paper}>
             Related
-            <TrendingList/>
+            <TrendingList results={relatedResults} getResults={getRelatedResults}
+                          searchParam={loadedEntity ? loadedEntity.title : ""}/>
           </Paper>
         </Grid>
         <Grid item xs={9}>
           <Paper className={classes.paper}>
             <Grid container width={1}>
               <Grid item>
-                <Avatar alt={loadedEntity.title} src={loadedEntity.image_url === "" ? "avatar.png" : loadedEntity.image_url} className={classes.bigAvatar}/>
+                <Avatar alt={loadedEntity.title}
+                        src={loadedEntity.image_url === "" ? "avatar.png" : loadedEntity.image_url}
+                        className={classes.bigAvatar}/>
               </Grid>
               <Grid item xs={9}>
                 <Typography variant="h4" gutterBottom>
                   {loadedEntity.title}
                 </Typography>
-                  <table>
-                    <tbody>
-                    {loadedEntity.attributes ? loadedEntity.attributes.map((attribute) => (
-                      <FormattedContent key={attribute.name} content={attribute}/>
-                    )) : null}
-                    </tbody>
-                  </table>
+                <table>
+                  <tbody>
+                  {loadedEntity.attributes ? loadedEntity.attributes.map((attribute) => (
+                    <FormattedContent key={attribute.name} content={attribute}/>
+                  )) : null}
+                  </tbody>
+                </table>
               </Grid>
             </Grid>
             <MainContentList/>

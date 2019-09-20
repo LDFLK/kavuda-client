@@ -9,11 +9,11 @@ import MainContentList from "./latest/mainContentList"
 class Home extends Component {
 
   componentDidMount() {
-    this.props.getHomeResults(this.props.match.params.searchKey);
+    this.props.getHomeResults();
   }
 
   render() {
-    const {classes, homeResults} = this.props;
+    const {classes, homeResults, trendingResults, getTrendingResults} = this.props;
     return (
       <Grid className={classes.container} container width={1}>
         <Grid item xs={9}>
@@ -25,7 +25,7 @@ class Home extends Component {
         <Grid item xs={3}>
           <Paper className={classes.paper}>
             Trending
-            <TrendingList/>
+            <TrendingList results={trendingResults} getResults={getTrendingResults}/>
           </Paper>
         </Grid>
       </Grid>

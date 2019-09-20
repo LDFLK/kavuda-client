@@ -20,7 +20,7 @@ class SearchResult extends Component {
   }
 
   render() {
-    const {classes, searchResults} = this.props;
+    const {classes, searchResults, trendingResults, getTrendingResults} = this.props;
     return (
       <Grid className={classes.container} container width={1}>
         <Grid item xs={9}>
@@ -32,7 +32,7 @@ class SearchResult extends Component {
         <Grid item xs={3}>
           <Paper className={classes.paper}>
             Trending
-            <TrendingList/>
+            <TrendingList results={trendingResults} getResults={getTrendingResults}/>
           </Paper>
         </Grid>
       </Grid>
