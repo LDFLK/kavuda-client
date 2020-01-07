@@ -52,6 +52,7 @@ class App extends Component {
   getHomeResults() {
     this.startLoading();
     let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=&categories=News';
+    searchUrl += '&limit=15';
     fetch(searchUrl, {
       method: 'GET'
     }).then(results => {
@@ -67,6 +68,7 @@ class App extends Component {
   getTrendingResults() {
     this.startLoading();
     let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=&categories=News';
+    searchUrl += '&limit=15';
     fetch(searchUrl, {
       method: 'GET'
     }).then(results => {
@@ -83,6 +85,7 @@ class App extends Component {
     if (title !== undefined) {
       this.startLoading();
       let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/relations/' + title;
+      searchUrl += '?limit=15';
       fetch(searchUrl, {
         method: 'GET'
       }).then(results => {
@@ -100,6 +103,7 @@ class App extends Component {
     if (title !== undefined) {
       this.startLoading();
       let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/linked/' + title;
+      searchUrl += '?limit=15';
       fetch(searchUrl, {
         method: 'GET'
       }).then(results => {
@@ -124,6 +128,7 @@ class App extends Component {
       } else {
         searchUrl += searchKey;
       }
+      searchUrl += '&limit=15';
       fetch(searchUrl, {
         method: 'GET'
       }).then(results => {
