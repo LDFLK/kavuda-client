@@ -14,6 +14,19 @@ import {Link} from "react-router-dom";
 
 class Profile extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      collapsed: false,
+    };
+
+    this.toggleCollapse = this.toggleCollapse.bind(this);
+  }
+
+  toggleCollapse() {
+    this.setState({collapsed: !this.state.collapsed});
+  }
+
   componentDidMount() {
     this.props.getEntity(this.props.match.params.title);
     this.props.getRelatedResults(this.props.match.params.title);
@@ -28,6 +41,7 @@ class Profile extends Component {
 
   render() {
     const {classes, loadedEntity, internalLinks, getInternalLinks, relatedResults} = this.props;
+    const {collapsed} = this.state;
 
     if (loadedEntity == null) {
       return (
@@ -70,13 +84,22 @@ class Profile extends Component {
                   )) : null}</Typography>
                   <Typography variant="h4">
                     {loadedEntity.title}
+                    {collapsed ?
+                      <Typography variant="subtitle1" style={{textAlign: 'right',float:'right'}}>
+                        <Link onClick={this.toggleCollapse} key={"collapse-button-bottom"} className={classes.link}
+                              to={"#"}>
+                          {collapsed ? "Hide Content" : "Collapse All"}
+                        </Link>
+                      </Typography>
+                      : null}
                   </Typography>
-                  <Typography variant="body2" gutterBottom>
-                    Original Source: <a className={classes.link} href={loadedEntity.source}>
-                    {loadedEntity.source}
-                  </a>
-                  </Typography>
-                  <Box maxHeight="70vh" overflow="auto">
+                  {loadedEntity.source ?
+                    <Typography variant="body2" gutterBottom>
+                      Original Source: <a className={classes.link} href={loadedEntity.source}>
+                      {loadedEntity.source}
+                    </a>
+                    </Typography> : null}
+                  <Box className={!collapsed ? classes.collapsible : null}>
                     <table className={"entity-attributes"}>
                       <tbody>
                       {loadedEntity.attributes ? loadedEntity.attributes.map((attribute) => (
@@ -85,12 +108,11 @@ class Profile extends Component {
                       </tbody>
                     </table>
                   </Box>
-                  <Typography variant="subtitle1">
-                    {loadedEntity.categories ? loadedEntity.categories.map((tag) =>
-                      <Link key={tag} className={classes.link} to={"/search/" + tag + ":"}>
-                        {tag}
-                      </Link>
-                    ) : null}
+                  <Typography variant="subtitle1" style={{textAlign: 'right'}}>
+                    <Link onClick={this.toggleCollapse} key={"collapse-button-bottom"} className={classes.link}
+                          to={"#"}>
+                      {collapsed ? "Hide Content" : "Collapse All"}
+                    </Link>
                   </Typography>
                 </Grid>
               </Grid>
@@ -100,7 +122,7 @@ class Profile extends Component {
               <Grid item xs={11}>
                 <br/>
                 Related Articles
-                <Box maxHeight="70vh" overflow="auto">
+                <Box>
                   <MainContentList listItems={relatedResults}/>
                 </Box>
               </Grid>

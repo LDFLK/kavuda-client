@@ -26,7 +26,7 @@ const Styles = theme => ({
     padding: theme.spacing(2),
     textAlign: 'left',
     color: theme.palette.text.primary,
-    backgroundColor:'#ddd'
+    backgroundColor: '#ddd'
   },
   trendingListContainer: {
     width: '100%',
@@ -38,11 +38,15 @@ const Styles = theme => ({
   inline: {
     display: 'inline',
   },
-  link:{
+  link: {
     paddingRight: '10px',
   },
-  itemLink:{
-    textDecoration:'none',
+  collapsible: {
+    maxHeight: "300px",
+    overflow: "hidden",
+  },
+  itemLink: {
+    textDecoration: 'none',
   },
   search: {
     position: 'relative',
@@ -92,7 +96,7 @@ const Styles = theme => ({
     margin: 10,
     width: "80%",
     height: "80%",
-    maxHeight:100,
+    maxHeight: 100,
   },
 });
 
