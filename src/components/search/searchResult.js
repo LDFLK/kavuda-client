@@ -30,7 +30,7 @@ class SearchResult extends Component {
           </Paper>
         </Grid>
         <Grid item xs={3}>
-          <Paper className={classes.paper}>
+          <Paper className={classes.trendingContainer}>
             Trending
             <TrendingList results={trendingResults} getResults={getTrendingResults}/>
           </Paper>

@@ -23,11 +23,14 @@ class TrendingList extends Component {
   render() {
     const {classes, results} = this.props;
     return (
-      <List className={classes.listContainer}>
+      <List className={classes.trendingListContainer}>
         {Array.isArray(results) ?
           results.map((item) => (
             <TrendingListItem key={item.title}
-                              imageUrl={item.image_url} title={item.title} subtitle={Moment(item.updated_at).format('DD  MMM YYYY h:mm A')}/>
+                              imageUrl={item.image_url} title={item.title} subtitle={Moment(item.updated_at).format('DD  MMM YYYY h:mm A')}
+                              categories={item.categories}
+            />
+
           ))
           :
           <Typography component="p">

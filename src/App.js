@@ -67,7 +67,7 @@ class App extends Component {
 
   getTrendingResults() {
     this.startLoading();
-    let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=&categories=News';
+    let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=&categories=News,PERSON,ORGANIZATION';
     searchUrl += '&limit=15';
     fetch(searchUrl, {
       method: 'GET'

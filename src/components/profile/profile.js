@@ -47,7 +47,7 @@ class Profile extends Component {
 
           <Grid item xs={3}>
             <Paper className={classes.paper}>
-              Internal Links
+              Related Links
               <Box height="90vh" overflow="auto">
                 <TrendingList results={internalLinks} getResults={getInternalLinks}
                               searchParam={loadedEntity.title}/>
@@ -63,11 +63,21 @@ class Profile extends Component {
                           className={classes.bigAvatar}/>
                 </Grid>
                 <Grid item xs={10}>
-                  <Typography variant="h4" gutterBottom>
+                  <Typography variant="body2">{loadedEntity.categories ? loadedEntity.categories.map((category) => (
+                    <Link key={category} className={classes.link} to={"/search/" + category + ":"}>
+                      {category}
+                    </Link>
+                  )) : null}</Typography>
+                  <Typography variant="h4">
                     {loadedEntity.title}
                   </Typography>
+                  <Typography variant="body2" gutterBottom>
+                    Original Source: <a className={classes.link} href={loadedEntity.source}>
+                    {loadedEntity.source}
+                  </a>
+                  </Typography>
                   <Box maxHeight="70vh" overflow="auto">
-                    <table>
+                    <table className={"entity-attributes"}>
                       <tbody>
                       {loadedEntity.attributes ? loadedEntity.attributes.map((attribute) => (
                         <FormattedContent key={attribute.name} content={attribute}/>

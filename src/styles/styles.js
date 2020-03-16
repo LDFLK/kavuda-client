@@ -21,6 +21,16 @@ const Styles = theme => ({
     textAlign: 'left',
     color: theme.palette.text.primary,
   },
+  trendingContainer: {
+    margin: 10,
+    padding: theme.spacing(2),
+    textAlign: 'left',
+    color: theme.palette.text.primary,
+    backgroundColor:'#ddd'
+  },
+  trendingListContainer: {
+    width: '100%',
+  },
   listContainer: {
     width: '100%',
     backgroundColor: theme.palette.background.paper,

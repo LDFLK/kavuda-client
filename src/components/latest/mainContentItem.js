@@ -13,7 +13,7 @@ import {Link} from "react-router-dom";
 class MainContentItem extends Component {
 
   render() {
-    const {classes, imageUrl, title, subtitle, description, links} = this.props;
+    const {classes, imageUrl, title, subtitle, description, links, categories} = this.props;
     return (
       <div>
         <Divider variant="inset" component="li"/>
@@ -27,6 +27,11 @@ class MainContentItem extends Component {
             <Grid item md={11}>
               <Grid container width={1}>
                 <Grid item md={12}>
+                  <Typography variant="body2">{categories ? categories.map((category) => (
+                    <Link key={category} className={classes.link} to={"/search/" + category + ":"}>
+                      {category}
+                    </Link>
+                  )) : null}</Typography>
                   <Link className={classes.itemLink} to={"/profile/" + title}>
                     <ListItemText
                       primary={title}
