@@ -62,10 +62,8 @@ class Profile extends Component {
           <Grid item xs={3}>
             <Paper className={classes.paper}>
               Related Links
-              <Box height="90vh" overflow="auto">
                 <TrendingList results={internalLinks} getResults={getInternalLinks}
                               searchParam={loadedEntity.title}/>
-              </Box>
             </Paper>
           </Grid>
           < Grid item xs={9}>
