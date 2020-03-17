@@ -102,8 +102,8 @@ class Profile extends Component {
                   <Box className={!collapsed ? classes.collapsible : null}>
                     <table className={"entity-attributes"}>
                       <tbody>
-                      {loadedEntity.attributes ? loadedEntity.attributes.map((attribute) => (
-                        <FormattedContent key={attribute.name} content={attribute}/>
+                      {loadedEntity.attributes ? Object.entries(loadedEntity.attributes).map((attribute) => (
+                        <FormattedContent key={attribute[1].name} content={attribute[1]}/>
                       )) : null}
                       </tbody>
                     </table>
