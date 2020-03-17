@@ -84,27 +84,38 @@ class Profile extends Component {
                   )) : null}</Typography>
                   <Typography variant="h4">
                     {loadedEntity.title}
-                    {collapsed ?
-                      <Typography variant="subtitle1" style={{textAlign: 'right',float:'right'}}>
-                        <Link onClick={this.toggleCollapse} key={"collapse-button-bottom"} className={classes.link}
-                              to={"#"}>
-                          {collapsed ? "Hide Content" : "Collapse All"}
-                        </Link>
-                      </Typography>
-                      : null}
                   </Typography>
+                  {collapsed ?
+                    <Typography variant="subtitle1" style={{textAlign: 'right', float: 'right'}}>
+                      <Link onClick={this.toggleCollapse} key={"collapse-button-bottom"} className={classes.link}
+                            to={"#"}>
+                        {collapsed ? "Hide Content" : "Collapse All"}
+                      </Link>
+                    </Typography>
+                    : null}
                   {loadedEntity.source ?
-                    <Typography variant="body2" gutterBottom>
+                    <Typography variant="body2">
                       Original Source: <a className={classes.link} href={loadedEntity.source}>
                       {loadedEntity.source}
                     </a>
                     </Typography> : null}
+
+                  {loadedEntity.attributes ?
+                    <Typography variant="body2">
+                      {loadedEntity.attributes.author && loadedEntity.attributes.author.values[0].value_string ?
+                        "Author: " + loadedEntity.attributes.author.values[0].value_string
+                        : null}
+                      {loadedEntity.attributes.date && loadedEntity.attributes.date.values[0].value_string ?
+                        "Date: " + new Date(loadedEntity.attributes.date.values[0].value_string).toDateString()
+                        : null}
+                    </Typography> : null}
+
                   <Box className={!collapsed ? classes.collapsible : null}>
                     <table className={"entity-attributes"}>
                       <tbody>
-                      {loadedEntity.attributes ? Object.entries(loadedEntity.attributes).map((attribute) => (
-                        <FormattedContent key={attribute[1].name} content={attribute[1]}/>
-                      )) : null}
+                      {loadedEntity.attributes && loadedEntity.attributes[""] ?
+                        <FormattedContent key={loadedEntity.attributes[""].name} content={loadedEntity.attributes[""]}/>
+                        : null}
                       </tbody>
                     </table>
                   </Box>
