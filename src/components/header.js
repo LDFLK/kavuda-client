@@ -40,7 +40,7 @@ class Header extends Component {
         <Grid container width={1}>
           <Grid item>
             <Typography component={Link} to="/" style={{textDecoration: 'none'}}
-                        variant="h6"
+                        variant="h4"
                         color="inherit" noWrap>
             Kavuda.lk
             </Typography>

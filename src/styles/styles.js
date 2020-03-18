@@ -46,6 +46,7 @@ const Styles = theme => ({
     overflow: "hidden",
   },
   itemLink: {
+    display: 'inline',
     textDecoration: 'none',
   },
   search: {
@@ -94,9 +95,9 @@ const Styles = theme => ({
   },
   searchAvatar: {
     margin: 10,
-    width: "80%",
-    height: "80%",
-    maxHeight: 100,
+    width: 100,
+    height: 100,
+    float: 'right'
   },
 });
 

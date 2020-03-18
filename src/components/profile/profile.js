@@ -61,9 +61,9 @@ class Profile extends Component {
 
           <Grid item xs={3}>
             <Paper className={classes.paper}>
-              Related Links
-                <TrendingList results={internalLinks} getResults={getInternalLinks}
-                              searchParam={loadedEntity.title}/>
+              <Typography variant="h4" color="inherit" noWrap>Related Links</Typography>
+              <TrendingList results={internalLinks} getResults={getInternalLinks}
+                            searchParam={loadedEntity.title}/>
             </Paper>
           </Grid>
           < Grid item xs={9}>
@@ -112,7 +112,8 @@ class Profile extends Component {
                     <table className={"entity-attributes"}>
                       <tbody>
                       {loadedEntity.attributes && loadedEntity.attributes[""] ?
-                        <FormattedContent key={loadedEntity.attributes[""].name} content={loadedEntity.attributes[""]}/>
+                        <FormattedContent key={loadedEntity.attributes[""].name}
+                                          content={loadedEntity.attributes[""]}/>
                         : null}
                       </tbody>
                     </table>
@@ -130,7 +131,7 @@ class Profile extends Component {
               </Grid>
               <Grid item xs={11}>
                 <br/>
-                Related Articles
+                <Typography variant="h4" color="inherit" noWrap>Related Articles</Typography>
                 <Box>
                   <MainContentList listItems={relatedResults}/>
                 </Box>

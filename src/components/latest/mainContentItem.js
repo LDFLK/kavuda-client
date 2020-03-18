@@ -15,16 +15,16 @@ class MainContentItem extends Component {
   render() {
     const {classes, imageUrl, title, subtitle, description, links, categories} = this.props;
     return (
-      <div>
+      <div >
         <Divider variant="inset" component="li"/>
         <ListItem alignItems="flex-start">
           <Grid container width={1}>
-            <Grid item md={1}>
+            <Grid item md={2}>
               <Link className={classes.itemLink} to={"/profile/" + title}>
                 <Avatar alt={title} src={imageUrl === "" ? "avatar.png" : imageUrl} className={classes.searchAvatar}/>
               </Link>
             </Grid>
-            <Grid item md={11}>
+            <Grid item md={10}>
               <Grid container width={1}>
                 <Grid item md={12}>
                   <Typography variant="body2">{categories ? categories.map((category) => (
@@ -33,7 +33,7 @@ class MainContentItem extends Component {
                     </Link>
                   )) : null}</Typography>
                   <Link className={classes.itemLink} to={"/profile/" + title}>
-                    <ListItemText
+                    <ListItemText style={{margin:0}}
                       primary={title}
                       secondary={
                         <React.Fragment>
