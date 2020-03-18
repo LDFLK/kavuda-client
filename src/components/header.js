@@ -26,10 +26,12 @@ class Header extends Component {
     event.preventDefault();
     if (this.props.searchKey.length > 1) {
       this.props.history.push(`/search/` + this.props.searchKey);
+    }
+  }
 
-      if (this.props.location.pathname !== "/") {
-        this.props.getSearchResults(this.props.searchKey);
-      }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.match.params.searchKey !== this.props.match.params.searchKey) {
+      this.props.getSearchResults(this.props.match.params.searchKey, true);
     }
   }
 
@@ -42,7 +44,7 @@ class Header extends Component {
             <Typography component={Link} to="/" style={{textDecoration: 'none'}}
                         variant="h4"
                         color="inherit" noWrap>
-            Kavuda.lk
+              Kavuda.lk
             </Typography>
           </Grid>
           <Grid item xs={6}>
@@ -72,8 +74,8 @@ class Header extends Component {
           </Grid>
         </Grid>
       </AppBar>
-  )
+    )
   }
-  }
+}
 
-  export default withStyles(Styles)(Header);
+export default withStyles(Styles)(Header);
