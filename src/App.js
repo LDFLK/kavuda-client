@@ -9,7 +9,17 @@ import Footer from "./components/footer";
 import Home from "./components/home";
 import SearchResult from "./components/search/searchResult";
 import Profile from "./components/profile/profile";
+import {createMuiTheme} from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
 
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: [
+      'Didact Gothic',
+      'sans-serif',
+    ].join(','),
+  },
+});
 
 class App extends Component {
 
@@ -160,57 +170,59 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <HashRouter>
-            <Route path="/"
-                   render={(props) => <Header {...props}
-                                              searchKey={this.state.searchKey}
-                                              handleChange={this.handleChange}
-                                              getSearchResults={this.getSearchResults}
-                                              loading={this.state.loading}
-                   />}
-            />
-            <Route exact path="/"
-                   render={(props) => <Home {...props}
-                                            homeResults={this.state.homeResults}
-                                            getHomeResults={this.getHomeResults}
-                                            trendingResults={this.state.trendingResults}
-                                            getTrendingResults={this.getTrendingResults}
-                   />
-                   }
-            />
-            < Route path="/search/:searchKey"
-                    render={(props) => <SearchResult {...props}
-                                                     searchKey={this.state.searchKey}
-                                                     handleChange={this.handleChange}
-                                                     searchResults={this.state.searchResults}
-                                                     getSearchResults={this.getSearchResults}
-                                                     trendingResults={this.state.trendingResults}
-                                                     getTrendingResults={this.getTrendingResults}
+      <ThemeProvider theme={theme}>
+        <div className="App">
+          <header className="App-header">
+            <HashRouter>
+              <Route path="/"
+                     render={(props) => <Header {...props}
+                                                searchKey={this.state.searchKey}
+                                                handleChange={this.handleChange}
+                                                getSearchResults={this.getSearchResults}
+                                                loading={this.state.loading}
+                     />}
+              />
+              <Route exact path="/"
+                     render={(props) => <Home {...props}
+                                              homeResults={this.state.homeResults}
+                                              getHomeResults={this.getHomeResults}
+                                              trendingResults={this.state.trendingResults}
+                                              getTrendingResults={this.getTrendingResults}
+                     />
+                     }
+              />
+              < Route path="/search/:searchKey"
+                      render={(props) => <SearchResult {...props}
+                                                       searchKey={this.state.searchKey}
+                                                       handleChange={this.handleChange}
+                                                       searchResults={this.state.searchResults}
+                                                       getSearchResults={this.getSearchResults}
+                                                       trendingResults={this.state.trendingResults}
+                                                       getTrendingResults={this.getTrendingResults}
 
-                    />
-                    }
-            />
-            <Route path="/profile/:title"
-                   render={(props) => <Profile {...props}
-                                               getEntity={this.getEntity}
-                                               loadedEntity={this.state.loadedEntity}
-                                               handleChange={this.handleChange}
-                                               relatedResults={this.state.relatedResults}
-                                               getRelatedResults={this.getRelatedResults}
-                                               internalLinks={this.state.internalLinks}
-                                               getInternalLinks={this.getInternalLinks}
-                   />}
-            />
-            <Route path="/"
-                   render={(props) => <Footer {...props}
-                   />
-                   }
-            />
-          </HashRouter>
-        </header>
-      </div>
+                      />
+                      }
+              />
+              <Route path="/profile/:title"
+                     render={(props) => <Profile {...props}
+                                                 getEntity={this.getEntity}
+                                                 loadedEntity={this.state.loadedEntity}
+                                                 handleChange={this.handleChange}
+                                                 relatedResults={this.state.relatedResults}
+                                                 getRelatedResults={this.getRelatedResults}
+                                                 internalLinks={this.state.internalLinks}
+                                                 getInternalLinks={this.getInternalLinks}
+                     />}
+              />
+              <Route path="/"
+                     render={(props) => <Footer {...props}
+                     />
+                     }
+              />
+            </HashRouter>
+          </header>
+        </div>
+      </ThemeProvider>
     );
   }
 }

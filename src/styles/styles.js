@@ -3,7 +3,7 @@ import {fade} from "@material-ui/core/styles/colorManipulator";
 const Styles = theme => ({
   appBar: {
     backgroundColor: '#282c34',
-    padding: theme.spacing(2),
+    padding: theme.spacing(1),
   },
   container: {
     backgroundColor: '#eeeeee',
@@ -12,7 +12,7 @@ const Styles = theme => ({
   },
   footer: {
     backgroundColor: '#282c34',
-    paddingTop: theme.spacing(3),
+    paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(2),
   },
   paper: {
