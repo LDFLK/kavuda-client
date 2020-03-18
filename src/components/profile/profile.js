@@ -29,13 +29,13 @@ class Profile extends Component {
 
   componentDidMount() {
     this.props.getEntity(this.props.match.params.title);
-    this.props.getRelatedResults(this.props.match.params.title);
+    this.props.getRelatedResults(this.props.match.params.title, true);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.match.params.title !== this.props.match.params.title) {
       this.props.getEntity(this.props.match.params.title);
-      this.props.getRelatedResults(this.props.match.params.title);
+      this.props.getRelatedResults(this.props.match.params.title, true);
     }
   }
 
@@ -133,7 +133,7 @@ class Profile extends Component {
                 <br/>
                 <Typography variant="h4" color="inherit" noWrap>Related Articles</Typography>
                 <Box>
-                  <MainContentList listItems={relatedResults}/>
+                  <MainContentList listItems={relatedResults} getSearchResults={() => this.props.getRelatedResults(loadedEntity.title)}/>
                 </Box>
               </Grid>
             </Paper>

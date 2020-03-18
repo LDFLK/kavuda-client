@@ -10,7 +10,7 @@ import Home from "./components/home";
 import SearchResult from "./components/search/searchResult";
 import Profile from "./components/profile/profile";
 import {createMuiTheme} from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
+import {ThemeProvider} from '@material-ui/styles';
 
 const theme = createMuiTheme({
   typography: {
@@ -28,10 +28,13 @@ class App extends Component {
     this.state = {
       searchKey: "",
       searchResults: [],
+      searchResultsPage: 0,
       trendingResults: [],
       homeResults: [],
+      homeResultsPage: 0,
       loadedEntity: [],
       relatedResults: [],
+      relatedResultsPage: 0,
       internalLinks: [],
       loading: true
     };
@@ -60,18 +63,8 @@ class App extends Component {
   }
 
   getHomeResults() {
-    this.startLoading();
     let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=&categories=News';
-    searchUrl += '&limit=15';
-    fetch(searchUrl, {
-      method: 'GET'
-    }).then(results => {
-      return results.json();
-    }).then(data => {
-      this.handleChange("homeResults", data);
-    }).then(
-      end => this.endLoading()
-    );
+    this.getResults(searchUrl,false,"homeResults","homeResultsPage")
 
   }
 
@@ -91,20 +84,10 @@ class App extends Component {
 
   }
 
-  getRelatedResults(title) {
+  getRelatedResults(title, newSearch) {
     if (title !== undefined) {
-      this.startLoading();
       let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/relations/' + title;
-      searchUrl += '?limit=15';
-      fetch(searchUrl, {
-        method: 'GET'
-      }).then(results => {
-        return results.json();
-      }).then(data => {
-        this.handleChange("relatedResults", data);
-      }).then(
-        end => this.endLoading()
-      );
+      this.getResults(searchUrl+'?',newSearch,"relatedResults","relatedResultsPage")
     }
 
   }
@@ -127,9 +110,7 @@ class App extends Component {
 
   }
 
-
-  getSearchResults(searchKey) {
-    this.startLoading();
+  getSearchResults(searchKey, newSearch) {
     if (searchKey.length > 1) {
       let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=';
       if (searchKey.includes(":")) {
@@ -138,18 +119,36 @@ class App extends Component {
       } else {
         searchUrl += searchKey;
       }
-      searchUrl += '&limit=15';
-      fetch(searchUrl, {
-        method: 'GET'
-      }).then(results => {
-        return results.json();
-      }).then(data => {
-        this.handleChange("searchResults", data);
-      }).then(
-        end => this.endLoading()
-      );
+      this.getResults(searchUrl,newSearch,"searchResults","searchResultsPage")
     }
+  }
 
+  getResults(searchUrl, newSearch,results,page) {
+    this.startLoading();
+    searchUrl += '&limit=2&page=' + (newSearch ? 1 : (this.state[page] + 1));
+    fetch(searchUrl, {
+      method: 'GET'
+    }).then(results => {
+      if (results.status === 200) {
+        return results.json();
+      }
+    }).then(data => {
+      if (newSearch) {
+        this.setState({
+          [results]: data,
+          [page]: 1
+        });
+      } else {
+        if (data) {
+          this.setState({
+            [results]: this.state[results].concat(data),
+            [page]: (this.state[page] + 1)
+          })
+        }
+      }
+    }).then(
+      end => this.endLoading()
+    );
   }
 
   getEntity(title) {
@@ -184,10 +183,12 @@ class App extends Component {
               />
               <Route exact path="/"
                      render={(props) => <Home {...props}
+                                              searchKey={this.state.searchKey}
                                               homeResults={this.state.homeResults}
                                               getHomeResults={this.getHomeResults}
                                               trendingResults={this.state.trendingResults}
                                               getTrendingResults={this.getTrendingResults}
+                                              getSearchResults={this.getSearchResults}
                      />
                      }
               />

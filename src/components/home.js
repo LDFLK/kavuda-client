@@ -20,7 +20,8 @@ class Home extends Component {
         <Grid item xs={8}>
           <Paper className={classes.paper}>
             <Typography variant="h4" color="inherit" noWrap>Latest</Typography>
-            <MainContentList listItems={homeResults}/>
+            <MainContentList listItems={homeResults}
+                             getSearchResults={() => this.props.getHomeResults()}/>
           </Paper>
         </Grid>
         <Grid item xs={4}>

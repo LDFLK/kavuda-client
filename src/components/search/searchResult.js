@@ -11,12 +11,12 @@ class SearchResult extends Component {
 
   componentDidMount() {
     this.props.handleChange("searchKey", this.props.match.params.searchKey);
-    this.props.getSearchResults(this.props.match.params.searchKey);
+    this.props.getSearchResults(this.props.match.params.searchKey, true);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.match.params.searchKey !== this.props.match.params.searchKey) {
-      this.props.getSearchResults(this.props.match.params.searchKey);
+      this.props.getSearchResults(this.props.match.params.searchKey, true);
     }
   }
 
@@ -27,7 +27,7 @@ class SearchResult extends Component {
         <Grid item xs={8}>
           <Paper className={classes.paper}>
             <Typography variant="h4" color="inherit" noWrap>Search Results:</Typography>
-            <MainContentList listItems={searchResults}/>
+            <MainContentList listItems={searchResults} getSearchResults={()=>this.props.getSearchResults(this.props.match.params.searchKey,false)}/>
           </Paper>
         </Grid>
         <Grid item xs={4}>

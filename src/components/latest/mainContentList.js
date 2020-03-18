@@ -1,15 +1,14 @@
 import React, {Component} from "react";
-import {withStyles} from "@material-ui/core";
+import {withStyles, Button, Typography} from "@material-ui/core";
 import Styles from "../../styles/styles"
 import List from "@material-ui/core/List/List";
 import MainContentItem from "./mainContentItem";
-import Typography from '@material-ui/core/Typography';
 import Moment from 'moment';
 
 class MainContentList extends Component {
 
   render() {
-    const {classes, listItems} = this.props;
+    const {classes, listItems, getSearchResults} = this.props;
 
     return (
       <List className={classes.listContainer}>
@@ -20,13 +19,18 @@ class MainContentList extends Component {
                              subtitle={Moment(entity.updated_at).format('DD  MMM YYYY h:mm A')}
                              description={entity.snippet}
                              links={entity.links}
-                              categories={entity.categories}/>
+                             categories={entity.categories}/>
           ))
           :
-          <Typography component="p">
+          <Typography component="p" style={{textAlign:'center'}}>
             No Results Found
           </Typography>
         }
+        {Array.isArray(listItems) ?
+          <Typography component="p" style={{textAlign:'center'}}>
+            <Button onClick={() => getSearchResults()} variant="contained">View More</Button>
+          </Typography>
+          : null}
       </List>
     )
   }
