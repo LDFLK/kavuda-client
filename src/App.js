@@ -30,12 +30,14 @@ class App extends Component {
       searchResults: [],
       searchResultsPage: 0,
       trendingResults: [],
+      trendingResultsPage: 0,
       homeResults: [],
       homeResultsPage: 0,
       loadedEntity: [],
       relatedResults: [],
       relatedResultsPage: 0,
       internalLinks: [],
+      internalLinksPage: 0,
       loading: true
     };
 
@@ -64,66 +66,11 @@ class App extends Component {
 
   getHomeResults() {
     let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=&categories=News';
-    this.getResults(searchUrl,false,"homeResults","homeResultsPage")
+    this.getResults(searchUrl, false, "homeResults", "homeResultsPage")
 
   }
 
-  getTrendingResults() {
-    this.startLoading();
-    let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=&categories=News,PERSON,ORGANIZATION';
-    searchUrl += '&limit=15';
-    fetch(searchUrl, {
-      method: 'GET'
-    }).then(results => {
-      return results.json();
-    }).then(data => {
-      this.handleChange("trendingResults", data);
-    }).then(
-      end => this.endLoading()
-    );
-
-  }
-
-  getRelatedResults(title, newSearch) {
-    if (title !== undefined) {
-      let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/relations/' + title;
-      this.getResults(searchUrl+'?',newSearch,"relatedResults","relatedResultsPage")
-    }
-
-  }
-
-  getInternalLinks(title) {
-    if (title !== undefined) {
-      this.startLoading();
-      let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/linked/' + title;
-      searchUrl += '?limit=15';
-      fetch(searchUrl, {
-        method: 'GET'
-      }).then(results => {
-        return results.json();
-      }).then(data => {
-        this.handleChange("internalLinks", data);
-      }).then(
-        end => this.endLoading()
-      );
-    }
-
-  }
-
-  getSearchResults(searchKey, newSearch) {
-    if (searchKey.length > 1) {
-      let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=';
-      if (searchKey.includes(":")) {
-        let searchArray = searchKey.split(":", 2);
-        searchUrl += searchArray[1] + '&categories=' + searchArray[0];
-      } else {
-        searchUrl += searchKey;
-      }
-      this.getResults(searchUrl,newSearch,"searchResults","searchResultsPage")
-    }
-  }
-
-  getResults(searchUrl, newSearch,results,page) {
+  getResults(searchUrl, newSearch, results, page) {
     this.startLoading();
     searchUrl += '&limit=2&page=' + (newSearch ? 1 : (this.state[page] + 1));
     fetch(searchUrl, {
@@ -149,6 +96,41 @@ class App extends Component {
     }).then(
       end => this.endLoading()
     );
+  }
+
+  getTrendingResults() {
+    let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=&categories=News,PERSON,ORGANIZATION';
+    this.getResults(searchUrl, false, "trendingResults", "trendingResultsPage")
+
+  }
+
+  getSearchResults(searchKey, newSearch) {
+    if (searchKey.length > 1) {
+      let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=';
+      if (searchKey.includes(":")) {
+        let searchArray = searchKey.split(":", 2);
+        searchUrl += searchArray[1] + '&categories=' + searchArray[0];
+      } else {
+        searchUrl += searchKey;
+      }
+      this.getResults(searchUrl, newSearch, "searchResults", "searchResultsPage")
+    }
+  }
+
+  getRelatedResults(title, newSearch) {
+    if (title !== undefined) {
+      let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/relations/' + title;
+      this.getResults(searchUrl + '?', newSearch, "relatedResults", "relatedResultsPage")
+    }
+
+  }
+
+  getInternalLinks(title, newSearch) {
+    if (title !== undefined) {
+      let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/linked/' + title;
+      this.getResults(searchUrl + '?', newSearch, "internalLinks", "internalLinksPage")
+    }
+
   }
 
   getEntity(title) {

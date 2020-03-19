@@ -1,7 +1,7 @@
 import {Component} from "react";
 import React from "react";
 import List from "@material-ui/core/List/List";
-import {withStyles} from "@material-ui/core";
+import {Button, withStyles} from "@material-ui/core";
 import Styles from "../../styles/styles";
 import TrendingListItem from "./trendingListItem";
 import Typography from "@material-ui/core/Typography/Typography";
@@ -21,7 +21,7 @@ class TrendingList extends Component {
 
 
   render() {
-    const {classes, results} = this.props;
+    const {classes, results, getResults, searchParam} = this.props;
     return (
       <List className={classes.trendingListContainer}>
         {Array.isArray(results) ?
@@ -37,6 +37,11 @@ class TrendingList extends Component {
             No Results Found
           </Typography>
         }
+        {Array.isArray(results) ?
+          <Typography component="p" style={{textAlign:'center'}}>
+            <Button onClick={() => getResults(searchParam)} variant="contained">View More</Button>
+          </Typography>
+          : null}
       </List>
     )
   }
