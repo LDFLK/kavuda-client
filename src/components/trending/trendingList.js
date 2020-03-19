@@ -10,7 +10,7 @@ import Moment from "moment";
 class TrendingList extends Component {
 
   componentDidMount() {
-    if (this.props.results.length === 0) {
+    if (this.props.results && this.props.results.length === 0) {
       this.props.getResults(this.props.searchParam);
     }
   }
