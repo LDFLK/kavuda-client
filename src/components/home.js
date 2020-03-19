@@ -10,7 +10,9 @@ import Typography from '@material-ui/core/Typography';
 class Home extends Component {
 
   componentDidMount() {
-    this.props.getHomeResults();
+    if (this.props.homeResults.length === 0) {
+      this.props.getHomeResults();
+    }
   }
 
   render() {

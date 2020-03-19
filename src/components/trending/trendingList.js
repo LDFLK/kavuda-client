@@ -10,7 +10,9 @@ import Moment from "moment";
 class TrendingList extends Component {
 
   componentDidMount() {
-    this.props.getResults(this.props.searchParam);
+    if (this.props.results.length === 0) {
+      this.props.getResults(this.props.searchParam);
+    }
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -27,7 +29,8 @@ class TrendingList extends Component {
         {Array.isArray(results) ?
           results.map((item) => (
             <TrendingListItem key={item.title}
-                              imageUrl={item.image_url} title={item.title} subtitle={Moment(item.updated_at).format('DD  MMM YYYY h:mm A')}
+                              imageUrl={item.image_url} title={item.title}
+                              subtitle={Moment(item.updated_at).format('DD  MMM YYYY h:mm A')}
                               categories={item.categories}
             />
 
@@ -38,7 +41,7 @@ class TrendingList extends Component {
           </Typography>
         }
         {Array.isArray(results) ?
-          <Typography component="p" style={{textAlign:'center'}}>
+          <Typography component="p" style={{textAlign: 'center'}}>
             <Button onClick={() => getResults(searchParam)} variant="contained">View More</Button>
           </Typography>
           : null}

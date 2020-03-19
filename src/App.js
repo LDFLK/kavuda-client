@@ -11,6 +11,11 @@ import SearchResult from "./components/search/searchResult";
 import Profile from "./components/profile/profile";
 import {createMuiTheme} from '@material-ui/core/styles';
 import {ThemeProvider} from '@material-ui/styles';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import Typography from '@material-ui/core/Typography';
 
 const theme = createMuiTheme({
   typography: {
@@ -38,7 +43,8 @@ class App extends Component {
       relatedResultsPage: 0,
       internalLinks: [],
       internalLinksPage: 0,
-      loading: true
+      loading: true,
+      alertOpen: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -72,7 +78,7 @@ class App extends Component {
 
   getResults(searchUrl, newSearch, results, page) {
     this.startLoading();
-    searchUrl += '&limit=2&page=' + (newSearch ? 1 : (this.state[page] + 1));
+    searchUrl += '&limit=15&page=' + (newSearch ? 1 : (this.state[page] + 1));
     fetch(searchUrl, {
       method: 'GET'
     }).then(results => {
@@ -91,6 +97,8 @@ class App extends Component {
             [results]: this.state[results].concat(data),
             [page]: (this.state[page] + 1)
           })
+        } else {
+          this.handleChange("alertOpen", true);
         }
       }
     }).then(
@@ -204,6 +212,23 @@ class App extends Component {
               />
             </HashRouter>
           </header>
+          <Dialog
+            open={this.state.alertOpen}
+            onClose={() => this.handleChange("alertOpen", false)}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogContent>
+              <Typography variant="body2" id="alert-dialog-description">
+                No items found!
+              </Typography>
+            </DialogContent>
+            <DialogActions style={{justifyContent:"center"}}>
+              <Button onClick={() => this.handleChange("alertOpen", false)} color="primary" autoFocus>
+                Ok
+              </Button>
+            </DialogActions>
+          </Dialog>
         </div>
       </ThemeProvider>
     );
