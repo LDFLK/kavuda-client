@@ -34,7 +34,7 @@
   border-radius: 10px;
   max-width:300px;
   float: left;
-  margin: 1em;
+  margin: 0 1em 1em 0;
 }
 
 @keyframes App-logo-spin {
