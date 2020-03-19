@@ -15,7 +15,7 @@ class TrendingList extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.searchParam !== this.props.searchParam) {
-      this.props.getResults(this.props.searchParam);
+      this.props.getResults(this.props.searchParam, true);
     }
   }
 
