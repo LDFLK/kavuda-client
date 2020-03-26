@@ -26,15 +26,15 @@ class RelatedLinkList extends Component {
   render() {
     const {classes, links} = this.props;
 
-    let viewSet = links.slice(0, 5);
-    let hiddenSet = links.slice(5);
+    let viewSet = Object.entries(links).slice(0, 5);
+    let hiddenSet = Object.entries(links).slice(5);
 
     return (
       <Grid container width={1} spacing={2}>
         {Array.isArray(viewSet) ?
-          viewSet.map((title) => (
-            <RelatedLinkItem key={title}
-                             imageUrl="" title={title}/>
+          viewSet.map((link) => (
+            <RelatedLinkItem key={link[1].title}
+                             imageUrl="" title={link[1].title} url={link[1].title + "?date=" + link[1].dates[0]}/>
           ))
           :
           <Typography component="p">
@@ -43,7 +43,7 @@ class RelatedLinkList extends Component {
         }
         {!this.state.open && hiddenSet.length > 0 ?
           <Grid item>
-            <Tooltip title={hiddenSet.length +" more"} aria-label="add">
+            <Tooltip title={hiddenSet.length + " more"} aria-label="add">
               <Link className={classes.link} to="#">
                 <Avatar alt="view more" src="plus.jpg" onClick={this.handleClick}/>
               </Link>
@@ -53,9 +53,9 @@ class RelatedLinkList extends Component {
         }
 
         {Array.isArray(hiddenSet) && this.state.open ?
-          hiddenSet.map((title) => (
-            <RelatedLinkItem key={title}
-                             imageUrl="" title={title}/>
+          hiddenSet.map((link) => (
+            <RelatedLinkItem key={link[1].title}
+                             imageUrl="" title={link[1].title} url={link[1].title + "?date=" + link[1].dates[0]}/>
           ))
           : null
         }

@@ -74,7 +74,6 @@ class FormattedContent extends Component {
     const {content} = this.props;
     return (
       <tr key={content.name}>
-        <td><Typography>{content.name !== "" ? content.name + ": " : ""}</Typography></td>
         <td>{this.formatValues(content.values)}</td>
       </tr>
     );

@@ -9,11 +9,11 @@ import Tooltip from '@material-ui/core/Tooltip';
 class RelatedLinkItem extends Component {
 
   render() {
-    const {classes, imageUrl, title} = this.props;
+    const {classes, imageUrl, title, url} = this.props;
     return (
       <Grid item>
         <Tooltip title={title} aria-label="add">
-          <Link className={classes.link} to={"/profile/" + title}>
+          <Link className={classes.link} to={"/profile/" + url}>
             <Avatar alt={title} src={imageUrl === "" ? "avatar.png" : imageUrl}/>
           </Link>
         </Tooltip>
