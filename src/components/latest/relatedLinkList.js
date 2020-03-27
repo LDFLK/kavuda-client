@@ -26,15 +26,15 @@ class RelatedLinkList extends Component {
   render() {
     const {classes, links} = this.props;
 
-    let viewSet = Object.entries(links).slice(0, 5);
-    let hiddenSet = Object.entries(links).slice(5);
+    let viewSet = links.slice(0, 5);
+    let hiddenSet = links.slice(5);
 
     return (
       <Grid container width={1} spacing={2}>
         {Array.isArray(viewSet) ?
           viewSet.map((link) => (
-            <RelatedLinkItem key={link[1].title}
-                             imageUrl="" title={link[1].title} url={link[1].title + "?date=" + link[1].dates[0]}/>
+            <RelatedLinkItem key={link.title}
+                             imageUrl="" title={link.title} url={link.title + "?date=" + link.dates[0]}/>
           ))
           :
           <Typography component="p">
@@ -54,8 +54,8 @@ class RelatedLinkList extends Component {
 
         {Array.isArray(hiddenSet) && this.state.open ?
           hiddenSet.map((link) => (
-            <RelatedLinkItem key={link[1].title}
-                             imageUrl="" title={link[1].title} url={link[1].title + "?date=" + link[1].dates[0]}/>
+            <RelatedLinkItem key={link.title}
+                             imageUrl="" title={link.title} url={link.title + "?date=" + link.dates[0]}/>
           ))
           : null
         }
