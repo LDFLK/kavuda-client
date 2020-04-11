@@ -26,7 +26,9 @@ class RelatedLinkItem extends Component {
     fetch(searchUrl, {
       method: 'GET'
     }).then(results => {
-      return results.json()
+      if (results.status === 200) {
+        return results.json()
+      }
     }).then(url => {
       if (url !== "") {
         this.setState({imageUrl: url ? url : "avatar.png"})
