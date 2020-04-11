@@ -33,8 +33,7 @@ class RelatedLinkList extends Component {
       <Grid container width={1} spacing={2}>
         {Array.isArray(viewSet) ?
           viewSet.map((link) => (
-            <RelatedLinkItem key={link.title}
-                             imageUrl="" title={link.title} url={link.title + "?date=" + link.dates[0]}/>
+            <RelatedLinkItem key={link.title} title={link.title} url={link.title + "?date=" + link.dates[0]}/>
           ))
           :
           <Typography component="p">
@@ -54,8 +53,7 @@ class RelatedLinkList extends Component {
 
         {Array.isArray(hiddenSet) && this.state.open ?
           hiddenSet.map((link) => (
-            <RelatedLinkItem key={link.title}
-                             imageUrl="" title={link.title} url={link.title + "?date=" + link.dates[0]}/>
+            <RelatedLinkItem key={link.title} title={link.title} url={link.title + "?date=" + link.dates[0]}/>
           ))
           : null
         }
