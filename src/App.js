@@ -135,7 +135,7 @@ class App extends Component {
 
   getInternalLinks(title, newSearch) {
     if (title !== undefined) {
-      let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/linked/' + title;
+      let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/links/' + title;
       this.getResults(searchUrl + '?', newSearch, "internalLinks", "internalLinksPage")
     }
 
