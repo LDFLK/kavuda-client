@@ -76,7 +76,8 @@ class App extends Component {
 
   }
 
-  getResults(searchUrl, newSearch, results, page) {
+  getResults(searchUrl, newSearch, results) {
+    let page=results+"Page";
     this.startLoading();
     searchUrl += '&limit=15&page=' + (newSearch ? 1 : (this.state[page] + 1));
     fetch(searchUrl, {
@@ -108,7 +109,7 @@ class App extends Component {
 
   getTrendingResults() {
     let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=&categories=News,PERSON,ORGANIZATION';
-    this.getResults(searchUrl, false, "trendingResults", "trendingResultsPage")
+    this.getResults(searchUrl, false, "trendingResults")
 
   }
 
@@ -121,14 +122,14 @@ class App extends Component {
       } else {
         searchUrl += searchKey;
       }
-      this.getResults(searchUrl, newSearch, "searchResults", "searchResultsPage")
+      this.getResults(searchUrl, newSearch, "searchResults")
     }
   }
 
   getRelatedResults(title, newSearch) {
     if (title !== undefined) {
       let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/relations/' + title;
-      this.getResults(searchUrl + '?', newSearch, "relatedResults", "relatedResultsPage")
+      this.getResults(searchUrl + '?', newSearch, "relatedResults")
     }
 
   }
@@ -136,7 +137,7 @@ class App extends Component {
   getInternalLinks(title, newSearch) {
     if (title !== undefined) {
       let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/links/' + title;
-      this.getResults(searchUrl + '?', newSearch, "internalLinks", "internalLinksPage")
+      this.getResults(searchUrl + '?', newSearch, "internalLinks")
     }
 
   }
