@@ -76,40 +76,36 @@ class App extends Component {
 
   }
 
-  getResults(searchUrl, newSearch, results) {
-    let page=results+"Page";
+  async getResults(searchUrl, newSearch, results) {
+    let page = results + "Page";
     this.startLoading();
     searchUrl += '&limit=15&page=' + (newSearch ? 1 : (this.state[page] + 1));
-    fetch(searchUrl, {
-      method: 'GET'
-    }).then(results => {
-      if (results.status === 200) {
-        return results.json();
-      }
-    }).then(data => {
+    const response = await fetch(searchUrl, {method: 'GET'});
+    const json = await response.json();
+
+    if (response.status === 200) {
       if (newSearch) {
         this.setState({
-          [results]: data,
+          [results]: json,
           [page]: 1
         });
       } else {
-        if (data) {
+        if (json) {
           this.setState({
-            [results]: this.state[results].concat(data),
+            [results]: this.state[results].concat(json),
             [page]: (this.state[page] + 1)
           })
         } else {
           this.handleChange("alertOpen", true);
         }
       }
-    }).then(
-      end => this.endLoading()
-    );
+    }
+    this.endLoading();
   }
 
-  getTrendingResults() {
+  async getTrendingResults() {
     let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=&categories=News,PERSON,ORGANIZATION';
-    this.getResults(searchUrl, false, "trendingResults")
+    await this.getResults(searchUrl, false, "trendingResults")
 
   }
 
@@ -224,7 +220,7 @@ class App extends Component {
                 No items found!
               </Typography>
             </DialogContent>
-            <DialogActions style={{justifyContent:"center"}}>
+            <DialogActions style={{justifyContent: "center"}}>
               <Button onClick={() => this.handleChange("alertOpen", false)} color="primary" autoFocus>
                 Ok
               </Button>
