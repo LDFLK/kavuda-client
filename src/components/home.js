@@ -6,6 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import TrendingList from "./trending/trendingList";
 import MainContentList from "./latest/mainContentList";
 import Typography from '@material-ui/core/Typography';
+import InfiniteList from "./infinite-list/infinite-list";
 
 class Home extends Component {
 
@@ -22,8 +23,10 @@ class Home extends Component {
         <Grid item xs={8}>
           <Paper className={classes.paper}>
             <Typography variant="h4" color="inherit" noWrap>Latest</Typography>
-            <MainContentList listItems={homeResults}
-                             getSearchResults={() => this.props.getHomeResults()}/>
+            <InfiniteList listItems={homeResults}
+                          getResults={() => this.props.getHomeResults()}
+                          list={<MainContentList listItems={homeResults}/>}
+            />
           </Paper>
         </Grid>
         <Grid item xs={4}>

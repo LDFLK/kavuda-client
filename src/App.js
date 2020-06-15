@@ -70,16 +70,16 @@ class App extends Component {
     this.setState({[key]: value});
   }
 
-  getHomeResults() {
+  async getHomeResults() {
     let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=&categories=News';
-    this.getResults(searchUrl, false, "homeResults", "homeResultsPage")
+    await this.getResults(searchUrl, false, "homeResults", "homeResultsPage")
 
   }
 
   async getResults(searchUrl, newSearch, results) {
     let page = results + "Page";
     this.startLoading();
-    searchUrl += '&limit=15&page=' + (newSearch ? 1 : (this.state[page] + 1));
+    searchUrl += '&limit=2&page=' + (newSearch ? 1 : (this.state[page] + 1));
     const response = await fetch(searchUrl, {method: 'GET'});
     const json = await response.json();
 
