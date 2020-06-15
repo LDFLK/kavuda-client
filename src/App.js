@@ -72,7 +72,7 @@ class App extends Component {
 
   async getHomeResults() {
     let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=&categories=News';
-    await this.getResults(searchUrl, false, "homeResults", "homeResultsPage")
+    return await this.getResults(searchUrl, false, "homeResults", "homeResultsPage");
 
   }
 
@@ -96,20 +96,22 @@ class App extends Component {
             [page]: (this.state[page] + 1)
           })
         } else {
-          this.handleChange("alertOpen", true);
+          this.endLoading();
+          return false;
         }
       }
     }
     this.endLoading();
+    return true
   }
 
   async getTrendingResults() {
     let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=&categories=News,PERSON,ORGANIZATION';
-    await this.getResults(searchUrl, false, "trendingResults")
+    return await this.getResults(searchUrl, false, "trendingResults")
 
   }
 
-  getSearchResults(searchKey, newSearch) {
+  async getSearchResults(searchKey, newSearch) {
     if (searchKey.length > 1) {
       let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=';
       if (searchKey.includes(":")) {
@@ -118,7 +120,7 @@ class App extends Component {
       } else {
         searchUrl += searchKey;
       }
-      this.getResults(searchUrl, newSearch, "searchResults")
+      return await this.getResults(searchUrl, newSearch, "searchResults")
     }
   }
 

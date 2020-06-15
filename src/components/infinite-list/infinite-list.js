@@ -9,6 +9,7 @@ class InfiniteList extends Component {
     super(props);
     this.state = {
       isLoading: false,
+      listEnded: false
     };
 
     this.loadResults = this.loadResults.bind(this);
@@ -16,19 +17,27 @@ class InfiniteList extends Component {
 
   async loadResults() {
     this.setState({isLoading: true});
-    await this.props.getResults();
-    this.setState({isLoading: false});
+    const results = await this.props.getResultItems();
+    if (!results) {
+      this.setState({
+        isLoading: false,
+        listEnded: true,
+
+      });
+    } else {
+      this.setState({isLoading: false});
+    }
   }
 
   render() {
     const {listItems, list} = this.props;
-    const {isLoading} = this.state;
+    const {isLoading, listEnded} = this.state;
 
     return (
       <div>
         {list}
         {Array.isArray(listItems) ?
-          <Typography component="p" style={{textAlign: 'center'}}>
+          <div style={{textAlign: 'center'}}>
             {isLoading ?
               <BeatLoader
                 sizeUnit={"px"}
@@ -36,10 +45,11 @@ class InfiniteList extends Component {
                 color={'#36D7B7'}
                 loading={this.props.loading}
               /> : null}
-            {!isLoading ?
-              <Button onClick={() => setTimeout(this.loadResults(), 3000)} variant="contained">View More</Button>
-              : null}
-          </Typography>
+            {!(isLoading || listEnded) ?
+              <Button style={{width:"100%"}} onClick={() => this.loadResults()}><img width={"15px"} src={"down-arrow.svg"}/></Button>
+              :<Button style={{width:"100%"}}> </Button>
+            }
+          </div>
           : null}
       </div>
     )

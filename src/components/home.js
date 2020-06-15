@@ -17,14 +17,14 @@ class Home extends Component {
   }
 
   render() {
-    const {classes, homeResults, trendingResults, getTrendingResults} = this.props;
+    const {classes, homeResults, trendingResults, getTrendingResults, getHomeResults} = this.props;
     return (
       <Grid className={classes.container} container width={1}>
         <Grid item xs={8}>
           <Paper className={classes.paper}>
             <Typography variant="h4" color="inherit" noWrap>Latest</Typography>
             <InfiniteList listItems={homeResults}
-                          getResults={() => this.props.getHomeResults()}
+                          getResultItems={getHomeResults}
                           list={<MainContentList listItems={homeResults}/>}
             />
           </Paper>
