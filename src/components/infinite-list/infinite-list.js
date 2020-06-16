@@ -46,7 +46,7 @@ class InfiniteList extends Component {
                 loading={this.props.loading}
               /> : null}
             {!(isLoading || listEnded) ?
-              <Button style={{width:"100%"}} onClick={() => this.loadResults()}><img alt={"view more"} width={"15px"} src={"down-arrow.svg"}/></Button>
+              <Button style={{width:"100%"}} onClick={() => this.loadResults()}><img alt={"view more"} width={"15px"} src={"down.png"}/></Button>
               :<Button style={{width:"100%"}}> </Button>
             }
           </div>

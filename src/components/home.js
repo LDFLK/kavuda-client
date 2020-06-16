@@ -11,8 +11,11 @@ import InfiniteList from "./infinite-list/infinite-list";
 class Home extends Component {
 
   componentDidMount() {
-    if (this.props.homeResults.length === 0) {
+    if (this.props.trendingResults.length === 0) {
       this.props.getHomeResults();
+    }
+    if (this.props.trendingResults.length === 0) {
+      this.props.getTrendingResults();
     }
   }
 
@@ -32,7 +35,10 @@ class Home extends Component {
         <Grid item xs={4}>
           <Paper className={classes.trendingContainer}>
             <Typography variant="h4" color="inherit" noWrap>Trending</Typography>
-            <TrendingList results={trendingResults} getResults={getTrendingResults}/>
+            <InfiniteList listItems={trendingResults}
+                          getResultItems={getTrendingResults}
+                          list={<TrendingList listItems={trendingResults}/>}
+            />
           </Paper>
         </Grid>
       </Grid>
