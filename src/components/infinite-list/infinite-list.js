@@ -15,6 +15,19 @@ class InfiniteList extends Component {
     this.loadResults = this.loadResults.bind(this);
   }
 
+  componentDidMount() {
+    if (this.props.results && this.props.results.length === 0) {
+      this.props.getResultItems(this.props.searchParam);
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.searchParam !== this.props.searchParam) {
+      this.props.getResultItems(this.props.searchParam, true);
+      this.setState({listEnded: false})
+    }
+  }
+
   async loadResults() {
     this.setState({isLoading: true});
     const results = await this.props.getResultItems();
@@ -46,8 +59,9 @@ class InfiniteList extends Component {
                 loading={this.props.loading}
               /> : null}
             {!(isLoading || listEnded) ?
-              <Button style={{width:"100%"}} onClick={() => this.loadResults()}><img alt={"view more"} width={"15px"} src={"down.png"}/></Button>
-              :<Button style={{width:"100%"}}> </Button>
+              <Button style={{width: "100%"}} onClick={() => this.loadResults()}><img alt={"view more"} width={"15px"}
+                                                                                      src={"down.png"}/></Button>
+              : <Button style={{width: "100%"}}> </Button>
             }
           </div>
           : null}

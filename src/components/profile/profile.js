@@ -11,6 +11,7 @@ import FormattedContent from "./formattedContent";
 import Box from '@material-ui/core/Box';
 import Divider from "@material-ui/core/Divider/Divider";
 import {Link} from "react-router-dom";
+import InfiniteList from "../infinite-list/infinite-list";
 
 class Profile extends Component {
 
@@ -40,7 +41,7 @@ class Profile extends Component {
   }
 
   render() {
-    const {classes, loadedEntity, internalLinks, getInternalLinks, relatedResults} = this.props;
+    const {classes, loadedEntity, internalLinks, getInternalLinks, relatedResults, getRelatedResults} = this.props;
     const {collapsed} = this.state;
 
     if (loadedEntity == null) {
@@ -62,8 +63,11 @@ class Profile extends Component {
           <Grid item xs={3}>
             <Paper className={classes.paper}>
               <Typography variant="h4" color="inherit" noWrap>Related Links</Typography>
-              <TrendingList results={internalLinks} getResults={getInternalLinks}
-                            searchParam={loadedEntity.title}/>
+              <InfiniteList listItems={internalLinks}
+                            getResultItems={getInternalLinks}
+                            searchParam={loadedEntity.title}
+                            list={<TrendingList listItems={internalLinks} getResults={getInternalLinks} searchParam={loadedEntity.title}/>}
+              />
             </Paper>
           </Grid>
           < Grid item xs={9}>
@@ -133,7 +137,10 @@ class Profile extends Component {
                 <br/>
                 <Typography variant="h4" color="inherit" noWrap>Related Articles</Typography>
                 <Box>
-                  <MainContentList listItems={relatedResults} getSearchResults={() => this.props.getRelatedResults(loadedEntity.title)}/>
+                  <InfiniteList listItems={relatedResults}
+                                getResultItems={() => getRelatedResults(loadedEntity.title)}
+                                list={<MainContentList listItems={relatedResults}/>}
+                  />
                 </Box>
               </Grid>
             </Paper>

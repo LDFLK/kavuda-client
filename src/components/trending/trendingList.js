@@ -9,19 +9,6 @@ import Moment from "moment";
 
 class TrendingList extends Component {
 
-  componentDidMount() {
-    if (this.props.results && this.props.results.length === 0) {
-      this.props.getResults(this.props.searchParam);
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.searchParam !== this.props.searchParam) {
-      this.props.getResults(this.props.searchParam, true);
-    }
-  }
-
-
   render() {
     const {classes, listItems} = this.props;
     return (
