@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {withStyles, Button, Typography} from "@material-ui/core";
+import {withStyles, Button} from "@material-ui/core";
 import Styles from "../../styles/styles"
 import BeatLoader from "react-spinners/BeatLoader";
 
@@ -46,7 +46,7 @@ class InfiniteList extends Component {
                 loading={this.props.loading}
               /> : null}
             {!(isLoading || listEnded) ?
-              <Button style={{width:"100%"}} onClick={() => this.loadResults()}><img width={"15px"} src={"down-arrow.svg"}/></Button>
+              <Button style={{width:"100%"}} onClick={() => this.loadResults()}><img alt={"view more"} width={"15px"} src={"down-arrow.svg"}/></Button>
               :<Button style={{width:"100%"}}> </Button>
             }
           </div>

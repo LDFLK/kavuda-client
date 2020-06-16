@@ -124,23 +124,23 @@ class App extends Component {
     }
   }
 
-  getRelatedResults(title, newSearch) {
+  async getRelatedResults(title, newSearch) {
     if (title !== undefined) {
       let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/relations/' + title;
-      this.getResults(searchUrl + '?', newSearch, "relatedResults")
+      return await this.getResults(searchUrl + '?', newSearch, "relatedResults")
     }
 
   }
 
-  getInternalLinks(title, newSearch) {
+  async getInternalLinks(title, newSearch) {
     if (title !== undefined) {
       let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/links/' + title;
-      this.getResults(searchUrl + '?', newSearch, "internalLinks")
+      return await this.getResults(searchUrl + '?', newSearch, "internalLinks")
     }
 
   }
 
-  getEntity(title) {
+  async getEntity(title) {
     this.startLoading();
     fetch(process.env.REACT_APP_SERVER_URL + 'api/get/' + title, {
       method: 'GET'
