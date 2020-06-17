@@ -79,7 +79,7 @@ class App extends Component {
   async getResults(searchUrl, newSearch, results) {
     let page = results + "Page";
     this.startLoading();
-    searchUrl += '&limit=2&page=' + (newSearch ? 1 : (this.state[page] + 1));
+    searchUrl += '&limit=15&page=' + (newSearch ? 1 : (this.state[page] + 1));
     const response = await fetch(searchUrl, {method: 'GET'});
     const json = await response.json();
 
