@@ -12,7 +12,13 @@ import Styles from "../../styles/styles";
 class TrendingListItem extends Component {
 
   render() {
-    const {classes, title, subtitle, imageUrl} = this.props;
+    const {classes, title, subtitle, imageUrl, categories} = this.props;
+    let defaultImageUrl = "unknown.png";
+    if (categories.includes("PERSON")) {
+      defaultImageUrl = "avatar.png"
+    } else if (categories.includes("ORGANIZATION")) {
+      defaultImageUrl = "organization.png"
+    }
 
     return (
       <div>
@@ -20,7 +26,7 @@ class TrendingListItem extends Component {
         <ListItem alignItems="flex-start">
           <ListItemAvatar>
             <Link className={classes.itemLink} to={"/profile/" + title}>
-              <Avatar alt={title} src={imageUrl === "" ? "avatar.png" : imageUrl}/>
+              <Avatar alt={title} src={imageUrl === "" ? defaultImageUrl : imageUrl}/>
             </Link>
           </ListItemAvatar>
           <Link className={classes.itemLink} to={"/profile/" + title}>
