@@ -33,7 +33,6 @@
 .entity-attributes img{
   border-radius: 10px;
   max-width:300px;
-  padding: 0 1em 1em 0;
 }
 
 @keyframes App-logo-spin {
