@@ -8,8 +8,6 @@ import {css} from '@emotion/core';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import {Link} from "react-router-dom";
-import InputAdornment from '@material-ui/core/InputAdornment';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 
 const override = css`
     display: block;
@@ -53,13 +51,6 @@ class Header extends Component {
             <div className={classes.search}>
               <form id="search-form" onSubmit={this.handleSubmit} noValidate autoComplete="off">
                 <InputBase
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <AccountCircle />
-                      </InputAdornment>
-                    ),
-                  }}
                   name="search"
                   placeholder="Search…"
                   value={searchKey}

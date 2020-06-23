@@ -4,19 +4,18 @@ import Typography from '@material-ui/core/Typography';
 import Styles from "../../styles/styles"
 import Avatar from "@material-ui/core/Avatar/Avatar";
 import Grid from "@material-ui/core/Grid/Grid";
-import Divider from "@material-ui/core/Divider/Divider";
 import ListItem from "@material-ui/core/ListItem/ListItem";
 import ListItemText from "@material-ui/core/ListItemText/ListItemText";
 import RelatedLinkList from "./relatedLinkList";
 import {Link} from "react-router-dom";
+import Paper from '@material-ui/core/Paper';
 
 class MainContentItem extends Component {
 
   render() {
     const {classes, imageUrl, title, subtitle, description, links, categories} = this.props;
     return (
-      <div >
-        <Divider variant="inset" component="li"/>
+      <Paper className={classes.paper}>
         <ListItem alignItems="flex-start">
           <Grid container width={1}>
             <Grid item md={2}>
@@ -60,7 +59,7 @@ class MainContentItem extends Component {
             </Grid>
           </Grid>
         </ListItem>
-      </div>
+      </Paper>
     )
   }
 }

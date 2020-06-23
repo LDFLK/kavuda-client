@@ -4,7 +4,6 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar/Avatar";
 import ListItemText from "@material-ui/core/ListItemText/ListItemText";
 import ListItem from "@material-ui/core/ListItem/ListItem";
-import Divider from "@material-ui/core/Divider/Divider";
 import {Link} from "react-router-dom";
 import {withStyles} from "@material-ui/core";
 import Styles from "../../styles/styles";
@@ -21,8 +20,6 @@ class TrendingListItem extends Component {
     }
 
     return (
-      <div>
-        <Divider variant="inset" component="li"/>
         <ListItem alignItems="flex-start">
           <ListItemAvatar>
             <Link className={classes.itemLink} to={"/profile/" + title}>
@@ -41,7 +38,6 @@ class TrendingListItem extends Component {
             />
           </Link>
         </ListItem>
-      </div>
     )
   }
 }

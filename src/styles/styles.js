@@ -16,10 +16,14 @@ const Styles = theme => ({
     paddingBottom: theme.spacing(2),
   },
   paper: {
-    margin: 10,
+    margin: theme.spacing(2),
     padding: theme.spacing(2),
     textAlign: 'left',
     color: theme.palette.text.primary,
+  },
+  headerText:{
+    color:'#000000DE',
+    marginLeft:theme.spacing(2),
   },
   trendingContainer: {
     margin: 10,
@@ -33,7 +37,6 @@ const Styles = theme => ({
   },
   listContainer: {
     width: '100%',
-    backgroundColor: theme.palette.background.paper,
   },
   inline: {
     display: 'inline',

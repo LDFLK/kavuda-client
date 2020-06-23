@@ -150,7 +150,6 @@ class App extends Component {
     return (
       <ThemeProvider>
         <div className="App">
-          <header className="App-header">
             <HashRouter>
               <Route path="/"
                      render={(props) => <Header {...props}
@@ -200,7 +199,6 @@ class App extends Component {
                      }
               />
             </HashRouter>
-          </header>
           <Dialog
             open={this.state.alertOpen}
             onClose={() => this.handleChange("alertOpen", false)}
