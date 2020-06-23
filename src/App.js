@@ -9,22 +9,12 @@ import Footer from "./components/footer";
 import Home from "./components/home";
 import SearchResult from "./components/search/searchResult";
 import Profile from "./components/profile/profile";
-import {createMuiTheme} from '@material-ui/core/styles';
 import {ThemeProvider} from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import Typography from '@material-ui/core/Typography';
-
-const theme = createMuiTheme({
-  typography: {
-    fontFamily: [
-      'Didact Gothic',
-      'sans-serif',
-    ].join(','),
-  },
-});
 
 class App extends Component {
 
@@ -158,7 +148,7 @@ class App extends Component {
 
   render() {
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider>
         <div className="App">
           <header className="App-header">
             <HashRouter>

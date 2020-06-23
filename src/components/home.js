@@ -23,21 +23,21 @@ class Home extends Component {
     const {classes, homeResults, trendingResults, getTrendingResults, getHomeResults} = this.props;
     return (
       <Grid className={classes.container} container width={1}>
-        <Grid item xs={8}>
-          <Paper className={classes.paper}>
-            <Typography variant="h4" color="inherit" noWrap>Latest</Typography>
-            <InfiniteList listItems={homeResults}
-                          getResultItems={getHomeResults}
-                          list={<MainContentList listItems={homeResults}/>}
-            />
-          </Paper>
-        </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={3}>
           <Paper className={classes.trendingContainer}>
             <Typography variant="h4" color="inherit" noWrap>Trending</Typography>
             <InfiniteList listItems={trendingResults}
                           getResultItems={getTrendingResults}
                           list={<TrendingList listItems={trendingResults}/>}
+            />
+          </Paper>
+        </Grid>
+        <Grid item xs={6}>
+          <Paper className={classes.paper}>
+            <Typography variant="h4" color="inherit" noWrap>Latest</Typography>
+            <InfiniteList listItems={homeResults}
+                          getResultItems={getHomeResults}
+                          list={<MainContentList listItems={homeResults}/>}
             />
           </Paper>
         </Grid>
