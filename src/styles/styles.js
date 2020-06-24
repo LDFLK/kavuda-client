@@ -17,13 +17,15 @@ const Styles = theme => ({
   },
   paper: {
     margin: theme.spacing(2),
-    padding: theme.spacing(2),
+    padding: 0,
     textAlign: 'left',
     color: theme.palette.text.primary,
+    boxShadow: '0px 3px 6px #00000029',
+    borderRadius: 16,
   },
-  headerText:{
-    color:'#000000DE',
-    marginLeft:theme.spacing(2),
+  headerText: {
+    color: '#000000DE',
+    marginLeft: theme.spacing(2),
   },
   trendingContainer: {
     margin: 10,
@@ -42,7 +44,8 @@ const Styles = theme => ({
     display: 'inline',
   },
   link: {
-    paddingRight: '10px',
+    paddingRight: theme.spacing(0.5),
+    textDecoration: 'none',
   },
   collapsible: {
     maxHeight: "300px",
@@ -85,7 +88,7 @@ const Styles = theme => ({
     paddingRight: theme.spacing(1),
     paddingBottom: theme.spacing(1),
     paddingLeft: theme.spacing(1),
-    marginLeft:theme.spacing(1),
+    marginLeft: theme.spacing(1),
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
@@ -98,10 +101,19 @@ const Styles = theme => ({
     height: 100,
   },
   searchAvatar: {
-    margin: 10,
-    width: 100,
-    height: 100,
-    float: 'right'
+    height: 300,
+    width: '100%',
+    float: 'right',
+    objectFit: 'cover',
+    borderRadius: 16,
+  },
+  mainContentItemTitle: {
+    fontSize: 27,
+    color: '#000000DE',
+  },
+  trendingItemTitle: {
+    fontSize: 16,
+    color: '#000000DE',
   },
 });
 

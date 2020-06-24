@@ -16,7 +16,7 @@ class MainContentList extends Component {
           listItems.map((entity) => (
             <MainContentItem key={entity.title}
                              imageUrl={entity.image_url} title={entity.title}
-                             subtitle={Moment(entity.updated_at).format('DD  MMM YYYY h:mm A')}
+                             subtitle={Moment(entity.source_date).format('DD  MMM YYYY h:mm A')}
                              description={entity.snippet}
                              links={entity.links.slice(0, 20)}
                              categories={entity.categories}/>

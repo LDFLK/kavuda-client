@@ -2,13 +2,12 @@ import React, {Component} from "react";
 import {withStyles} from "@material-ui/core";
 import Typography from '@material-ui/core/Typography';
 import Styles from "../../styles/styles"
-import Avatar from "@material-ui/core/Avatar/Avatar";
 import Grid from "@material-ui/core/Grid/Grid";
 import ListItem from "@material-ui/core/ListItem/ListItem";
-import ListItemText from "@material-ui/core/ListItemText/ListItemText";
 import RelatedLinkList from "./relatedLinkList";
 import {Link} from "react-router-dom";
 import Paper from '@material-ui/core/Paper';
+import Chip from '@material-ui/core/Chip';
 
 class MainContentItem extends Component {
 
@@ -18,44 +17,41 @@ class MainContentItem extends Component {
       <Paper className={classes.paper}>
         <ListItem alignItems="flex-start">
           <Grid container width={1}>
-            <Grid item md={2}>
+            <Grid item md={5}>
               <Link className={classes.itemLink} to={"/profile/" + title}>
-                <Avatar alt={title} src={imageUrl === "" ? "avatar.png" : imageUrl} className={classes.searchAvatar}/>
+                <img alt={title} src={imageUrl === "" ? "avatar.png" : imageUrl} className={classes.searchAvatar}/>
               </Link>
             </Grid>
-            <Grid item md={10}>
-              <Grid container width={1}>
-                <Grid item md={12}>
-                  <Typography variant="body2">{categories ? categories.map((category) => (
+            <Grid item md={7}>
+              <div style={{padding: '20px'}}>
+                <Typography variant="body2">
+                  {categories ? categories.map((category) => (
                     <Link key={category} className={classes.link} to={"/search/" + category + ":"}>
-                      {category}
+                      <Chip
+                        size="small"
+                        label={category}
+                        variant="outlined"
+                      />
                     </Link>
-                  )) : null}</Typography>
-                  <Link className={classes.itemLink} to={"/profile/" + title}>
-                    <ListItemText style={{margin:0}}
-                      primary={title}
-                      secondary={
-                        <React.Fragment>
-                          {subtitle}
-                          <br/>
-                          <Typography
-                            component="span"
-                            variant="body2"
-                            className={classes.inline}
-                            color="textPrimary"
-                          >
-                            {description}
-                          </Typography>
-                        </React.Fragment>
-
-                      }
-                    />
-                  </Link>
-                </Grid>
-              </Grid>
-              <Grid item md={11}>
+                  )) : null}
+                </Typography>
+                <Link className={classes.itemLink} to={"/profile/" + title}>
+                  <Typography className={classes.mainContentItemTitle} variant='h4'>{title}</Typography>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                  >
+                    {subtitle}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                  >
+                    {description}
+                  </Typography>
+                </Link>
                 <RelatedLinkList links={links}/>
-              </Grid>
+              </div>
             </Grid>
           </Grid>
         </ListItem>

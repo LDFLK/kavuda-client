@@ -23,16 +23,13 @@
   color: #61dafb;
 }
 
-.MuiTypography-body1{
-  font-size: 1.5rem !important;
-}
-
-.entity-attributes p{
+.entity-attributes p {
   font-size: 1rem;
 }
-.entity-attributes img{
+
+.entity-attributes img {
   border-radius: 10px;
-  max-width:300px;
+  max-width: 300px;
 }
 
 @keyframes App-logo-spin {

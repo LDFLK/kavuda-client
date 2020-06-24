@@ -2,11 +2,11 @@ import {Component} from "react";
 import React from "react";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar/Avatar";
-import ListItemText from "@material-ui/core/ListItemText/ListItemText";
 import ListItem from "@material-ui/core/ListItem/ListItem";
 import {Link} from "react-router-dom";
 import {withStyles} from "@material-ui/core";
 import Styles from "../../styles/styles";
+import Typography from "@material-ui/core/Typography/Typography";
 
 class TrendingListItem extends Component {
 
@@ -27,15 +27,13 @@ class TrendingListItem extends Component {
             </Link>
           </ListItemAvatar>
           <Link className={classes.itemLink} to={"/profile/" + title}>
-            <ListItemText
-              primary={title}
-              secondary={
-                <React.Fragment>
-                  {subtitle}
-                </React.Fragment>
-
-              }
-            />
+            <Typography className={classes.trendingItemTitle} variant='h4'>{title}</Typography>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+            >
+              {subtitle}
+            </Typography>
           </Link>
         </ListItem>
     )
