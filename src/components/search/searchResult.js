@@ -28,24 +28,21 @@ class SearchResult extends Component {
     const {classes, searchResults, trendingResults, getTrendingResults, getSearchResults} = this.props;
     return (
       <Grid className={classes.container} container width={1}>
-        <Grid item xs={8}>
-          <Paper className={classes.paper}>
-            <Typography variant="h4" color="inherit" noWrap>Search Results:</Typography>
-            <InfiniteList listItems={searchResults}
-                          getResultItems={() => getSearchResults(this.props.match.params.searchKey, false)}
-                          list={<MainContentList listItems={searchResults}/>}
-            />
-          </Paper>
+        <Grid item xs={3} className={classes.leftContentColumn}>
+          <Typography variant="h4" color="inherit" className={classes.headerText} noWrap>Trending</Typography>
+          <InfiniteList listItems={trendingResults}
+                        getResultItems={getTrendingResults}
+                        list={<TrendingList listItems={trendingResults}/>}
+          />
         </Grid>
-        <Grid item xs={4}>
-          <Paper className={classes.trendingContainer}>
-            <Typography variant="h4" color="inherit" noWrap>Trending</Typography>
-            <InfiniteList listItems={trendingResults}
-                          getResultItems={getTrendingResults}
-                          list={<TrendingList listItems={trendingResults}/>}
-            />
-          </Paper>
+        <Grid item xs={6} style={{textAlign: 'left'}}>
+          <Typography variant="h4" color="inherit" noWrap>Search Results:</Typography>
+          <InfiniteList listItems={searchResults}
+                        getResultItems={() => getSearchResults(this.props.match.params.searchKey, false)}
+                        list={<MainContentList listItems={searchResults}/>}
+          />
         </Grid>
+
       </Grid>
     );
   }

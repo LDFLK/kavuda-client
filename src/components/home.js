@@ -21,9 +21,8 @@ class Home extends Component {
   render() {
     const {classes, homeResults, trendingResults, getTrendingResults, getHomeResults} = this.props;
     return (
-      <Grid className={classes.container} container width={1}
-            style={{display: 'flex', justifyContent: 'center', width: '100%'}}>
-        <Grid item xs={3} style={{textAlign: 'left', position: 'fixed',top:'70px', left:'0',bottom:'50px', overflow:'auto'}}>
+      <Grid className={classes.container} container width={1}>
+        <Grid item xs={3} className={classes.leftContentColumn}>
           <Typography variant="h4" className={classes.headerText} noWrap>Trending</Typography>
           <InfiniteList listItems={trendingResults}
                         getResultItems={getTrendingResults}

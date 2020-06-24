@@ -9,6 +9,9 @@ const Styles = theme => ({
     backgroundColor: '#eeeeee',
     padding: theme.spacing(2),
     flexGrow: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%',
   },
   footer: {
     backgroundColor: '#282c34',
@@ -110,12 +113,20 @@ const Styles = theme => ({
   mainContentItemTitle: {
     fontSize: 27,
     color: '#000000DE',
-    marginBottom:theme.spacing(1)
+    marginBottom: theme.spacing(1)
   },
   trendingItemTitle: {
     fontSize: 16,
     color: '#000000DE',
   },
+  leftContentColumn:{
+    textAlign: 'left',
+    position: 'fixed',
+    top:'70px',
+    left:'0',
+    bottom:'50px',
+    overflow:'auto'
+  }
 });
 
 export default Styles;
