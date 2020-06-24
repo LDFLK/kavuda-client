@@ -12,6 +12,7 @@ const Styles = theme => ({
     display: 'flex',
     justifyContent: 'center',
     width: '100%',
+    minHeight:'100vh'
   },
   footer: {
     backgroundColor: '#282c34',
@@ -21,6 +22,14 @@ const Styles = theme => ({
   paper: {
     margin: theme.spacing(2),
     padding: 0,
+    textAlign: 'left',
+    color: theme.palette.text.primary,
+    boxShadow: '0px 3px 6px #00000029',
+    borderRadius: 16,
+  },
+  profilePaper: {
+    margin: theme.spacing(2),
+    padding:theme.spacing(2),
     textAlign: 'left',
     color: theme.palette.text.primary,
     boxShadow: '0px 3px 6px #00000029',
@@ -110,6 +119,13 @@ const Styles = theme => ({
     objectFit: 'cover',
     borderRadius: 16,
   },
+  profileAvatar: {
+    height: 180,
+    width: '100%',
+    float: 'right',
+    objectFit: 'cover',
+    borderRadius: 16,
+  },
   mainContentItemTitle: {
     fontSize: 27,
     color: '#000000DE',
@@ -126,6 +142,17 @@ const Styles = theme => ({
     left:'0',
     bottom:'50px',
     overflow:'auto'
+  },
+  rightContentColumn:{
+    textAlign: 'left',
+    position: 'fixed',
+    top:'70px',
+    right:'0',
+    bottom:'50px',
+    overflow:'auto'
+  },
+  mainContentColumn:{
+    textAlign: 'left',
   }
 });
 

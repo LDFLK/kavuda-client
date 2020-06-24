@@ -8,25 +8,11 @@ import MainContentList from "../latest/mainContentList"
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import FormattedContent from "./formattedContent";
-import Box from '@material-ui/core/Box';
-import Divider from "@material-ui/core/Divider/Divider";
 import {Link} from "react-router-dom";
 import InfiniteList from "../infinite-list/infinite-list";
+import Chip from "@material-ui/core/Chip/Chip";
 
 class Profile extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      collapsed: false,
-    };
-
-    this.toggleCollapse = this.toggleCollapse.bind(this);
-  }
-
-  toggleCollapse() {
-    this.setState({collapsed: !this.state.collapsed});
-  }
 
   componentDidMount() {
     this.props.getEntity(this.props.match.params.title);
@@ -42,14 +28,17 @@ class Profile extends Component {
 
   render() {
     const {classes, loadedEntity, internalLinks, getInternalLinks, relatedResults, getRelatedResults} = this.props;
-    const {collapsed} = this.state;
 
     if (loadedEntity == null) {
       return (
         <Grid className={classes.container} container width={1}>
-          <Grid item xs={12}>
-            <Paper className={classes.paper}>
-              <Typography component="p">
+          <Grid item xs={6} className={classes.mainContentColumn}>
+            <Paper className={classes.profilePaper}>
+              <Typography
+                component="p"
+                style={{paddingLeft: '20px'}}
+                variant="body2"
+                color="textSecondary">
                 Document not found
               </Typography>
             </Paper>
@@ -59,49 +48,44 @@ class Profile extends Component {
     } else {
       return (
         <Grid className={classes.container} container width={1}>
-
-          <Grid item xs={3}>
-            <Paper className={classes.paper}>
-              <Typography variant="h4" color="inherit" noWrap>Related Links</Typography>
-              <InfiniteList listItems={internalLinks}
-                            getResultItems={getInternalLinks}
-                            searchParam={loadedEntity.title}
-                            list={<TrendingList listItems={internalLinks} getResults={getInternalLinks} searchParam={loadedEntity.title}/>}
-              />
-            </Paper>
+          <Grid item xs={3} className={classes.leftContentColumn}>
+            <Typography variant="h4" color="inherit" className={classes.headerText} noWrap>Related Links</Typography>
+            <InfiniteList listItems={internalLinks}
+                          getResultItems={getInternalLinks}
+                          searchParam={loadedEntity.title}
+                          list={<TrendingList listItems={internalLinks} getResults={getInternalLinks}
+                                              searchParam={loadedEntity.title}/>}
+            />
           </Grid>
-          < Grid item xs={9}>
-            <Paper className={classes.paper}>
+          < Grid item xs={6} className={classes.mainContentColumn}>
+            <Paper className={classes.profilePaper}>
               <Grid container width={1}>
-                <Grid item>
-                  <Avatar alt={loadedEntity.title}
-                          src={loadedEntity.image_url === "" ? "avatar.png" : loadedEntity.image_url}
-                          className={classes.bigAvatar}/>
+                <Grid item xs={3}>
+                  <img alt={loadedEntity.title}
+                       src={loadedEntity.image_url === "" ? "avatar.png" : loadedEntity.image_url}
+                       className={classes.profileAvatar}/>
                 </Grid>
-                <Grid item xs={10}>
-                  <Typography variant="body2">{loadedEntity.categories ? loadedEntity.categories.map((category) => (
-                    <Link key={category} className={classes.link} to={"/search/" + category + ":"}>
-                      {category}
-                    </Link>
-                  )) : null}</Typography>
-                  <Typography variant="h4">
+                <Grid item xs={9}>
+                  <Typography className={classes.mainContentItemTitle} variant="body2">
+                    {loadedEntity.categories ? loadedEntity.categories.map((category) => (
+                      <Link key={category} className={classes.link} to={"/search/" + category + ":"}>
+                        <Chip
+                          size="small"
+                          label={category}
+                          variant="outlined"
+                        />
+                      </Link>
+                    )) : null}
+                  </Typography>
+                  <Typography className={classes.mainContentItemTitle} variant='h4'>
                     {loadedEntity.title}
                   </Typography>
-                  {collapsed ?
-                    <Typography variant="subtitle1" style={{textAlign: 'right', float: 'right'}}>
-                      <Link onClick={this.toggleCollapse} key={"collapse-button-bottom"} className={classes.link}
-                            to={"#"}>
-                        {collapsed ? "Hide Content" : "Collapse All"}
-                      </Link>
-                    </Typography>
-                    : null}
                   {loadedEntity.source ?
                     <Typography variant="body2">
                       Original Source: <a className={classes.link} href={loadedEntity.source}>
                       {loadedEntity.source}
                     </a>
                     </Typography> : null}
-
                   {loadedEntity.attributes ?
                     <Typography variant="body2">
                       {loadedEntity.attributes.author && loadedEntity.attributes.author.values[0].value_string ?
@@ -112,38 +96,21 @@ class Profile extends Component {
                         : null}
                     </Typography> : null}
 
-                  <Box className={!collapsed ? classes.collapsible : null}>
-                    <table className={"entity-attributes"}>
-                      <tbody>
-                      {loadedEntity.attributes && loadedEntity.attributes.content ?
-                        <FormattedContent key={loadedEntity.attributes.content.name}
-                                          content={loadedEntity.attributes.content}/>
-                        : null}
-                      </tbody>
-                    </table>
-                  </Box>
-                  <Typography variant="subtitle1" style={{textAlign: 'right'}}>
-                    <Link onClick={this.toggleCollapse} key={"collapse-button-bottom"} className={classes.link}
-                          to={"#"}>
-                      {collapsed ? "Hide Content" : "Collapse All"}
-                    </Link>
-                  </Typography>
                 </Grid>
               </Grid>
-              <Grid item xs={12}>
-                <Divider variant="inset" component="div"/>
-              </Grid>
-              <Grid item xs={11}>
-                <br/>
-                <Typography variant="h4" color="inherit" noWrap>Related Articles</Typography>
-                <Box>
-                  <InfiniteList listItems={relatedResults}
-                                getResultItems={() => getRelatedResults(loadedEntity.title)}
-                                list={<MainContentList listItems={relatedResults}/>}
-                  />
-                </Box>
-              </Grid>
+              <br/>
+              {loadedEntity.attributes && loadedEntity.attributes.content ?
+                <FormattedContent key={loadedEntity.attributes.content.name}
+                                  content={loadedEntity.attributes.content}/>
+                : null}
             </Paper>
+          </Grid>
+          <Grid item xs={3} className={classes.rightContentColumn}>
+            {/*<Typography variant="h4" color="inherit" className={classes.headerText} noWrap>Related Articles</Typography>*/}
+            {/*<InfiniteList listItems={relatedResults}*/}
+            {/*getResultItems={() => getRelatedResults(loadedEntity.title)}*/}
+            {/*list={<MainContentList listItems={relatedResults}/>}*/}
+            {/*/>*/}
           </Grid>
         </Grid>
       );

@@ -73,9 +73,9 @@ class FormattedContent extends Component {
   render() {
     const {content} = this.props;
     return (
-      <tr key={content.name}>
-        <td>{this.formatValues(content.values)}</td>
-      </tr>
+      <div className={"mainContent"} key={content.name}>
+       {this.formatValues(content.values)}
+      </div>
     );
   }
 }

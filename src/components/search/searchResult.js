@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import {withStyles} from "@material-ui/core";
 import Styles from "../../styles/styles"
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import TrendingList from "../trending/trendingList";
 import MainContentList from "../latest/mainContentList"
 import Typography from "@material-ui/core/Typography/Typography";
@@ -35,7 +34,7 @@ class SearchResult extends Component {
                         list={<TrendingList listItems={trendingResults}/>}
           />
         </Grid>
-        <Grid item xs={6} style={{textAlign: 'left'}}>
+        <Grid item xs={6} className={classes.mainContentColumn}>
           <Typography variant="h4" color="inherit" noWrap>Search Results:</Typography>
           <InfiniteList listItems={searchResults}
                         getResultItems={() => getSearchResults(this.props.match.params.searchKey, false)}

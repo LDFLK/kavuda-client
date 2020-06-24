@@ -23,11 +23,16 @@
   color: #61dafb;
 }
 
-.entity-attributes p {
-  font-size: 1rem;
+.mainContent p {
+  font-size: 1em;
 }
 
-.entity-attributes img {
+p a{
+  color:#768B9B;
+  text-decoration: none;
+}
+
+.mainContent img {
   border-radius: 10px;
   max-width: 300px;
 }

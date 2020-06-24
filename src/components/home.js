@@ -29,7 +29,7 @@ class Home extends Component {
                         list={<TrendingList listItems={trendingResults}/>}
           />
         </Grid>
-        <Grid item xs={6} style={{textAlign: 'left'}}>
+        <Grid item xs={6} className={classes.mainContentColumn}>
           <Typography variant="h4" className={classes.headerText} noWrap>Latest</Typography>
           <InfiniteList listItems={homeResults}
                         getResultItems={getHomeResults}

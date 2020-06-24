@@ -23,7 +23,11 @@ class TrendingList extends Component {
 
           ))
           :
-          <Typography component="p">
+          <Typography
+            component="p"
+            style={{paddingLeft: '20px'}}
+            variant="body2"
+            color="textSecondary">
             No Results Found
           </Typography>
         }
