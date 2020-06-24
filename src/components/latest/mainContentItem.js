@@ -12,7 +12,50 @@ import Chip from '@material-ui/core/Chip';
 class MainContentItem extends Component {
 
   render() {
-    const {classes, imageUrl, title, subtitle, description, links, categories} = this.props;
+    const {classes, imageUrl, title, subtitle, description, links, categories, vertical} = this.props;
+    if (vertical) {
+      return (
+        <Paper className={classes.paper}>
+          <div style={{padding: '10px'}}>
+            <Link className={classes.itemLink} to={"/profile/" + title}>
+              <img alt={title} src={imageUrl === "" ? "avatar.png" : imageUrl} className={classes.searchAvatar}/>
+            </Link>
+          </div>
+          <div style={{padding: '20px'}}>
+            <Typography className={classes.mainContentItemTitle} variant="body2">
+              {categories ? categories.map((category) => (
+                <Link key={category} className={classes.link} to={"/search/" + category + ":"}>
+                  <Chip style={{cursor: 'pointer'}}
+                        size="small"
+                        label={category}
+                        variant="outlined"
+                  />
+                </Link>
+              )) : null}
+            </Typography>
+            <Link className={classes.itemLink} to={"/profile/" + title}>
+              <Typography className={classes.mainContentItemTitle} variant='h4'><span
+                className={"news-title"}>{title}</span></Typography>
+              <Typography
+                variant="body2"
+                color="textSecondary"
+              >
+                {subtitle}
+              </Typography>
+              <Typography
+                className={"news-description"}
+                style={{marginBottom: '10px'}}
+                variant="body2"
+                color="textSecondary"
+              >
+                {description}
+              </Typography>
+            </Link>
+            <RelatedLinkList links={links}/>
+          </div>
+        </Paper>
+      )
+    }
     return (
       <Paper className={classes.paper}>
         <ListItem alignItems="flex-start">
@@ -27,16 +70,17 @@ class MainContentItem extends Component {
                 <Typography className={classes.mainContentItemTitle} variant="body2">
                   {categories ? categories.map((category) => (
                     <Link key={category} className={classes.link} to={"/search/" + category + ":"}>
-                      <Chip style={{cursor:'pointer'}}
-                        size="small"
-                        label={category}
-                        variant="outlined"
+                      <Chip style={{cursor: 'pointer'}}
+                            size="small"
+                            label={category}
+                            variant="outlined"
                       />
                     </Link>
                   )) : null}
                 </Typography>
                 <Link className={classes.itemLink} to={"/profile/" + title}>
-                  <Typography className={classes.mainContentItemTitle} variant='h4'><span className={"news-title"}>{title}</span></Typography>
+                  <Typography className={classes.mainContentItemTitle} variant='h4'><span
+                    className={"news-title"}>{title}</span></Typography>
                   <Typography
                     variant="body2"
                     color="textSecondary"
@@ -45,7 +89,7 @@ class MainContentItem extends Component {
                   </Typography>
                   <Typography
                     className={"news-description"}
-                    style={{marginBottom:'10px'}}
+                    style={{marginBottom: '10px'}}
                     variant="body2"
                     color="textSecondary"
                   >

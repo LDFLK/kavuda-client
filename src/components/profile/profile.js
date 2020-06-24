@@ -106,11 +106,11 @@ class Profile extends Component {
             </Paper>
           </Grid>
           <Grid item xs={3} className={classes.rightContentColumn}>
-            {/*<Typography variant="h4" color="inherit" className={classes.headerText} noWrap>Related Articles</Typography>*/}
-            {/*<InfiniteList listItems={relatedResults}*/}
-            {/*getResultItems={() => getRelatedResults(loadedEntity.title)}*/}
-            {/*list={<MainContentList listItems={relatedResults}/>}*/}
-            {/*/>*/}
+            <Typography variant="h4" color="inherit" className={classes.headerText} noWrap>Related Articles</Typography>
+            <InfiniteList listItems={relatedResults}
+            getResultItems={() => getRelatedResults(loadedEntity.title)}
+            list={<MainContentList listItems={relatedResults} vertical={true}/>}
+            />
           </Grid>
         </Grid>
       );

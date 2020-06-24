@@ -8,7 +8,7 @@ import Moment from 'moment';
 class MainContentList extends Component {
 
   render() {
-    const {classes, listItems} = this.props;
+    const {classes, listItems, vertical} = this.props;
 
     return (
       <List className={classes.listContainer}>
@@ -19,7 +19,9 @@ class MainContentList extends Component {
                              subtitle={Moment(entity.source_date).format('DD  MMM YYYY h:mm A')}
                              description={entity.snippet}
                              links={entity.links.slice(0, 20)}
-                             categories={entity.categories}/>
+                             categories={entity.categories}
+                             vertical={vertical}
+            />
           ))
           :
           <Typography component="p" style={{textAlign: 'center'}}>
