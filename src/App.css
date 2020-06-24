@@ -27,6 +27,20 @@
   font-size: 1em;
 }
 
+.news-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 p a{
   color:#768B9B;
   text-decoration: none;

@@ -27,7 +27,7 @@ class TrendingListItem extends Component {
             </Link>
           </ListItemAvatar>
           <Link className={classes.itemLink} to={"/profile/" + title}>
-            <Typography className={classes.trendingItemTitle} variant='h4'>{title}</Typography>
+            <Typography className={classes.trendingItemTitle} variant='h4'><span className={"news-title"}>{title}</span></Typography>
             <Typography
               variant="body2"
               color="textSecondary"

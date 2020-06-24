@@ -27,7 +27,7 @@ class MainContentItem extends Component {
                 <Typography className={classes.mainContentItemTitle} variant="body2">
                   {categories ? categories.map((category) => (
                     <Link key={category} className={classes.link} to={"/search/" + category + ":"}>
-                      <Chip
+                      <Chip style={{cursor:'pointer'}}
                         size="small"
                         label={category}
                         variant="outlined"
@@ -36,7 +36,7 @@ class MainContentItem extends Component {
                   )) : null}
                 </Typography>
                 <Link className={classes.itemLink} to={"/profile/" + title}>
-                  <Typography className={classes.mainContentItemTitle} variant='h4'>{title}</Typography>
+                  <Typography className={classes.mainContentItemTitle} variant='h4'><span className={"news-title"}>{title}</span></Typography>
                   <Typography
                     variant="body2"
                     color="textSecondary"
@@ -44,11 +44,12 @@ class MainContentItem extends Component {
                     {subtitle}
                   </Typography>
                   <Typography
-                    style={{paddingBottom:'10px'}}
+                    className={"news-description"}
+                    style={{marginBottom:'10px'}}
                     variant="body2"
                     color="textSecondary"
                   >
-                    {description.length > 100 ? description.substring(0, 100) + "..." : description}
+                    {description}
                   </Typography>
                 </Link>
                 <RelatedLinkList links={links}/>

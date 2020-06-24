@@ -65,11 +65,11 @@ class Profile extends Component {
                        src={loadedEntity.image_url === "" ? "avatar.png" : loadedEntity.image_url}
                        className={classes.profileAvatar}/>
                 </Grid>
-                <Grid item xs={9}>
+                <Grid item xs={9} style={{paddingLeft: '20px'}}>
                   <Typography className={classes.mainContentItemTitle} variant="body2">
                     {loadedEntity.categories ? loadedEntity.categories.map((category) => (
                       <Link key={category} className={classes.link} to={"/search/" + category + ":"}>
-                        <Chip
+                        <Chip style={{cursor:'pointer'}}
                           size="small"
                           label={category}
                           variant="outlined"
