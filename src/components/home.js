@@ -21,20 +21,21 @@ class Home extends Component {
   render() {
     const {classes, homeResults, trendingResults, getTrendingResults, getHomeResults} = this.props;
     return (
-      <Grid className={classes.container} container width={1}>
-        <Grid item xs={3} style={{textAlign: 'left'}}>
+      <Grid className={classes.container} container width={1}
+            style={{display: 'flex', justifyContent: 'center', width: '100%'}}>
+        <Grid item xs={3} style={{textAlign: 'left', position: 'fixed',top:'70px', left:'0',bottom:'50px', overflow:'auto'}}>
           <Typography variant="h4" className={classes.headerText} noWrap>Trending</Typography>
-            <InfiniteList listItems={trendingResults}
-                          getResultItems={getTrendingResults}
-                          list={<TrendingList listItems={trendingResults}/>}
-            />
+          <InfiniteList listItems={trendingResults}
+                        getResultItems={getTrendingResults}
+                        list={<TrendingList listItems={trendingResults}/>}
+          />
         </Grid>
         <Grid item xs={6} style={{textAlign: 'left'}}>
           <Typography variant="h4" className={classes.headerText} noWrap>Latest</Typography>
-            <InfiniteList listItems={homeResults}
-                          getResultItems={getHomeResults}
-                          list={<MainContentList listItems={homeResults}/>}
-            />
+          <InfiniteList listItems={homeResults}
+                        getResultItems={getHomeResults}
+                        list={<MainContentList listItems={homeResults}/>}
+          />
         </Grid>
       </Grid>
     );

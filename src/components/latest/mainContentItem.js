@@ -24,7 +24,7 @@ class MainContentItem extends Component {
             </Grid>
             <Grid item md={7}>
               <div style={{padding: '20px'}}>
-                <Typography variant="body2">
+                <Typography className={classes.mainContentItemTitle} variant="body2">
                   {categories ? categories.map((category) => (
                     <Link key={category} className={classes.link} to={"/search/" + category + ":"}>
                       <Chip
@@ -44,10 +44,11 @@ class MainContentItem extends Component {
                     {subtitle}
                   </Typography>
                   <Typography
+                    style={{paddingBottom:'10px'}}
                     variant="body2"
                     color="textSecondary"
                   >
-                    {description}
+                    {description.length > 100 ? description.substring(0, 100) + "..." : description}
                   </Typography>
                 </Link>
                 <RelatedLinkList links={links}/>

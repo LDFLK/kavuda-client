@@ -9,7 +9,6 @@ import Footer from "./components/footer";
 import Home from "./components/home";
 import SearchResult from "./components/search/searchResult";
 import Profile from "./components/profile/profile";
-import {ThemeProvider} from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -148,7 +147,6 @@ class App extends Component {
 
   render() {
     return (
-      <ThemeProvider>
         <div className="App">
             <HashRouter>
               <Route path="/"
@@ -217,7 +215,6 @@ class App extends Component {
             </DialogActions>
           </Dialog>
         </div>
-      </ThemeProvider>
     );
   }
 }

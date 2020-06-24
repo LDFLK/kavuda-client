@@ -38,7 +38,7 @@ class Header extends Component {
   render() {
     const {classes, searchKey} = this.props;
     return (
-      <AppBar className={classes.appBar} position="static">
+      <AppBar className={classes.appBar} position="sticky">
         <Grid container width={1} style={{textAlign: 'left'}}>
           <Grid item xs={3}>
             <Typography component={Link} to="/" style={{textDecoration: 'none'}}

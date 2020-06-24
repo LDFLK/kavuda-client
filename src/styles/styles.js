@@ -110,6 +110,7 @@ const Styles = theme => ({
   mainContentItemTitle: {
     fontSize: 27,
     color: '#000000DE',
+    marginBottom:theme.spacing(1)
   },
   trendingItemTitle: {
     fontSize: 16,
