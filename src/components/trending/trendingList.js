@@ -17,7 +17,8 @@ class TrendingList extends Component {
           listItems.map((item) => (
             <TrendingListItem key={item.title}
                               imageUrl={item.image_url} title={item.title}
-                              subtitle={Moment(item.updated_at).format('DD  MMM YYYY h:mm A')}
+                              subtitle={item.source_date !== "0001-01-01T00:00:00Z" ? Moment(item.source_date).
+                              format('DD  MMM YYYY h:mm A') : Moment(item.updated_at).format('DD  MMM YYYY h:mm A')}
                               categories={item.categories}
             />
 
