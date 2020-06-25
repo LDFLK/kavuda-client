@@ -85,6 +85,7 @@ class Profile extends Component {
                         new Date(loadedEntity.attributes.date.values[0].value_string).toDateString()
                         : null}
                     </Typography> : null}
+                    <div style={{paddingTop:'10px'}}>
                   {loadedEntity.categories ? loadedEntity.categories.map((category) => (
                     ignoreCategories.includes(category) ? null :
                       <Link key={category} className={classes.link} to={"/search/" + category + ":"}>
@@ -95,6 +96,7 @@ class Profile extends Component {
                         />
                       </Link>
                   )) : null}
+                    </div>
                 </Grid>
               </Grid>
               <br/>
