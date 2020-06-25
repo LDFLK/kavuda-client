@@ -26,6 +26,7 @@ class Profile extends Component {
   }
 
   render() {
+    const ignoreCategories = ["News", "PERSON", "ORGANIZATION", "LOCATION", "arbitrary-entities", "OrgChart-Level1"];
     const {classes, loadedEntity, internalLinks, getInternalLinks, relatedResults, getRelatedResults} = this.props;
 
     if (loadedEntity == null) {
@@ -71,8 +72,8 @@ class Profile extends Component {
                   {loadedEntity.source ?
                     <Typography variant="body2">
                       <a className={classes.link} href={loadedEntity.source}>
-                      {loadedEntity.source}
-                    </a>
+                        {loadedEntity.source}
+                      </a>
                     </Typography> : null}
                   {loadedEntity.attributes ?
                     <Typography variant="body2">
@@ -83,8 +84,8 @@ class Profile extends Component {
                         new Date(loadedEntity.attributes.date.values[0].value_string).toDateString()
                         : null}
                     </Typography> : null}
-                  <Typography className={classes.mainContentItemTitle} variant="body2">
-                    {loadedEntity.categories ? loadedEntity.categories.map((category) => (
+                  {loadedEntity.categories ? loadedEntity.categories.map((category) => (
+                    ignoreCategories.includes(category) ? null :
                       <Link key={category} className={classes.link} to={"/search/" + category + ":"}>
                         <Chip style={{cursor: 'pointer'}}
                               size="small"
@@ -92,9 +93,7 @@ class Profile extends Component {
                               variant="outlined"
                         />
                       </Link>
-                    )) : null}
-                  </Typography>
-
+                  )) : null}
                 </Grid>
               </Grid>
               <br/>

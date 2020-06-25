@@ -12,6 +12,7 @@ import Avatar from "@material-ui/core/Avatar/Avatar";
 class MainContentItem extends Component {
 
   render() {
+    const ignoreCategories = ["News", "PERSON", "ORGANIZATION", "LOCATION", "arbitrary-entities", "OrgChart-Level1"];
     const {classes, imageUrl, title, subtitle, description, links, categories, vertical} = this.props;
     if (vertical) {
       return (
@@ -19,16 +20,18 @@ class MainContentItem extends Component {
           <div style={{padding: '20px'}}>
             <Link className={classes.itemLink} to={"/profile/" + title}>
               <table width='100%'>
+                <tbody>
                 <tr>
-                <td style={{paddingRight:'10px'}}>
-                  <Avatar alt={title} src={imageUrl === "" ? "avatar.png" : imageUrl}/>
-                </td>
-                <td width='100%'>
-                  <Typography className={classes.mainContentItemTitle} variant='h4'>
-                    <span className={"news-title"}>{title}</span>
-                  </Typography>
-                </td>
+                  <td style={{paddingRight: '10px'}}>
+                    <Avatar alt={title} src={imageUrl === "" ? "avatar.png" : imageUrl}/>
+                  </td>
+                  <td width='100%'>
+                    <Typography className={classes.mainContentItemTitle} variant='h4'>
+                      <span className={"news-title"}>{title}</span>
+                    </Typography>
+                  </td>
                 </tr>
+                </tbody>
               </table>
               <Typography
                 variant="body2"
@@ -45,8 +48,8 @@ class MainContentItem extends Component {
                 {description}
               </Typography>
             </Link>
-            <Typography className={classes.mainContentItemTitle} variant="body2">
-              {categories ? categories.map((category) => (
+            {categories ? categories.map((category) => (
+              ignoreCategories.includes(category) ? null :
                 <Link key={category} className={classes.link} to={"/search/" + category + ":"}>
                   <Chip style={{cursor: 'pointer'}}
                         size="small"
@@ -54,8 +57,7 @@ class MainContentItem extends Component {
                         variant="outlined"
                   />
                 </Link>
-              )) : null}
-            </Typography>
+            )) : null}
           </div>
         </Paper>
       )
@@ -91,14 +93,15 @@ class MainContentItem extends Component {
                 </Link>
                 <div>
                   {categories ? categories.map((category) => (
-                    <Link key={category} className={classes.link} to={"/search/" + category + ":"}>
-                      <Chip style={{cursor: 'pointer'}}
-                            size="small"
-                            label={category}
-                            variant="outlined"
-                      />
-                    </Link>
-                  )) : null}
+                    ignoreCategories.includes(category) ? null :
+                      <Link key={category} className={classes.link} to={"/search/" + category + ":"}>
+                        <Chip style={{cursor: 'pointer'}}
+                              size="small"
+                              label={category}
+                              variant="outlined"
+                        />
+                      </Link>
+                    )) : null}
                 </div>
                 {/*<RelatedLinkList links={links}/>*/}
               </div>
