@@ -4,10 +4,10 @@ import Typography from '@material-ui/core/Typography';
 import Styles from "../../styles/styles"
 import Grid from "@material-ui/core/Grid/Grid";
 import ListItem from "@material-ui/core/ListItem/ListItem";
-import RelatedLinkList from "./relatedLinkList";
 import {Link} from "react-router-dom";
 import Paper from '@material-ui/core/Paper';
 import Chip from '@material-ui/core/Chip';
+import Avatar from "@material-ui/core/Avatar/Avatar";
 
 class MainContentItem extends Component {
 
@@ -16,27 +16,20 @@ class MainContentItem extends Component {
     if (vertical) {
       return (
         <Paper className={classes.paper}>
-          <div style={{padding: '10px'}}>
+          <div style={{padding: '20px'}}>
             <Link className={classes.itemLink} to={"/profile/" + title}>
-              <img alt={title} src={imageUrl === "" ? "avatar.png" : imageUrl}
-                   className={classes.searchAvatarVertical}/>
-            </Link>
-          </div>
-          <div style={{padding: '0 20px'}}>
-            <Typography className={classes.mainContentItemTitle} variant="body2">
-              {categories ? categories.map((category) => (
-                <Link key={category} className={classes.link} to={"/search/" + category + ":"}>
-                  <Chip style={{cursor: 'pointer'}}
-                        size="small"
-                        label={category}
-                        variant="outlined"
-                  />
-                </Link>
-              )) : null}
-            </Typography>
-            <Link className={classes.itemLink} to={"/profile/" + title}>
-              <Typography className={classes.mainContentItemTitle} variant='h4'><span
-                className={"news-title"}>{title}</span></Typography>
+              <table width='100%'>
+                <tr>
+                <td style={{paddingRight:'10px'}}>
+                  <Avatar alt={title} src={imageUrl === "" ? "avatar.png" : imageUrl}/>
+                </td>
+                <td width='100%'>
+                  <Typography className={classes.mainContentItemTitle} variant='h4'>
+                    <span className={"news-title"}>{title}</span>
+                  </Typography>
+                </td>
+                </tr>
+              </table>
               <Typography
                 variant="body2"
                 color="textSecondary"
@@ -52,7 +45,17 @@ class MainContentItem extends Component {
                 {description}
               </Typography>
             </Link>
-            <RelatedLinkList links={links}/>
+            <Typography className={classes.mainContentItemTitle} variant="body2">
+              {categories ? categories.map((category) => (
+                <Link key={category} className={classes.link} to={"/search/" + category + ":"}>
+                  <Chip style={{cursor: 'pointer'}}
+                        size="small"
+                        label={category}
+                        variant="outlined"
+                  />
+                </Link>
+              )) : null}
+            </Typography>
           </div>
         </Paper>
       )
@@ -68,17 +71,6 @@ class MainContentItem extends Component {
             </Grid>
             <Grid item md={7}>
               <div style={{padding: '20px'}}>
-                <div style={{paddingBottom: '20px'}}>
-                  {categories ? categories.map((category) => (
-                    <Link key={category} className={classes.link} to={"/search/" + category + ":"}>
-                      <Chip style={{cursor: 'pointer'}}
-                            size="small"
-                            label={category}
-                            variant="outlined"
-                      />
-                    </Link>
-                  )) : null}
-                </div>
                 <Link className={classes.itemLink} to={"/profile/" + title}>
                   <Typography className={classes.mainContentItemTitle} variant='h4'><span
                     className={"news-title"}>{title}</span></Typography>
@@ -97,7 +89,18 @@ class MainContentItem extends Component {
                     {description}
                   </Typography>
                 </Link>
-                <RelatedLinkList links={links}/>
+                <div>
+                  {categories ? categories.map((category) => (
+                    <Link key={category} className={classes.link} to={"/search/" + category + ":"}>
+                      <Chip style={{cursor: 'pointer'}}
+                            size="small"
+                            label={category}
+                            variant="outlined"
+                      />
+                    </Link>
+                  )) : null}
+                </div>
+                {/*<RelatedLinkList links={links}/>*/}
               </div>
             </Grid>
           </Grid>

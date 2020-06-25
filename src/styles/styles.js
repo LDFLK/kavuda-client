@@ -39,6 +39,7 @@ const Styles = theme => ({
       headerText: {
         color: '#000000DE',
         marginLeft: theme.spacing(2),
+        fontSize: '18px',
       },
       trendingContainer: {
         margin: 10,
@@ -114,10 +115,10 @@ const Styles = theme => ({
         height: 100,
       },
       searchAvatar: {
-        height: 300,
+        height: 210,
         width: '100%',
         float: 'right',
-        objectFit: 'cover',
+        objectFit: 'contain',
         borderRadius: 16,
       },
       searchAvatarVertical: {
@@ -135,7 +136,7 @@ const Styles = theme => ({
         borderRadius: 16,
       },
       mainContentItemTitle: {
-        fontSize: 27,
+        fontSize: 18,
         color: '#000000DE',
         marginBottom: theme.spacing(1),
       },
@@ -144,7 +145,7 @@ const Styles = theme => ({
         color: '#000000DE',
       },
       leftContentColumn: {
-        width:'100%',
+        width: '100%',
         textAlign: 'left',
         position: 'fixed',
         top: '70px',
@@ -153,7 +154,7 @@ const Styles = theme => ({
         overflow: 'auto'
       },
       rightContentColumn: {
-        width:'100%',
+        width: '100%',
         textAlign: 'left',
         position: 'fixed',
         top: '70px',

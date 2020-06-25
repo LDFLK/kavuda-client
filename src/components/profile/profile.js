@@ -10,7 +10,6 @@ import FormattedContent from "./formattedContent";
 import {Link} from "react-router-dom";
 import InfiniteList from "../infinite-list/infinite-list";
 import Chip from "@material-ui/core/Chip/Chip";
-import Divider from '@material-ui/core/Divider';
 
 class Profile extends Component {
 
@@ -60,45 +59,45 @@ class Profile extends Component {
           < Grid item xs={6} className={classes.mainContentColumn}>
             <Paper className={classes.profilePaper}>
               <Grid container width={1}>
-                <Grid item xs={3}>
-                  <img alt={loadedEntity.title}
-                       src={loadedEntity.image_url === "" ? "avatar.png" : loadedEntity.image_url}
-                       className={classes.profileAvatar}/>
-                </Grid>
-                <Grid item xs={9} style={{paddingLeft: '20px'}}>
-                  <Typography className={classes.mainContentItemTitle} variant="body2">
-                    {loadedEntity.categories ? loadedEntity.categories.map((category) => (
-                      <Link key={category} className={classes.link} to={"/search/" + category + ":"}>
-                        <Chip style={{cursor:'pointer'}}
-                          size="small"
-                          label={category}
-                          variant="outlined"
-                        />
-                      </Link>
-                    )) : null}
-                  </Typography>
+                {/*<Grid item xs={3}>*/}
+                {/*<img alt={loadedEntity.title}*/}
+                {/*src={loadedEntity.image_url === "" ? "avatar.png" : loadedEntity.image_url}*/}
+                {/*className={classes.profileAvatar}/>*/}
+                {/*</Grid>*/}
+                <Grid item xs={9}>
                   <Typography className={classes.mainContentItemTitle} variant='h4'>
                     {loadedEntity.title}
                   </Typography>
                   {loadedEntity.source ?
                     <Typography variant="body2">
-                      Original Source: <a className={classes.link} href={loadedEntity.source}>
+                      <a className={classes.link} href={loadedEntity.source}>
                       {loadedEntity.source}
                     </a>
                     </Typography> : null}
                   {loadedEntity.attributes ?
                     <Typography variant="body2">
                       {loadedEntity.attributes.author && loadedEntity.attributes.author.values[0].value_string ?
-                        "Author: " + loadedEntity.attributes.author.values[0].value_string
+                        loadedEntity.attributes.author.values[0].value_string
                         : null}
                       {loadedEntity.attributes.date && loadedEntity.attributes.date.values[0].value_string ?
-                        "Date: " + new Date(loadedEntity.attributes.date.values[0].value_string).toDateString()
+                        new Date(loadedEntity.attributes.date.values[0].value_string).toDateString()
                         : null}
                     </Typography> : null}
+                  <Typography className={classes.mainContentItemTitle} variant="body2">
+                    {loadedEntity.categories ? loadedEntity.categories.map((category) => (
+                      <Link key={category} className={classes.link} to={"/search/" + category + ":"}>
+                        <Chip style={{cursor: 'pointer'}}
+                              size="small"
+                              label={category}
+                              variant="outlined"
+                        />
+                      </Link>
+                    )) : null}
+                  </Typography>
 
                 </Grid>
               </Grid>
-              <Divider style={{marginTop:'10px'}}/>
+              <br/>
               {loadedEntity.attributes && loadedEntity.attributes.content ?
                 <FormattedContent key={loadedEntity.attributes.content.name}
                                   content={loadedEntity.attributes.content}/>
@@ -108,8 +107,8 @@ class Profile extends Component {
           <Grid item xs={3} className={classes.rightContentColumn}>
             <Typography variant="h4" color="inherit" className={classes.headerText} noWrap>Related Articles</Typography>
             <InfiniteList listItems={relatedResults}
-            getResultItems={() => getRelatedResults(loadedEntity.title)}
-            list={<MainContentList listItems={relatedResults} vertical={true}/>}
+                          getResultItems={() => getRelatedResults(loadedEntity.title)}
+                          list={<MainContentList listItems={relatedResults} vertical={true}/>}
             />
           </Grid>
         </Grid>

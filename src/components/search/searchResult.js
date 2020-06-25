@@ -28,14 +28,13 @@ class SearchResult extends Component {
     return (
       <Grid className={classes.container} container width={1}>
         <Grid item xs={3} className={classes.leftContentColumn}>
-          <Typography variant="h4" color="inherit" className={classes.headerText} noWrap>Trending</Typography>
+          <Typography variant="body2" color="inherit" className={classes.headerText} noWrap>Most Viewed</Typography>
           <InfiniteList listItems={trendingResults}
                         getResultItems={getTrendingResults}
                         list={<TrendingList listItems={trendingResults}/>}
           />
         </Grid>
         <Grid item xs={6} className={classes.mainContentColumn}>
-          <Typography variant="h4" color="inherit" noWrap>Search Results:</Typography>
           <InfiniteList listItems={searchResults}
                         getResultItems={() => getSearchResults(this.props.match.params.searchKey, false)}
                         list={<MainContentList listItems={searchResults}/>}

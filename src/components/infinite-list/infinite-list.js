@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {withStyles, Button} from "@material-ui/core";
 import Styles from "../../styles/styles"
 import BeatLoader from "react-spinners/BeatLoader";
+import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 
 class InfiniteList extends Component {
 
@@ -59,8 +60,10 @@ class InfiniteList extends Component {
                 loading={this.props.loading}
               /> : null}
             {!(isLoading || listEnded) ?
+              <Tooltip title={'view more'} aria-label="add">
               <Button style={{width: "100%"}} onClick={() => this.loadResults()}><img alt={"view more"} width={"15px"}
                                                                                       src={"down.png"}/></Button>
+              </Tooltip>
               : <Button style={{width: "100%"}}> </Button>
             }
           </div>
