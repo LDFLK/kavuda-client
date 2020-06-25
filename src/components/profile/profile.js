@@ -5,7 +5,6 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import TrendingList from "../trending/trendingList";
 import MainContentList from "../latest/mainContentList"
-import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import FormattedContent from "./formattedContent";
 import {Link} from "react-router-dom";
