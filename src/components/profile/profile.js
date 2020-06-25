@@ -10,6 +10,7 @@ import FormattedContent from "./formattedContent";
 import {Link} from "react-router-dom";
 import InfiniteList from "../infinite-list/infinite-list";
 import Chip from "@material-ui/core/Chip/Chip";
+import extractHostname from "../../functions/extractHostnames"
 
 class Profile extends Component {
 
@@ -72,7 +73,7 @@ class Profile extends Component {
                   {loadedEntity.source ?
                     <Typography variant="body2">
                       <a className={classes.link} href={loadedEntity.source}>
-                        {loadedEntity.source}
+                        {extractHostname(loadedEntity.source)}
                       </a>
                     </Typography> : null}
                   {loadedEntity.attributes ?
