@@ -7,6 +7,7 @@ import {Link} from "react-router-dom";
 import {withStyles} from "@material-ui/core";
 import Styles from "../../styles/styles";
 import Typography from "@material-ui/core/Typography/Typography";
+import moment from "moment";
 
 class TrendingListItem extends Component {
 
@@ -32,7 +33,7 @@ class TrendingListItem extends Component {
               variant="body2"
               color="textSecondary"
             >
-              {subtitle}
+              {moment(subtitle,'DD  MMM YYYY h:mm A').fromNow()}
             </Typography>
           </Link>
         </ListItem>

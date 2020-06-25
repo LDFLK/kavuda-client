@@ -8,6 +8,7 @@ import {Link} from "react-router-dom";
 import Paper from '@material-ui/core/Paper';
 import Chip from '@material-ui/core/Chip';
 import Avatar from "@material-ui/core/Avatar/Avatar";
+import moment from 'moment';
 
 class MainContentItem extends Component {
 
@@ -37,7 +38,7 @@ class MainContentItem extends Component {
                 variant="body2"
                 color="textSecondary"
               >
-                {subtitle}
+                {moment(subtitle,'DD  MMM YYYY h:mm A').fromNow()}
               </Typography>
               <Typography
                 className={"news-description"}
@@ -80,7 +81,7 @@ class MainContentItem extends Component {
                     variant="body2"
                     color="textSecondary"
                   >
-                    {subtitle}
+                    {moment(subtitle,'DD  MMM YYYY h:mm A').fromNow()}
                   </Typography>
                   <Typography
                     className={"news-description"}
