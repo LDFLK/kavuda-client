@@ -14,6 +14,14 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import Typography from '@material-ui/core/Typography';
+import {createMuiTheme} from '@material-ui/core/styles';
+import {ThemeProvider} from '@material-ui/styles';
+
+const THEME = createMuiTheme({
+  typography: {
+    "fontFamily": `"Helvetica", "Arial", sans-serif`,
+  }
+});
 
 class App extends Component {
 
@@ -148,6 +156,7 @@ class App extends Component {
 
   render() {
     return (
+      <ThemeProvider theme={THEME}>
       <div className="App">
         <HashRouter>
           <Route path="/"
@@ -216,6 +225,7 @@ class App extends Component {
           </DialogActions>
         </Dialog>
       </div>
+      </ThemeProvider>
     );
   }
 }
