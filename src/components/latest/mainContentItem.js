@@ -18,10 +18,11 @@ class MainContentItem extends Component {
         <Paper className={classes.paper}>
           <div style={{padding: '10px'}}>
             <Link className={classes.itemLink} to={"/profile/" + title}>
-              <img alt={title} src={imageUrl === "" ? "avatar.png" : imageUrl} className={classes.searchAvatar}/>
+              <img alt={title} src={imageUrl === "" ? "avatar.png" : imageUrl}
+                   className={classes.searchAvatarVertical}/>
             </Link>
           </div>
-          <div style={{padding: '20px'}}>
+          <div style={{padding: '0 20px'}}>
             <Typography className={classes.mainContentItemTitle} variant="body2">
               {categories ? categories.map((category) => (
                 <Link key={category} className={classes.link} to={"/search/" + category + ":"}>
@@ -67,7 +68,7 @@ class MainContentItem extends Component {
             </Grid>
             <Grid item md={7}>
               <div style={{padding: '20px'}}>
-                <Typography className={classes.mainContentItemTitle} variant="body2">
+                <div style={{paddingBottom: '20px'}}>
                   {categories ? categories.map((category) => (
                     <Link key={category} className={classes.link} to={"/search/" + category + ":"}>
                       <Chip style={{cursor: 'pointer'}}
@@ -77,7 +78,7 @@ class MainContentItem extends Component {
                       />
                     </Link>
                   )) : null}
-                </Typography>
+                </div>
                 <Link className={classes.itemLink} to={"/profile/" + title}>
                   <Typography className={classes.mainContentItemTitle} variant='h4'><span
                     className={"news-title"}>{title}</span></Typography>

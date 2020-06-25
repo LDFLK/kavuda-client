@@ -34,7 +34,7 @@ const Styles = theme => ({
         color: theme.palette.text.primary,
         boxShadow: '0px 3px 6px #00000029',
         borderRadius: 16,
-        minHeight:'100vh',
+        minHeight: '100vh',
       },
       headerText: {
         color: '#000000DE',
@@ -120,6 +120,13 @@ const Styles = theme => ({
         objectFit: 'cover',
         borderRadius: 16,
       },
+      searchAvatarVertical: {
+        height: 140,
+        width: '100%',
+        float: 'center',
+        objectFit: 'cover',
+        borderRadius: 16,
+      },
       profileAvatar: {
         height: 180,
         width: '100%',
@@ -137,6 +144,7 @@ const Styles = theme => ({
         color: '#000000DE',
       },
       leftContentColumn: {
+        width:'100%',
         textAlign: 'left',
         position: 'fixed',
         top: '70px',
@@ -145,6 +153,7 @@ const Styles = theme => ({
         overflow: 'auto'
       },
       rightContentColumn: {
+        width:'100%',
         textAlign: 'left',
         position: 'fixed',
         top: '70px',

@@ -10,6 +10,7 @@ import FormattedContent from "./formattedContent";
 import {Link} from "react-router-dom";
 import InfiniteList from "../infinite-list/infinite-list";
 import Chip from "@material-ui/core/Chip/Chip";
+import Divider from '@material-ui/core/Divider';
 
 class Profile extends Component {
 
@@ -97,7 +98,7 @@ class Profile extends Component {
 
                 </Grid>
               </Grid>
-              <br/>
+              <Divider style={{marginTop:'10px'}}/>
               {loadedEntity.attributes && loadedEntity.attributes.content ?
                 <FormattedContent key={loadedEntity.attributes.content.name}
                                   content={loadedEntity.attributes.content}/>
