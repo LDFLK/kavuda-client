@@ -61,14 +61,15 @@ class App extends Component {
 
   async getHomeResults() {
     let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=&categories=News';
-    return await this.getResults(searchUrl, false, "homeResults", "homeResultsPage");
+    console.log("hello");
+    return await this.getResults(searchUrl, false, "homeResults",15);
 
   }
 
-  async getResults(searchUrl, newSearch, results) {
+  async getResults(searchUrl, newSearch, results, limit) {
     let page = results + "Page";
     this.startLoading();
-    searchUrl += '&limit=15&page=' + (newSearch ? 1 : (this.state[page] + 1));
+    searchUrl += '&limit=' + limit + '&page=' + (newSearch ? 1 : (this.state[page] + 1));
     const response = await fetch(searchUrl, {method: 'GET'});
     const json = await response.json();
 
@@ -96,7 +97,7 @@ class App extends Component {
 
   async getTrendingResults() {
     let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=&categories=News,PERSON,ORGANIZATION';
-    return await this.getResults(searchUrl, false, "trendingResults")
+    return await this.getResults(searchUrl, false, "trendingResults",15)
 
   }
 
@@ -109,14 +110,14 @@ class App extends Component {
       } else {
         searchUrl += searchKey;
       }
-      return await this.getResults(searchUrl, newSearch, "searchResults")
+      return await this.getResults(searchUrl, newSearch, "searchResults",15)
     }
   }
 
   async getRelatedResults(title, newSearch) {
     if (title !== undefined) {
       let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/relations/' + title;
-      return await this.getResults(searchUrl + '?', newSearch, "relatedResults")
+      return await this.getResults(searchUrl + '?', newSearch, "relatedResults",4)
     }
 
   }
@@ -124,7 +125,7 @@ class App extends Component {
   async getInternalLinks(title, newSearch) {
     if (title !== undefined) {
       let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/links/' + title;
-      return await this.getResults(searchUrl + '?', newSearch, "internalLinks")
+      return await this.getResults(searchUrl + '?', newSearch, "internalLinks",15)
     }
 
   }
@@ -147,74 +148,74 @@ class App extends Component {
 
   render() {
     return (
-        <div className="App">
-            <HashRouter>
-              <Route path="/"
-                     render={(props) => <Header {...props}
-                                                searchKey={this.state.searchKey}
-                                                handleChange={this.handleChange}
-                                                getSearchResults={this.getSearchResults}
-                                                loading={this.state.loading}
-                     />}
-              />
-              <Route exact path="/"
-                     render={(props) => <Home {...props}
-                                              searchKey={this.state.searchKey}
-                                              homeResults={this.state.homeResults}
-                                              getHomeResults={this.getHomeResults}
-                                              trendingResults={this.state.trendingResults}
-                                              getTrendingResults={this.getTrendingResults}
-                                              getSearchResults={this.getSearchResults}
-                     />
-                     }
-              />
-              < Route path="/search/:searchKey"
-                      render={(props) => <SearchResult {...props}
-                                                       searchKey={this.state.searchKey}
-                                                       handleChange={this.handleChange}
-                                                       searchResults={this.state.searchResults}
-                                                       getSearchResults={this.getSearchResults}
-                                                       trendingResults={this.state.trendingResults}
-                                                       getTrendingResults={this.getTrendingResults}
+      <div className="App">
+        <HashRouter>
+          <Route path="/"
+                 render={(props) => <Header {...props}
+                                            searchKey={this.state.searchKey}
+                                            handleChange={this.handleChange}
+                                            getSearchResults={this.getSearchResults}
+                                            loading={this.state.loading}
+                 />}
+          />
+          <Route exact path="/"
+                 render={(props) => <Home {...props}
+                                          searchKey={this.state.searchKey}
+                                          homeResults={this.state.homeResults}
+                                          getHomeResults={this.getHomeResults}
+                                          trendingResults={this.state.trendingResults}
+                                          getTrendingResults={this.getTrendingResults}
+                                          getSearchResults={this.getSearchResults}
+                 />
+                 }
+          />
+          < Route path="/search/:searchKey"
+                  render={(props) => <SearchResult {...props}
+                                                   searchKey={this.state.searchKey}
+                                                   handleChange={this.handleChange}
+                                                   searchResults={this.state.searchResults}
+                                                   getSearchResults={this.getSearchResults}
+                                                   trendingResults={this.state.trendingResults}
+                                                   getTrendingResults={this.getTrendingResults}
 
-                      />
-                      }
-              />
-              <Route path="/profile/:title"
-                     render={(props) => <Profile {...props}
-                                                 getEntity={this.getEntity}
-                                                 loadedEntity={this.state.loadedEntity}
-                                                 handleChange={this.handleChange}
-                                                 relatedResults={this.state.relatedResults}
-                                                 getRelatedResults={this.getRelatedResults}
-                                                 internalLinks={this.state.internalLinks}
-                                                 getInternalLinks={this.getInternalLinks}
-                     />}
-              />
-              <Route path="/"
-                     render={(props) => <Footer {...props}
-                     />
-                     }
-              />
-            </HashRouter>
-          <Dialog
-            open={this.state.alertOpen}
-            onClose={() => this.handleChange("alertOpen", false)}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-          >
-            <DialogContent>
-              <Typography variant="body2" id="alert-dialog-description">
-                No items found!
-              </Typography>
-            </DialogContent>
-            <DialogActions style={{justifyContent: "center"}}>
-              <Button onClick={() => this.handleChange("alertOpen", false)} color="primary" autoFocus>
-                Ok
-              </Button>
-            </DialogActions>
-          </Dialog>
-        </div>
+                  />
+                  }
+          />
+          <Route path="/profile/:title"
+                 render={(props) => <Profile {...props}
+                                             getEntity={this.getEntity}
+                                             loadedEntity={this.state.loadedEntity}
+                                             handleChange={this.handleChange}
+                                             relatedResults={this.state.relatedResults}
+                                             getRelatedResults={this.getRelatedResults}
+                                             internalLinks={this.state.internalLinks}
+                                             getInternalLinks={this.getInternalLinks}
+                 />}
+          />
+          <Route path="/"
+                 render={(props) => <Footer {...props}
+                 />
+                 }
+          />
+        </HashRouter>
+        <Dialog
+          open={this.state.alertOpen}
+          onClose={() => this.handleChange("alertOpen", false)}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogContent>
+            <Typography variant="body2" id="alert-dialog-description">
+              No items found!
+            </Typography>
+          </DialogContent>
+          <DialogActions style={{justifyContent: "center"}}>
+            <Button onClick={() => this.handleChange("alertOpen", false)} color="primary" autoFocus>
+              Ok
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
     );
   }
 }
