@@ -27,6 +27,10 @@
   font-size: 14px;
 }
 
+.Header-inputInput-17 {
+  width: 100% !important;
+}
+
 .news-description {
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -41,8 +45,8 @@
   overflow: hidden;
 }
 
-p a{
-  color:#768B9B;
+p a {
+  color: #768B9B;
   text-decoration: none;
 }
 
