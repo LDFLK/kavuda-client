@@ -15,7 +15,7 @@ const Styles = theme => ({
         minHeight: '100vh'
       },
       footer: {
-        backgroundColor: '#282c34',
+        backgroundColor: '#eeeeee',
         paddingTop: theme.spacing(1),
         paddingBottom: theme.spacing(2),
       },
@@ -34,6 +34,7 @@ const Styles = theme => ({
         color: theme.palette.text.primary,
         boxShadow: '0px 3px 6px #00000029',
         borderRadius: 16,
+        minHeight:'100vh',
       },
       headerText: {
         color: '#000000DE',
@@ -140,7 +141,7 @@ const Styles = theme => ({
         position: 'fixed',
         top: '70px',
         left: '0',
-        bottom: '50px',
+        bottom: '0',
         overflow: 'auto'
       },
       rightContentColumn: {
@@ -148,7 +149,7 @@ const Styles = theme => ({
         position: 'fixed',
         top: '70px',
         right: '0',
-        bottom: '50px',
+        bottom: '0',
         overflow: 'auto'
       },
       mainContentColumn: {
