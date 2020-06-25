@@ -50,7 +50,7 @@ class Profile extends Component {
       return (
         <Grid className={classes.container} container width={1}>
           <Grid item xs={3} className={classes.leftContentColumn}>
-            <Typography variant="h4" color="inherit" className={classes.headerText} noWrap>Related Links</Typography>
+            <Typography variant="h4" color="inherit" className={classes.headerText} noWrap>Article Mentions</Typography>
             <InfiniteList listItems={internalLinks}
                           getResultItems={getInternalLinks}
                           searchParam={loadedEntity.title}
