@@ -100,6 +100,7 @@ class Profile extends Component {
                 </Grid>
               </Grid>
               <br/>
+              <img src={loadedEntity.image_url} width="100%"/>
               {loadedEntity.attributes && loadedEntity.attributes.content ?
                 <FormattedContent key={loadedEntity.attributes.content.name}
                                   content={loadedEntity.attributes.content}/>
