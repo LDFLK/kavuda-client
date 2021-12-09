@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import AppBar from "@material-ui/core/AppBar/AppBar";
-import {withStyles} from "@material-ui/core";
+import {withStyles, Button} from "@material-ui/core";
 import Styles from "../styles/styles"
 import InputBase from "@material-ui/core/InputBase/InputBase";
 import BeatLoader from 'react-spinners/BeatLoader';
@@ -39,7 +39,7 @@ class Header extends Component {
     const {classes, searchKey} = this.props;
     return (
       <AppBar className={classes.appBar} position="sticky">
-        <Grid container width={1} style={{textAlign: 'left'}}>
+        <Grid container width={1}  style={{textAlign: 'left'}}>
           <Grid item xs={3}>
             <Typography component={Link} to="/" style={{textDecoration: 'none'}}
                         variant="h4"
@@ -63,7 +63,7 @@ class Header extends Component {
               </form>
             </div>
           </Grid>
-          <Grid item>
+          <Grid item xs={1}>
             <BeatLoader
               css={override}
               sizeUnit={"px"}
@@ -71,6 +71,16 @@ class Header extends Component {
               color={'#36D7B7'}
               loading={this.props.loading}
             />
+          </Grid>
+          <Grid item xs={2}>
+          <Grid container width={1} justify="flex-end" style={{textAlign: 'right'}}>
+            <Grid item>
+                <Button onClick={() => this.props.handleChange('language','en')} size="small" variant="outlined" style={{color:'white'}}>English</Button>
+                <Button onClick={() => this.props.handleChange('language','sinhala')} size="small" variant="outlined" style={{color:'white'}}>සිංහල</Button>
+                <Button onClick={() => this.props.handleChange('language','tamil')} size="small" variant="outlined" style={{color:'white'}}>
+                  தமிழ்</Button>
+            </Grid>
+          </Grid>
           </Grid>
         </Grid>
       </AppBar>
