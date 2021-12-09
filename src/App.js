@@ -41,7 +41,8 @@ class App extends Component {
       internalLinks: [],
       internalLinksPage: 0,
       loading: true,
-      alertOpen: false
+      alertOpen: false,
+      language:'en'
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -57,7 +58,7 @@ class App extends Component {
 
   startLoading() {
     this.setState({loading: true});
-  }
+  };
 
   endLoading() {
     this.setState({loading: false});
@@ -199,6 +200,7 @@ class App extends Component {
                                              getRelatedResults={this.getRelatedResults}
                                              internalLinks={this.state.internalLinks}
                                              getInternalLinks={this.getInternalLinks}
+                                             language={this.state.language}
                  />}
           />
           <Route path="/"
