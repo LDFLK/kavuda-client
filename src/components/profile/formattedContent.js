@@ -71,10 +71,10 @@ class FormattedContent extends Component {
   }
 
   render() {
-    const {content} = this.props;
+    const {content, key} = this.props;
     return (
-      <div className={"mainContent"} key={content.name}>
-       {this.formatValues(content.values)}
+      <div className={"mainContent"} key={key}>
+       {this.formatValues(content)}
       </div>
     );
   }
