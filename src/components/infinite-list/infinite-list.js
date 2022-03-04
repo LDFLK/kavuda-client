@@ -1,8 +1,8 @@
 import React, {Component} from "react";
-import {withStyles, Button} from "@material-ui/core";
+import {withStyles, Button} from "@mui/material";
 import Styles from "../../styles/styles"
 import BeatLoader from "react-spinners/BeatLoader";
-import Tooltip from "@material-ui/core/Tooltip/Tooltip";
+import Tooltip from "@mui/material/Tooltip/Tooltip";
 
 class InfiniteList extends Component {
 

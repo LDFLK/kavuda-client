@@ -1,10 +1,10 @@
 import {Component} from "react";
 import React from "react";
-import List from "@material-ui/core/List/List";
-import {withStyles} from "@material-ui/core";
+import List from "@mui/material/List/List";
+import {withStyles} from "@mui/material";
 import Styles from "../../styles/styles";
 import TrendingListItem from "./trendingListItem";
-import Typography from "@material-ui/core/Typography/Typography";
+import Typography from "@mui/material/Typography/Typography";
 import Moment from "moment";
 
 class TrendingList extends Component {

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import {withStyles} from "@material-ui/core";
-import Typography from '@material-ui/core/Typography';
+import {withStyles} from "@mui/material";
+import Typography from '@mui/material/Typography';
 import Styles from "../styles/styles"
 
 class Footer extends Component {

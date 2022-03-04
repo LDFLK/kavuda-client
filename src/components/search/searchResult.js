@@ -1,10 +1,10 @@
 import React, {Component} from "react";
-import {withStyles} from "@material-ui/core";
+import {withStyles} from "@mui/material";
 import Styles from "../../styles/styles"
-import Grid from '@material-ui/core/Grid';
+import Grid from '@mui/material/Grid';
 import TrendingList from "../trending/trendingList";
 import MainContentList from "../latest/mainContentList"
-import Typography from "@material-ui/core/Typography/Typography";
+import Typography from "@mui/material/Typography/Typography";
 import InfiniteList from "../infinite-list/infinite-list";
 
 class SearchResult extends Component {

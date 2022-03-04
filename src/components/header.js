@@ -1,12 +1,12 @@
 import React, {Component} from "react";
-import AppBar from "@material-ui/core/AppBar/AppBar";
-import {withStyles, Button} from "@material-ui/core";
+import AppBar from "@mui/material/AppBar/AppBar";
+import {withStyles, Button} from "@mui/material";
 import Styles from "../styles/styles"
-import InputBase from "@material-ui/core/InputBase/InputBase";
+import InputBase from "@mui/material/InputBase/InputBase";
 import BeatLoader from 'react-spinners/BeatLoader';
 import {css} from '@emotion/core';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 import {Link} from "react-router-dom";
 
 const override = css`

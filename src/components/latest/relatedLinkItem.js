@@ -1,10 +1,10 @@
 import React, {Component} from "react";
-import {withStyles} from "@material-ui/core";
+import {withStyles} from "@mui/material";
 import Styles from "../../styles/styles"
 import {Link} from "react-router-dom";
-import Avatar from "@material-ui/core/Avatar/Avatar";
-import Grid from "@material-ui/core/Grid/Grid";
-import Tooltip from '@material-ui/core/Tooltip';
+import Avatar from "@mui/material/Avatar/Avatar";
+import Grid from "@mui/material/Grid/Grid";
+import Tooltip from '@mui/material/Tooltip';
 
 class RelatedLinkItem extends Component {
 

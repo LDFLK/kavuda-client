@@ -1,5 +1,3 @@
-import {fade} from "@material-ui/core/styles/colorManipulator";
-
 const Styles = theme => ({
       appBar: {
         backgroundColor: '#282c34',
@@ -72,9 +70,9 @@ const Styles = theme => ({
       search: {
         position: 'relative',
         borderRadius: '20px',
-        backgroundColor: fade(theme.palette.common.white, 1),
+        backgroundColor: theme.palette.common.white,
         '&:hover': {
-          backgroundColor: fade(theme.palette.common.white, 1),
+          backgroundColor: theme.palette.common.white,
         },
         marginRight: theme.spacing(2),
         marginLeft: 0,

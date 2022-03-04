@@ -1,12 +1,12 @@
 import {Component} from "react";
 import React from "react";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar/Avatar";
-import ListItem from "@material-ui/core/ListItem/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar/ListItemAvatar";
+import Avatar from "@mui/material/Avatar/Avatar";
+import ListItem from "@mui/material/ListItem/ListItem";
 import {Link} from "react-router-dom";
-import {withStyles} from "@material-ui/core";
+import {withStyles} from "@mui/material";
 import Styles from "../../styles/styles";
-import Typography from "@material-ui/core/Typography/Typography";
+import Typography from "@mui/material/Typography/Typography";
 import moment from "moment";
 
 class TrendingListItem extends Component {

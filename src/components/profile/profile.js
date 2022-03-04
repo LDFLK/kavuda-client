@@ -1,15 +1,15 @@
 import React, {Component} from "react";
-import {withStyles} from "@material-ui/core";
+import {withStyles} from "@mui/material";
 import Styles from "../../styles/styles"
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
 import TrendingList from "../trending/trendingList";
 import MainContentList from "../latest/mainContentList"
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 import FormattedContent from "./formattedContent";
 import {Link} from "react-router-dom";
 import InfiniteList from "../infinite-list/infinite-list";
-import Chip from "@material-ui/core/Chip/Chip";
+import Chip from "@mui/material/Chip/Chip";
 import extractHostname from "../../functions/extractHostnames";
 import ReactDOMServer from 'react-dom/server';
 

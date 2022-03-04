@@ -1,7 +1,7 @@
 import React, {Component} from "react";
-import {withStyles, Typography} from "@material-ui/core";
+import {withStyles, Typography} from "@mui/material";
 import Styles from "../../styles/styles"
-import List from "@material-ui/core/List/List";
+import List from "@mui/material/List/List";
 import MainContentItem from "./mainContentItem";
 import Moment from 'moment';
 
