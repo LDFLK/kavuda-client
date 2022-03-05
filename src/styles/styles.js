@@ -3,6 +3,12 @@ const Styles = theme => ({
         backgroundColor: '#282c34',
         padding: theme.spacing(1),
       },
+      headerColumn: {
+        paddingTop: theme.spacing(0.5)
+      },
+      loaderColumn: {
+        paddingTop: theme.spacing(1.5)
+      },
       container: {
         backgroundColor: '#eeeeee',
         padding: theme.spacing(2),
@@ -94,6 +100,8 @@ const Styles = theme => ({
       inputRoot: {
         color: '#0000008F',
         width: '100%',
+        paddingLeft: theme.spacing(2),
+        paddingRight: theme.spacing(2),
       },
       inputInput: {
         paddingTop: theme.spacing(1),
