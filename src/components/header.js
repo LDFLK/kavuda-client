@@ -11,8 +11,22 @@ import {Link, useNavigate} from "react-router-dom";
 
 function Header(props) {
   const [searchKey, setSearchKey] = useState("");
-  const {classes, loading} = props;
+  const {classes} = props;
   const navigate= useNavigate();
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  function startLoading() {
+    if (!isLoading) {
+      setIsLoading(true)
+    }
+  }
+
+  function endLoading() {
+    if (isLoading) {
+      setIsLoading(false)
+    }
+  }
 
   function HandleSubmit(event) {
     event.preventDefault();
@@ -35,7 +49,6 @@ function Header(props) {
           <div className={classes.search}>
             <form id="search-form" onSubmit={HandleSubmit} noValidate autoComplete="off">
               <InputBase
-                style={{color:"#000"}}
                 name="search"
                 placeholder="Search…"
                 value={searchKey}
@@ -53,7 +66,7 @@ function Header(props) {
             sizeUnit={"px"}
             size={14}
             color={'#36D7B7'}
-            loading={loading}
+            loading={isLoading}
           />
         </Grid>
         <Grid item xs={2} className={classes.headerColumn}>

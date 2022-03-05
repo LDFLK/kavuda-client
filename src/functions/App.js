@@ -52,58 +52,9 @@ constructor(props) {
   this.getEntity = this.getEntity.bind(this);
 }
 
-startLoading() {
-  this.setState({loading: true});
-};
 
-endLoading() {
-  this.setState({loading: false});
-}
 
-handleChange(key, value) {
-  this.setState({[key]: value});
-}
 
-async getHomeResults() {
-  let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=&categories=News';
-  return await this.getResults(searchUrl, false, "homeResults", 15);
-
-}
-
-async getResults(searchUrl, newSearch, results, limit) {
-  let page = results + "Page";
-  this.startLoading();
-  searchUrl += '&limit=' + limit + '&page=' + (newSearch ? 1 : (this.state[page] + 1));
-  const response = await fetch(searchUrl, {method: 'GET'});
-  const json = await response.json();
-
-  if (response.status === 200) {
-    if (newSearch) {
-      this.setState({
-        [results]: json,
-        [page]: 1
-      });
-    } else {
-      if (json) {
-        this.setState({
-          [results]: this.state[results].concat(json),
-          [page]: (this.state[page] + 1)
-        })
-      } else {
-        this.endLoading();
-        return false;
-      }
-    }
-  }
-  this.endLoading();
-  return true
-}
-
-async getTrendingResults() {
-  let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=&categories=News';
-  return await this.getResults(searchUrl, false, "trendingResults", 15)
-
-}
 
 async getSearchResults(searchKey, newSearch) {
   if (searchKey.length > 1) {

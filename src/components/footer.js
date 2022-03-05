@@ -3,16 +3,14 @@ import {withStyles} from "@mui/styles";
 import Typography from '@mui/material/Typography';
 import Styles from "../styles/styles"
 
-class Footer extends Component {
+function Footer(props) {
 
-  render() {
-    const {classes} = this.props;
+    const {classes} = props;
     return (
         <Typography className={classes.footer} component="p" color="textSecondary">
           A Social Network of High Profile Personals and Organizations in Sri Lanka.
         </Typography>
     )
-  }
 }
 
 export default withStyles(Styles)(Footer);

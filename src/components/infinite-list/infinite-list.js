@@ -18,18 +18,18 @@ class InfiniteList extends Component {
     this.loadResults = this.loadResults.bind(this);
   }
 
-  componentDidMount() {
-    if (this.props.results && this.props.results.length === 0) {
-      this.props.getResultItems(this.props.searchParam);
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.searchParam !== this.props.searchParam) {
-      this.props.getResultItems(this.props.searchParam, true);
-      this.setState({listEnded: false})
-    }
-  }
+  // componentDidMount() {
+  //   if (this.props.results && this.props.results.length === 0) {
+  //     this.props.getResultItems(this.props.searchParam);
+  //   }
+  // }
+  //
+  // componentDidUpdate(prevProps, prevState, snapshot) {
+  //   if (prevProps.searchParam !== this.props.searchParam) {
+  //     this.props.getResultItems(this.props.searchParam, true);
+  //     this.setState({listEnded: false})
+  //   }
+  // }
 
   async loadResults() {
     this.setState({isLoading: true});

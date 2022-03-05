@@ -19,61 +19,24 @@ import {createTheme, ThemeProvider, styled} from '@mui/material/styles';
 
 const darkTheme = createTheme({
   palette: {
-    mode: 'dark',
+    mode: 'light',
   },
 });
 
 function App() {
 
-  const [isLoading, setIsLoading] = useState(true);
-
   return (
     <ThemeProvider theme={darkTheme}>
       <div className="App">
         <Header
-          // handleChange={this.handleChange}
-          // getSearchResults={this.getSearchResults}
-          loading={isLoading}
         />
-        {/*<Routes>*/}
-        {/*<Route path="/"*/}
-        {/*element={<Home*/}
-        {/*searchKey={this.state.searchKey}*/}
-        {/*homeResults={this.state.homeResults}*/}
-        {/*getHomeResults={this.getHomeResults}*/}
-        {/*trendingResults={this.state.trendingResults}*/}
-        {/*getTrendingResults={this.getTrendingResults}*/}
-        {/*getSearchResults={this.getSearchResults}*/}
-        {/*/>}*/}
-        {/*/>*/}
-
-
-        {/*< Route path="search/:searchKey"*/}
-        {/*element={<SearchResult*/}
-        {/*searchKey={this.state.searchKey}*/}
-        {/*handleChange={this.handleChange}*/}
-        {/*searchResults={this.state.searchResults}*/}
-        {/*getSearchResults={this.getSearchResults}*/}
-        {/*trendingResults={this.state.trendingResults}*/}
-        {/*getTrendingResults={this.getTrendingResults}*/}
-
-        {/*/>}*/}
-        {/*/>*/}
-        {/*<Route path="profile/:title"*/}
-        {/*element={<Profile*/}
-        {/*getEntity={this.getEntity}*/}
-        {/*loadedEntity={this.state.loadedEntity}*/}
-        {/*handleChange={this.handleChange}*/}
-        {/*relatedResults={this.state.relatedResults}*/}
-        {/*getRelatedResults={this.getRelatedResults}*/}
-        {/*internalLinks={this.state.internalLinks}*/}
-        {/*getInternalLinks={this.getInternalLinks}*/}
-        {/*language={this.state.language}*/}
-        {/*/>}*/}
-        {/*/>*/}
-        {/*<Route path="*" element={<div>invalid url!</div>}/>*/}
-        {/*</Routes>*/}
-        {/*<Footer/>*/}
+        <Routes>
+          <Route path="/" element={<Home/>}/>
+          <Route path="search/:searchKey" element={<SearchResult/>}/>
+          <Route path="profile/:title" element={<Profile/>}/>
+          <Route path="*" element={<div>invalid url!</div>}/>
+        </Routes>
+        <Footer/>
 
         {/*<Dialog*/}
         {/*open={this.state.alertOpen}*/}
