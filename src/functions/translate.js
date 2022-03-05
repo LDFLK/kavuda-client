@@ -43,7 +43,7 @@ async function TranslateText(text) {
 
     const translated_text = await response.json();
 
-    const translated_values = await this.translateValues(values);
+    const translated_values = await TranslateValues(values);
 
     this.setState({translatedTitle: translated_text, title: text, language: lang, content: translated_values})
   }

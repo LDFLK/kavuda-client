@@ -1,4 +1,4 @@
-import React, {Component, useState} from "react";
+import React, {useState} from "react";
 import {withStyles} from "@mui/styles";
 import Styles from "../styles/styles"
 import Grid from '@mui/material/Grid';
@@ -6,6 +6,7 @@ import TrendingList from "./trending/trendingList";
 import MainContentList from "./latest/mainContentList";
 import Typography from '@mui/material/Typography';
 import InfiniteList from "./infinite-list/infinite-list";
+import {getResults} from "../functions/entity";
 
 function Home(props) {
 
@@ -14,27 +15,6 @@ function Home(props) {
   const [homePage, setHomePage] = useState(0);
   const [trendingResults, setTrendingResults] = useState([]);
   const [trendingPage, setTrendingPage] = useState(0);
-
-  async function getResults(searchUrl, newSearch, result, page, setResults,setPage, limit) {
-    searchUrl += '&limit=' + limit + '&page=' + (newSearch ? 1 : (page + 1));
-    const response = await fetch(searchUrl, {method: 'GET'});
-    const json = await response.json();
-
-    if (response.status === 200) {
-      if (newSearch) {
-        setResults(json);
-        setPage(1);
-      } else {
-        if (json) {
-          setResults(result.concat(json));
-          setPage(page+1);
-        } else {
-          return false;
-        }
-      }
-    }
-    return true
-  }
 
   async function getHomeResults() {
     let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=&categories=News';

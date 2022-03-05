@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, useState} from "react";
 import {withStyles} from "@mui/styles";
 import Styles from "../../styles/styles"
 import Grid from '@mui/material/Grid';
@@ -11,28 +11,48 @@ import {Link} from "react-router-dom";
 import InfiniteList from "../infinite-list/infinite-list";
 import Chip from "@mui/material/Chip/Chip";
 import extractHostname from "../../functions/extractHostnames";
+import {useParams} from "react-router-dom";
+import {getResults} from "../../functions/entity";
 
 function Profile(props) {
+  const {title} = useParams();
+  const [loadedEntity, setLoadedEntity] = useState(null);
+  const [translatedContent, setTranslatedContent] = useState([]);
+  const [translatedTitle, setTranslatedTitle] = useState(title);
+  const [internalLinks, setInternalLinks] = useState([]);
+  const [internalPage, setInternalPage] = useState(0);
+
+  async function getEntity(entityTitle) {
+    fetch(process.env.REACT_APP_SERVER_URL + 'api/get/' + entityTitle, {
+      method: 'GET'
+    }).then(results => {
+      if (results.status === 200) {
+        return results.json();
+      }
+      return null
+    }).then(data => {
+      setLoadedEntity(data);
+      setTranslatedContent(data.attributes.content ? data.attributes.content.values : []);
+      setTranslatedTitle(data.title);
+    }).then(
+      // end =>
+    );
+  }
+
+  async function getInternalLinks() {
+    let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/links/' + encodeURI(title) + "?";
+    return await getResults(searchUrl, false, internalLinks, internalPage, setInternalLinks, setInternalPage, 15);
+  }
+
+  if (!loadedEntity || loadedEntity.title !== title) {
+    console.log("get profile entity.");
+    getEntity(title)
+    getInternalLinks();
+  }
 
   const ignoreCategories = ["News", "PERSON", "ORGANIZATION", "LOCATION", "arbitrary-entities", "OrgChart-Level1"];
   const {classes} = props;
-  if (loadedEntity == null) {
-    return (
-      <Grid className={classes.container} container width={1}>
-        <Grid item xs={6} className={classes.mainContentColumn}>
-          <Paper className={classes.profilePaper}>
-            <Typography
-              component="p"
-              style={{paddingLeft: '20px'}}
-              variant="body2"
-              color="textSecondary">
-              Document not found
-            </Typography>
-          </Paper>
-        </Grid>
-      </Grid>
-    )
-  } else {
+  if (loadedEntity) {
     return (
       <Grid className={classes.container} container width={1}>
         <Grid item xs={3} className={classes.leftContentColumn}>
@@ -41,7 +61,7 @@ function Profile(props) {
                         getResultItems={getInternalLinks}
                         searchParam={loadedEntity.title}
                         list={<TrendingList listItems={internalLinks} getResults={getInternalLinks}
-                                            searchParam={loadedEntity.title}/>}
+                        />}
           />
         </Grid>
         < Grid item xs={6} className={classes.mainContentColumn}>
@@ -54,7 +74,7 @@ function Profile(props) {
               {/*</Grid>*/}
               <Grid item xs={9}>
                 <Typography className={classes.mainContentItemTitle} variant='h4'>
-                  {this.state.translatedTitle}
+                  {translatedTitle}
                 </Typography>
                 {loadedEntity.source ?
                   <Typography variant="body2">
@@ -88,21 +108,22 @@ function Profile(props) {
             <br/>
             <img src={loadedEntity.image_url} alt={loadedEntity.title} width="100%"/>
             {loadedEntity.attributes && loadedEntity.attributes.content ?
-              <FormattedContent key={this.props.loadedEntity.attributes.content.name}
-                                content={this.state.content}/>
+              <FormattedContent key={loadedEntity.attributes.content.name}
+                                content={translatedContent}/>
               : null}
           </Paper>
         </Grid>
         <Grid item xs={3} className={classes.rightContentColumn}>
-          <Typography variant="h4" color="inherit" className={classes.headerText} noWrap>Related Articles</Typography>
-          <InfiniteList listItems={relatedResults}
-                        getResultItems={() => getRelatedResults(loadedEntity.title)}
-                        list={<MainContentList listItems={relatedResults} vertical={true}/>}
+          {/*<Typography variant="h4" color="inherit" className={classes.headerText} noWrap>Related Articles</Typography>*/}
+          {/*<InfiniteList listItems={relatedResults}*/}
+          {/*getResultItems={() => getRelatedResults(loadedEntity.title)}*/}
+          {/*list={<MainContentList listItems={relatedResults} vertical={true}/>}*/}
           />
         </Grid>
       </Grid>
     );
   }
+  return <div/>
 }
 
 export default withStyles(Styles)(Profile);

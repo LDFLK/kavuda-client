@@ -69,34 +69,6 @@ async getSearchResults(searchKey, newSearch) {
   }
 }
 
-async getRelatedResults(title, newSearch) {
-  if (title !== undefined) {
-    let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/relations/' + title;
-    return await this.getResults(searchUrl + '?', newSearch, "relatedResults", 4)
-  }
 
-}
 
-async getInternalLinks(title, newSearch) {
-  if (title !== undefined) {
-    let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/links/' + title;
-    return await this.getResults(searchUrl + '?', newSearch, "internalLinks", 15)
-  }
 
-}
-
-async getEntity(title) {
-  this.startLoading();
-  fetch(process.env.REACT_APP_SERVER_URL + 'api/get/' + title, {
-    method: 'GET'
-  }).then(results => {
-    if (results.status === 200) {
-      return results.json();
-    }
-    return null
-  }).then(data => {
-    this.handleChange("loadedEntity", data);
-  }).then(
-    end => this.endLoading()
-  );
-}

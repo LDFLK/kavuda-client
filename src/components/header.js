@@ -32,11 +32,12 @@ function Header(props) {
     event.preventDefault();
 
     if (searchKey.length > 1) {
+      startLoading();
       navigate(`/search/` + searchKey);
     }
   }
   return (
-    <AppBar className={classes.appBar} position="sticky">
+    <AppBar className={classes.appBar} style={{backgroundColor:'#282c34'}} position="sticky">
       <Grid container width={1} style={{textAlign: 'left'}}>
         <Grid item xs={3}>
           <Typography component={Link} to="/" style={{textDecoration: 'none'}}

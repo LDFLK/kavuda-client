@@ -10,7 +10,7 @@ const styles = theme => ({
     padding: '10px'
   },
   searchResult: {
-    ...theme.mixins.gutters(),
+    // ...theme.mixins.gutters(),
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2),
     color: 'black',
