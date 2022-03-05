@@ -4,7 +4,7 @@ import {Button} from "@mui/material";
 import Styles from "../../styles/styles"
 import BeatLoader from "react-spinners/BeatLoader";
 import Tooltip from "@mui/material/Tooltip/Tooltip";
-import downArrow from "../../resources/down.png"
+import downArrow from "../../resources/images/down.png"
 
 class InfiniteList extends Component {
 
