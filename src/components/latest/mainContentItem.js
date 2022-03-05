@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {withStyles} from "@mui/material";
+import {withStyles} from "@mui/styles";
 import Typography from '@mui/material/Typography';
 import Styles from "../../styles/styles"
 import Grid from "@mui/material/Grid/Grid";
@@ -14,7 +14,7 @@ class MainContentItem extends Component {
 
   render() {
     const ignoreCategories = ["News", "PERSON", "ORGANIZATION", "LOCATION", "arbitrary-entities", "OrgChart-Level1"];
-    const {classes, imageUrl, title, subtitle, description, links, categories, vertical} = this.props;
+    const {classes, imageUrl, title, subtitle, description, categories, vertical} = this.props;
     if (vertical) {
       return (
         <Paper className={classes.paper}>

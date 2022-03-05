@@ -1,5 +1,6 @@
 import React, {Component} from "react";
-import {withStyles, Button} from "@mui/material";
+import {withStyles} from "@mui/styles";
+import {Button} from "@mui/material";
 import Styles from "../../styles/styles"
 import BeatLoader from "react-spinners/BeatLoader";
 import Tooltip from "@mui/material/Tooltip/Tooltip";

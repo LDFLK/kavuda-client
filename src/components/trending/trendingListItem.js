@@ -4,7 +4,7 @@ import ListItemAvatar from "@mui/material/ListItemAvatar/ListItemAvatar";
 import Avatar from "@mui/material/Avatar/Avatar";
 import ListItem from "@mui/material/ListItem/ListItem";
 import {Link} from "react-router-dom";
-import {withStyles} from "@mui/material";
+import {withStyles} from "@mui/styles";
 import Styles from "../../styles/styles";
 import Typography from "@mui/material/Typography/Typography";
 import moment from "moment";

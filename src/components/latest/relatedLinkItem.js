@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {withStyles} from "@mui/material";
+import {withStyles} from "@mui/styles";
 import Styles from "../../styles/styles"
 import {Link} from "react-router-dom";
 import Avatar from "@mui/material/Avatar/Avatar";

@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {withStyles} from "@mui/material";
+import {withStyles} from "@mui/styles";
 import Styles from "../../styles/styles"
 import Grid from '@mui/material/Grid';
 import TrendingList from "../trending/trendingList";

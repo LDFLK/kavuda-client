@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {withStyles} from "@mui/material";
+import {withStyles} from "@mui/styles";
 import Styles from "../../styles/styles"
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -11,7 +11,6 @@ import {Link} from "react-router-dom";
 import InfiniteList from "../infinite-list/infinite-list";
 import Chip from "@mui/material/Chip/Chip";
 import extractHostname from "../../functions/extractHostnames";
-import ReactDOMServer from 'react-dom/server';
 
 class Profile extends Component {
   constructor(props) {
@@ -172,7 +171,7 @@ class Profile extends Component {
                 </Grid>
               </Grid>
               <br/>
-              <img src={loadedEntity.image_url} width="100%"/>
+              <img src={loadedEntity.image_url} alt={loadedEntity.title} width="100%"/>
               {loadedEntity.attributes && loadedEntity.attributes.content ?
                 <FormattedContent key={this.props.loadedEntity.attributes.content.name}
                                   content={this.state.content}/>
