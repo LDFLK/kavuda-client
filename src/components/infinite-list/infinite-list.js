@@ -4,6 +4,7 @@ import {Button} from "@mui/material";
 import Styles from "../../styles/styles"
 import BeatLoader from "react-spinners/BeatLoader";
 import Tooltip from "@mui/material/Tooltip/Tooltip";
+import downArrow from "../../resources/down.png"
 
 class InfiniteList extends Component {
 
@@ -63,7 +64,7 @@ class InfiniteList extends Component {
             {!(isLoading || listEnded) ?
               <Tooltip title={'view more'} aria-label="add">
               <Button style={{width: "100%"}} onClick={() => this.loadResults()}><img alt={"view more"} width={"15px"}
-                                                                                      src={"down.png"}/></Button>
+                                                                                      src={downArrow}/></Button>
               </Tooltip>
               : <Button style={{width: "100%"}}> </Button>
             }

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {
   Route,
-  HashRouter,
   Routes,
+  useSearchParams,
 } from "react-router-dom";
 import './App.css';
 import Header from "./components/header";
@@ -120,7 +120,7 @@ class App extends Component {
   }
 
   async getTrendingResults() {
-    let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=&categories=News,PERSON,ORGANIZATION';
+    let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=&categories=News';
     return await this.getResults(searchUrl, false, "trendingResults", 15)
 
   }
@@ -174,72 +174,69 @@ class App extends Component {
     return (
       <ThemeProvider theme={THEME}>
         <div className="App">
-          <HashRouter>
-            <Routes>
-              <Route path="/"
-                     element={<Header
-                       searchKey={this.state.searchKey}
-                       handleChange={this.handleChange}
-                       getSearchResults={this.getSearchResults}
-                       loading={this.state.loading}
-                     />}
-              />
-              <Route exact path="/"
-                     element={<Home
-                       searchKey={this.state.searchKey}
-                       homeResults={this.state.homeResults}
-                       getHomeResults={this.getHomeResults}
-                       trendingResults={this.state.trendingResults}
-                       getTrendingResults={this.getTrendingResults}
-                       getSearchResults={this.getSearchResults}
-                     />}
-              />
-              < Route path="/search/:searchKey"
-                      element={<SearchResult
-                        searchKey={this.state.searchKey}
-                        handleChange={this.handleChange}
-                        searchResults={this.state.searchResults}
-                        getSearchResults={this.getSearchResults}
-                        trendingResults={this.state.trendingResults}
-                        getTrendingResults={this.getTrendingResults}
+          <Header
+            searchKey={this.state.searchKey}
+            handleChange={this.handleChange}
+            getSearchResults={this.getSearchResults}
+            loading={this.state.loading}
+          />
+          <Routes>
+            <Route path="/"
+                   element={<Home
+                     searchKey={this.state.searchKey}
+                     homeResults={this.state.homeResults}
+                     getHomeResults={this.getHomeResults}
+                     trendingResults={this.state.trendingResults}
+                     getTrendingResults={this.getTrendingResults}
+                     getSearchResults={this.getSearchResults}
+                   />}
+            />
 
-                      />}
-              />
-              <Route path="/profile/:title"
-                     element={<Profile
-                       getEntity={this.getEntity}
-                       loadedEntity={this.state.loadedEntity}
-                       handleChange={this.handleChange}
-                       relatedResults={this.state.relatedResults}
-                       getRelatedResults={this.getRelatedResults}
-                       internalLinks={this.state.internalLinks}
-                       getInternalLinks={this.getInternalLinks}
-                       language={this.state.language}
-                     />}
-              />
-              <Route path="/"
-                     element={<Footer/>}
-              />
-            </Routes>
-          </HashRouter>
-          <Dialog
-            open={this.state.alertOpen}
-            onClose={() => this.handleChange("alertOpen", false)}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-          >
-            <DialogContent>
-              <Typography variant="body2" id="alert-dialog-description">
-                No items found!
-              </Typography>
-            </DialogContent>
-            <DialogActions style={{justifyContent: "center"}}>
-              <Button onClick={() => this.handleChange("alertOpen", false)} color="primary" autoFocus>
-                Ok
-              </Button>
-            </DialogActions>
-          </Dialog>
+
+            < Route path="search/:searchKey"
+                    element={<SearchResult
+                      searchKey={this.state.searchKey}
+                      handleChange={this.handleChange}
+                      searchResults={this.state.searchResults}
+                      getSearchResults={this.getSearchResults}
+                      trendingResults={this.state.trendingResults}
+                      getTrendingResults={this.getTrendingResults}
+
+                    />}
+            />
+            <Route path="profile/:title"
+                   element={<Profile
+                     getEntity={this.getEntity}
+                     loadedEntity={this.state.loadedEntity}
+                     handleChange={this.handleChange}
+                     relatedResults={this.state.relatedResults}
+                     getRelatedResults={this.getRelatedResults}
+                     internalLinks={this.state.internalLinks}
+                     getInternalLinks={this.getInternalLinks}
+                     language={this.state.language}
+                   />}
+            />
+            <Route path="*" element={<div>invalid url!</div>} />
+          </Routes>
+          <Footer/>
         </div>
+        <Dialog
+          open={this.state.alertOpen}
+          onClose={() => this.handleChange("alertOpen", false)}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogContent>
+            <Typography variant="body2" id="alert-dialog-description">
+              No items found!
+            </Typography>
+          </DialogContent>
+          <DialogActions style={{justifyContent: "center"}}>
+            <Button onClick={() => this.handleChange("alertOpen", false)} color="primary" autoFocus>
+              Ok
+            </Button>
+          </DialogActions>
+        </Dialog>
       </ThemeProvider>
     );
   }

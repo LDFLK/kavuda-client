@@ -79,28 +79,27 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    this.props.getEntity(this.props.match.params.title);
-    this.props.getRelatedResults(this.props.match.params.title, true);
-    this.setState({translatedTitle: "", title: "", content: []})
+    // this.props.getEntity(this.props.match.params.title);
+    // this.props.getRelatedResults(this.props.match.params.title, true);
+    // this.setState({translatedTitle: "", title: "", content: []})
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.match.params.title !== this.props.match.params.title) {
-      this.props.getEntity(this.props.match.params.title);
-      this.props.getRelatedResults(this.props.match.params.title, true);
-    }
-    if (this.state.title !== this.props.loadedEntity.title || this.props.language !== this.state.language) {
-      this.translateText(this.props.loadedEntity.title);
-    }
-    if (this.props.loadedEntity.attributes && this.props.loadedEntity.attributes.content) {
-      console.log(this.props.loadedEntity.attributes.content.values);
-    }
+    // if (prevProps.match.params.title !== this.props.match.params.title) {
+    //   this.props.getEntity(this.props.match.params.title);
+    //   this.props.getRelatedResults(this.props.match.params.title, true);
+    // }
+    // if (this.state.title !== this.props.loadedEntity.title || this.props.language !== this.state.language) {
+    //   this.translateText(this.props.loadedEntity.title);
+    // }
+    // if (this.props.loadedEntity.attributes && this.props.loadedEntity.attributes.content) {
+    //   console.log(this.props.loadedEntity.attributes.content.values);
+    // }
   }
 
   render() {
     const ignoreCategories = ["News", "PERSON", "ORGANIZATION", "LOCATION", "arbitrary-entities", "OrgChart-Level1"];
     const {classes, loadedEntity, internalLinks, getInternalLinks, relatedResults, getRelatedResults} = this.props;
-
     if (loadedEntity == null) {
       return (
         <Grid className={classes.container} container width={1}>

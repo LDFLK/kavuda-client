@@ -9,12 +9,18 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {Link} from "react-router-dom";
+import {useNavigate} from 'react-router-dom';
 
 const override = css`
     display: block;
     margin: 0 auto;
     border-color: red;
 `;
+
+function RedirectUser(url){
+  const navigate = useNavigate();
+  return navigate(url);
+}
 
 class Header extends Component {
 
@@ -26,14 +32,15 @@ class Header extends Component {
   handleSubmit(event) {
     event.preventDefault();
     if (this.props.searchKey.length > 1) {
-      this.props.history.push(`/search/` + this.props.searchKey);
+      return RedirectUser(`/search/` + this.props.searchKey);
     }
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     // if (prevProps.match.params.searchKey !== this.props.match.params.searchKey) {
-      this.props.getSearchResults(this.props.match.params.searchKey, true);
+    //   this.props.getSearchResults(this.props.match.params.searchKey, true);
     // }
+    console.log(this.props.searchKey);
   }
 
   render() {
