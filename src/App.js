@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {
   Route,
-  BrowserRouter,
-  Routes
+  HashRouter,
+  Routes,
 } from "react-router-dom";
 import './App.css';
 import Header from "./components/header";
@@ -86,7 +86,6 @@ class App extends Component {
 
   async getHomeResults() {
     let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=&categories=News';
-    console.log("hello");
     return await this.getResults(searchUrl, false, "homeResults", 15);
 
   }
@@ -175,7 +174,7 @@ class App extends Component {
     return (
       <ThemeProvider theme={THEME}>
         <div className="App">
-          <BrowserRouter>
+          <HashRouter>
             <Routes>
               <Route path="/"
                      element={<Header
@@ -222,7 +221,7 @@ class App extends Component {
                      element={<Footer/>}
               />
             </Routes>
-          </BrowserRouter>
+          </HashRouter>
           <Dialog
             open={this.state.alertOpen}
             onClose={() => this.handleChange("alertOpen", false)}

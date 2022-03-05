@@ -31,16 +31,16 @@ class Header extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.match.params.searchKey !== this.props.match.params.searchKey) {
+    // if (prevProps.match.params.searchKey !== this.props.match.params.searchKey) {
       this.props.getSearchResults(this.props.match.params.searchKey, true);
-    }
+    // }
   }
 
   render() {
     const {classes, searchKey} = this.props;
     return (
       <AppBar className={classes.appBar} position="sticky">
-        <Grid container width={1}  style={{textAlign: 'left'}}>
+        <Grid container width={1} style={{textAlign: 'left'}}>
           <Grid item xs={3}>
             <Typography component={Link} to="/" style={{textDecoration: 'none'}}
                         variant="h4"
@@ -74,14 +74,17 @@ class Header extends Component {
             />
           </Grid>
           <Grid item xs={2}>
-          <Grid container width={1} justify="flex-end" style={{textAlign: 'right'}}>
-            <Grid item>
-                <Button onClick={() => this.props.handleChange('language','en')} size="small" variant="outlined" style={{color:'white'}}>English</Button>
-                <Button onClick={() => this.props.handleChange('language','sinhala')} size="small" variant="outlined" style={{color:'white'}}>සිංහල</Button>
-                <Button onClick={() => this.props.handleChange('language','tamil')} size="small" variant="outlined" style={{color:'white'}}>
+            <Grid container width={1} justify="flex-end" style={{textAlign: 'right'}}>
+              <Grid item>
+                <Button onClick={() => this.props.handleChange('language', 'en')} size="small" variant="outlined"
+                        style={{color: 'white'}}>English</Button>
+                <Button onClick={() => this.props.handleChange('language', 'sinhala')} size="small" variant="outlined"
+                        style={{color: 'white'}}>සිංහල</Button>
+                <Button onClick={() => this.props.handleChange('language', 'tamil')} size="small" variant="outlined"
+                        style={{color: 'white'}}>
                   தமிழ்</Button>
+              </Grid>
             </Grid>
-          </Grid>
           </Grid>
         </Grid>
       </AppBar>
