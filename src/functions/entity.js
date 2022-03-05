@@ -6,15 +6,6 @@ async function GetRelatedResults(title, newSearch) {
 
 }
 
-export async function getInternalLinks(title, newSearch) {
-  if (title !== undefined) {
-    let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/links/' + title;
-    return await this.getResults(searchUrl + '?', newSearch, "internalLinks", 15)
-  }
-
-}
-
-
 export async function getResults(searchUrl, newSearch, result, page, setResults,setPage, limit) {
   searchUrl += '&limit=' + limit + '&page=' + (newSearch ? 1 : (page + 1));
   const response = await fetch(searchUrl, {method: 'GET'});

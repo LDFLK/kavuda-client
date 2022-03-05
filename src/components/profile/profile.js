@@ -21,6 +21,8 @@ function Profile(props) {
   const [translatedTitle, setTranslatedTitle] = useState(title);
   const [internalLinks, setInternalLinks] = useState([]);
   const [internalPage, setInternalPage] = useState(0);
+  const [relatedLinks, setRelatedLinks] = useState([]);
+  const [relatedPage, setRelatedPage] = useState(0);
 
   async function getEntity(entityTitle) {
     fetch(process.env.REACT_APP_SERVER_URL + 'api/get/' + entityTitle, {
@@ -39,15 +41,21 @@ function Profile(props) {
     );
   }
 
-  async function getInternalLinks() {
+  async function getInternalLinks(initialSearch) {
     let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/links/' + encodeURI(title) + "?";
-    return await getResults(searchUrl, false, internalLinks, internalPage, setInternalLinks, setInternalPage, 15);
+    return await getResults(searchUrl, initialSearch, internalLinks, internalPage, setInternalLinks, setInternalPage, 15);
+  }
+
+  async function getRelatedResults(initialSearch) {
+    let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/relations/' + encodeURI(title) + "?";
+    return await getResults(searchUrl, initialSearch, relatedLinks, relatedPage, setRelatedLinks, setRelatedPage, 15);
   }
 
   if (!loadedEntity || loadedEntity.title !== title) {
     console.log("get profile entity.");
-    getEntity(title)
-    getInternalLinks();
+    getEntity(title);
+    getInternalLinks(true);
+    getRelatedResults(true);
   }
 
   const ignoreCategories = ["News", "PERSON", "ORGANIZATION", "LOCATION", "arbitrary-entities", "OrgChart-Level1"];
@@ -114,10 +122,10 @@ function Profile(props) {
           </Paper>
         </Grid>
         <Grid item xs={3} className={classes.rightContentColumn}>
-          {/*<Typography variant="h4" color="inherit" className={classes.headerText} noWrap>Related Articles</Typography>*/}
-          {/*<InfiniteList listItems={relatedResults}*/}
-          {/*getResultItems={() => getRelatedResults(loadedEntity.title)}*/}
-          {/*list={<MainContentList listItems={relatedResults} vertical={true}/>}*/}
+          <Typography variant="h4" color="inherit" className={classes.headerText} noWrap>Related Articles</Typography>
+          <InfiniteList listItems={relatedLinks}
+                        getResultItems={() => getRelatedResults(loadedEntity.title)}
+                        list={<MainContentList listItems={relatedLinks} vertical={true}/>}
           />
         </Grid>
       </Grid>
