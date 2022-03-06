@@ -34,6 +34,7 @@ function Header(props) {
     if (searchKey.length > 1) {
       startLoading();
       navigate(`/search/` + searchKey);
+      endLoading();
     }
   }
   return (

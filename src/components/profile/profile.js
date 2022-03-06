@@ -1,4 +1,4 @@
-import React, {Component, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {withStyles} from "@mui/styles";
 import Styles from "../../styles/styles"
 import Grid from '@mui/material/Grid';
