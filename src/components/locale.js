@@ -5,10 +5,3 @@ export const Locale = {
 };
 
 
-export function setLocale(locale) {
-  localStorage.setItem('kavuda-locale', locale);
-}
-
-export function getLocale() {
-  return localStorage.getItem('kavuda-locale');
-}

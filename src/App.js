@@ -10,7 +10,7 @@ import Home from "./components/home";
 import SearchResult from "./components/search/searchResult";
 import Profile from "./components/profile/profile";
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import {getLocale, Locale, setLocale} from "./components/locale";
+import {Locale} from "./components/locale";
 
 const darkTheme = createTheme({
   palette: {
@@ -19,14 +19,22 @@ const darkTheme = createTheme({
 });
 
 function App() {
-
-  const [isLoading, setIsLoading] = useState(false);
-
-  if (!getLocale()) {
-    setLocale(Locale.en);
+  function setLocale(locale) {
+    localStorage.setItem('kavuda-locale', locale);
+    setLocaleState(locale);
   }
 
-  const app_props = {isLoading, setIsLoading};
+  function getLocaleCookie() {
+    return localStorage.getItem('kavuda-locale');
+  }
+  if (!getLocaleCookie()) {
+    localStorage.setItem('kavuda-locale', Locale.en);
+  }
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [locale, setLocaleState] = useState(getLocaleCookie());
+
+  const app_props = {isLoading, setIsLoading,locale, setLocale};
   return (
     <ThemeProvider theme={darkTheme}>
       <div className="App">

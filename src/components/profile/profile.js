@@ -13,13 +13,12 @@ import Chip from "@mui/material/Chip/Chip";
 import extractHostname from "../../functions/extractHostnames";
 import {useParams} from "react-router-dom";
 import {getResults} from "../../functions/entity";
-import {getLocale, Locale} from "../locale";
+import {Locale} from "../locale";
 import {translateValue} from "../../functions/translate";
 import {Facebook} from 'react-content-loader'
 
 function Profile(props) {
-  const locale=getLocale();
-  const {classes} = props;
+  const {classes, locale} = props;
   const {title} = useParams();
   const [loadedEntity, setLoadedEntity] = useState(null);
   const [translatedContent, setTranslatedContent] = useState({});
