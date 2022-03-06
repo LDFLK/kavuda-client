@@ -1,4 +1,4 @@
-import React, {Component, useState} from "react";
+import React, {Component, useEffect, useState} from "react";
 import {withStyles} from "@mui/styles";
 import Styles from "../../styles/styles"
 import Grid from '@mui/material/Grid';
@@ -24,7 +24,7 @@ function Profile(props) {
   const [relatedLinks, setRelatedLinks] = useState([]);
   const [relatedPage, setRelatedPage] = useState(0);
 
-  async function getEntity(entityTitle) {
+  function getEntity(entityTitle) {
     fetch(process.env.REACT_APP_SERVER_URL + 'api/get/' + entityTitle, {
       method: 'GET'
     }).then(results => {
@@ -37,26 +37,32 @@ function Profile(props) {
       setTranslatedContent(data.attributes.content ? data.attributes.content.values : []);
       setTranslatedTitle(data.title);
     }).then(
-      // end =>
+      end => {
+        getInternalLinks(true);
+        getRelatedResults(true);
+      }
     );
+    return true
   }
 
-  async function getInternalLinks(initialSearch) {
+  function getInternalLinks(initialSearch) {
     let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/links/' + encodeURI(title) + "?";
-    return await getResults(searchUrl, initialSearch, internalLinks, internalPage, setInternalLinks, setInternalPage, 15);
+    return getResults(searchUrl, initialSearch, internalLinks, internalPage, setInternalLinks, setInternalPage, 15);
   }
 
-  async function getRelatedResults(initialSearch) {
+  function getRelatedResults(initialSearch) {
     let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/relations/' + encodeURI(title) + "?";
-    return await getResults(searchUrl, initialSearch, relatedLinks, relatedPage, setRelatedLinks, setRelatedPage, 15);
+    return getResults(searchUrl, initialSearch, relatedLinks, relatedPage, setRelatedLinks, setRelatedPage, 15);
   }
 
-  if (!loadedEntity || loadedEntity.title !== title) {
-    console.log("get profile entity.");
-    getEntity(title);
-    getInternalLinks(true);
-    getRelatedResults(true);
-  }
+  useEffect(() => {
+    if (!loadedEntity || loadedEntity.title !== title) {
+      console.log("get profile entity:", title);
+      getEntity(title);
+    }
+  });
+
+
 
   const ignoreCategories = ["News", "PERSON", "ORGANIZATION", "LOCATION", "arbitrary-entities", "OrgChart-Level1"];
   const {classes} = props;

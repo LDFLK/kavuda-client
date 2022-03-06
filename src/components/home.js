@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {withStyles} from "@mui/styles";
 import Styles from "../styles/styles"
 import Grid from '@mui/material/Grid';
@@ -16,25 +16,25 @@ function Home(props) {
   const [trendingResults, setTrendingResults] = useState([]);
   const [trendingPage, setTrendingPage] = useState(0);
 
-  async function getHomeResults() {
+  function getHomeResults() {
     let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=&categories=News';
-    return await getResults(searchUrl, false, homeResults, homePage, setHomeResults, setHomePage, 15);
+    return getResults(searchUrl, false, homeResults, homePage, setHomeResults, setHomePage, 15);
 
   }
-  if (homeResults.length===0){
-    console.log("homeresuls");
-    getHomeResults();
-  }
 
-  async function getTrendingResults() {
+  function getTrendingResults() {
     let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=&categories=News';
-    return await getResults(searchUrl, false, trendingResults, trendingPage, setTrendingResults, setTrendingPage, 15);
+    getResults(searchUrl, false, trendingResults, trendingPage, setTrendingResults, setTrendingPage, 15);
 
   }
-  if (trendingResults.length===0){
-    console.log("trendingresuls");
-    getTrendingResults();
-  }
+
+  useEffect(() => {
+    if (homeResults.length===0){
+      console.log("loading home results");
+      getHomeResults();
+      getTrendingResults();
+    }
+  });
 
 
   return (
