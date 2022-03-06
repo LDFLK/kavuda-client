@@ -1,4 +1,4 @@
-async function translateValue(value,lang) {
+export async function translateValue(value,lang) {
   let translatorUrl = 'translate?lang=' + lang;
   const requestOptions = {
     method: 'POST',

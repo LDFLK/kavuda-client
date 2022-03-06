@@ -13,13 +13,16 @@ import Chip from "@mui/material/Chip/Chip";
 import extractHostname from "../../functions/extractHostnames";
 import {useParams} from "react-router-dom";
 import {getResults} from "../../functions/entity";
-import {Locale} from "../locale";
+import {getLocale, Locale} from "../locale";
+import {translateValue} from "../../functions/translate";
+import {Facebook} from 'react-content-loader'
 
 function Profile(props) {
-  const {classes, isLoading, setIsLoading, locale, setLocale} = props;
+  const locale=getLocale();
+  const {classes} = props;
   const {title} = useParams();
   const [loadedEntity, setLoadedEntity] = useState(null);
-  const [translatedContent, setTranslatedContent] = useState([]);
+  const [translatedContent, setTranslatedContent] = useState({});
   const [translatedTitle, setTranslatedTitle] = useState({[Locale.en]: title});
   const [internalLinks, setInternalLinks] = useState([]);
   const [internalPage, setInternalPage] = useState(0);
@@ -42,8 +45,8 @@ function Profile(props) {
       return null
     }).then(data => {
       setLoadedEntity(data);
-      setTranslatedContent(data.attributes.content ? data.attributes.content.values : []);
-      appendStateObj(translatedTitle, setTranslatedTitle, locale, data.title)
+      appendStateObj(translatedTitle, setTranslatedTitle, locale, data.title);
+      appendStateObj(translatedContent, setTranslatedContent, locale, data.attributes.content.values);
     }).then(
       end => {
         getInternalLinks(true);
@@ -57,20 +60,14 @@ function Profile(props) {
     if (loadedEntity.attributes && values) {
       let contentArray = JSON.parse(JSON.stringify(values));
       for (let item of contentArray) {
-        item.value_string = await this.translateValue(item.value_string);
+        item.value_string = await translateValue(item.value_string, locale);
       }
       return contentArray;
     }
     return values;
   }
 
-
   async function translateText(text, lang) {
-    let values = [];
-    if (loadedEntity.attributes && loadedEntity.attributes.content) {
-      values = loadedEntity.attributes.content.values;
-    }
-
     if (lang !== Locale.en) {
       let translatorUrl = 'translate?lang=' + lang;
       const requestOptions = {
@@ -81,11 +78,7 @@ function Profile(props) {
       const response = await fetch(translatorUrl, requestOptions);
 
       const translated_text = await response.json();
-      appendStateObj(translatedTitle, setTranslatedTitle, lang, translated_text)
-
-      // const translated_values = await translateValues(values);
-
-      // this.setState({translatedTitle: translated_text, title: text, language: lang, content: translated_values})
+      appendStateObj(translatedTitle, setTranslatedTitle, lang, translated_text);
     }
 
   }
@@ -100,21 +93,30 @@ function Profile(props) {
     return getResults(searchUrl, initialSearch, relatedLinks, relatedPage, setRelatedLinks, setRelatedPage, 15);
   }
 
+  async function translateContent() {
+    let values = [];
+    if (loadedEntity.attributes && loadedEntity.attributes.content) {
+      values = loadedEntity.attributes.content.values;
+      const translated_values = await translateValues(values);
+      appendStateObj(translatedContent, setTranslatedContent, locale, translated_values);
+    }
+  }
+
   useEffect(() => {
     if (!loadedEntity || loadedEntity.title !== title) {
       console.log("get profile entity:", title);
       getEntity(title);
     }
     if (loadedEntity) {
-      if (translatedTitle[Locale.en] !== loadedEntity.title) {
-        setTranslatedTitle({[Locale.en]: loadedEntity.title});
-      }
       if (!(locale in translatedTitle)) {
         translateText(title, locale);
-      }
-    }
-  });
+        translateContent();
 
+      }
+
+    }
+
+  });
 
   // const ignoreCategories = ["News", "PERSON", "ORGANIZATION", "LOCATION", "arbitrary-entities", "OrgChart-Level1"];
   const ignoreCategories = [];
@@ -140,7 +142,7 @@ function Profile(props) {
               {/*</Grid>*/}
               <Grid item xs={9}>
                 <Typography className={classes.mainContentItemTitle} variant='h4'>
-                  {translatedTitle[locale]}
+                  {translatedTitle[locale] ? translatedTitle[locale] : <Facebook/>}
                 </Typography>
                 {loadedEntity.source ?
                   <Typography variant="body2">
@@ -173,10 +175,10 @@ function Profile(props) {
             </Grid>
             <br/>
             <img src={loadedEntity.image_url} alt={loadedEntity.title} width="100%"/>
-            {loadedEntity.attributes && loadedEntity.attributes.content ?
+            {loadedEntity.attributes && loadedEntity.attributes.content && translatedContent[locale] ?
               <FormattedContent key={loadedEntity.attributes.content.name}
-                                content={translatedContent}/>
-              : null}
+                                content={translatedContent[locale]}/>
+              : <Facebook/>}
           </Paper>
         </Grid>
         <Grid item xs={3} className={classes.rightContentColumn}>

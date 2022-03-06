@@ -10,7 +10,7 @@ import Home from "./components/home";
 import SearchResult from "./components/search/searchResult";
 import Profile from "./components/profile/profile";
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import {Locale} from "./components/locale";
+import {getLocale, Locale, setLocale} from "./components/locale";
 
 const darkTheme = createTheme({
   palette: {
@@ -21,8 +21,12 @@ const darkTheme = createTheme({
 function App() {
 
   const [isLoading, setIsLoading] = useState(false);
-  const [locale, setLocale] = useState(Locale.en);
-  const app_props = {isLoading, setIsLoading, locale, setLocale};
+
+  if (!getLocale()) {
+    setLocale(Locale.en);
+  }
+
+  const app_props = {isLoading, setIsLoading};
   return (
     <ThemeProvider theme={darkTheme}>
       <div className="App">

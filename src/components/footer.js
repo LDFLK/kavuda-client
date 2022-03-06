@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React from "react";
 import {withStyles} from "@mui/styles";
 import Typography from '@mui/material/Typography';
 import Styles from "../styles/styles"
