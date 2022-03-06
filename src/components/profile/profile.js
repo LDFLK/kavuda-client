@@ -73,8 +73,7 @@ function Profile(props) {
 
   });
 
-  // const ignoreCategories = ["News", "PERSON", "ORGANIZATION", "LOCATION", "arbitrary-entities", "OrgChart-Level1"];
-  const ignoreCategories = [];
+  const ignoreCategories = ["News", "PERSON", "ORGANIZATION", "LOCATION", "arbitrary-entities", "OrgChart-Level1"];
   if (loadedEntity) {
     return (
       <Grid className={classes.container} container width={1}>
