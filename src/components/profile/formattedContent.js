@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import Typography from '@material-ui/core/Typography';
-import {withStyles} from '@material-ui/core/styles';
+import Typography from '@mui/material/Typography';
+import {withStyles} from '@mui/styles';
 
 const styles = theme => ({
   container: {
@@ -10,7 +10,7 @@ const styles = theme => ({
     padding: '10px'
   },
   searchResult: {
-    ...theme.mixins.gutters(),
+    // ...theme.mixins.gutters(),
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2),
     color: 'black',

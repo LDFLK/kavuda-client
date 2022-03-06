@@ -1,8 +1,10 @@
 import React, {Component} from "react";
-import {withStyles, Button} from "@material-ui/core";
+import {withStyles} from "@mui/styles";
+import {Button} from "@mui/material";
 import Styles from "../../styles/styles"
 import BeatLoader from "react-spinners/BeatLoader";
-import Tooltip from "@material-ui/core/Tooltip/Tooltip";
+import Tooltip from "@mui/material/Tooltip/Tooltip";
+import downArrow from "../../resources/images/down.png"
 
 class InfiniteList extends Component {
 
@@ -16,18 +18,18 @@ class InfiniteList extends Component {
     this.loadResults = this.loadResults.bind(this);
   }
 
-  componentDidMount() {
-    if (this.props.results && this.props.results.length === 0) {
-      this.props.getResultItems(this.props.searchParam);
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.searchParam !== this.props.searchParam) {
-      this.props.getResultItems(this.props.searchParam, true);
-      this.setState({listEnded: false})
-    }
-  }
+  // componentDidMount() {
+  //   if (this.props.results && this.props.results.length === 0) {
+  //     this.props.getResultItems(this.props.searchParam);
+  //   }
+  // }
+  //
+  // componentDidUpdate(prevProps, prevState, snapshot) {
+  //   if (prevProps.searchParam !== this.props.searchParam) {
+  //     this.props.getResultItems(this.props.searchParam, true);
+  //     this.setState({listEnded: false})
+  //   }
+  // }
 
   async loadResults() {
     this.setState({isLoading: true});
@@ -62,7 +64,7 @@ class InfiniteList extends Component {
             {!(isLoading || listEnded) ?
               <Tooltip title={'view more'} aria-label="add">
               <Button style={{width: "100%"}} onClick={() => this.loadResults()}><img alt={"view more"} width={"15px"}
-                                                                                      src={"down.png"}/></Button>
+                                                                                      src={downArrow}/></Button>
               </Tooltip>
               : <Button style={{width: "100%"}}> </Button>
             }

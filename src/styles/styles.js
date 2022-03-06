@@ -1,9 +1,13 @@
-import {fade} from "@material-ui/core/styles/colorManipulator";
-
 const Styles = theme => ({
       appBar: {
         backgroundColor: '#282c34',
         padding: theme.spacing(1),
+      },
+      headerColumn: {
+        paddingTop: theme.spacing(0.5)
+      },
+      loaderColumn: {
+        paddingTop: theme.spacing(1.5)
       },
       container: {
         backgroundColor: '#eeeeee',
@@ -72,9 +76,9 @@ const Styles = theme => ({
       search: {
         position: 'relative',
         borderRadius: '20px',
-        backgroundColor: fade(theme.palette.common.white, 1),
+        backgroundColor: theme.palette.common.white,
         '&:hover': {
-          backgroundColor: fade(theme.palette.common.white, 1),
+          backgroundColor: theme.palette.common.white,
         },
         marginRight: theme.spacing(2),
         marginLeft: 0,
@@ -96,6 +100,8 @@ const Styles = theme => ({
       inputRoot: {
         color: '#0000008F',
         width: '100%',
+        paddingLeft: theme.spacing(2),
+        paddingRight: theme.spacing(2),
       },
       inputInput: {
         paddingTop: theme.spacing(1),

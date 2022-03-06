@@ -1,20 +1,20 @@
 import React, {Component} from "react";
-import {withStyles} from "@material-ui/core";
-import Typography from '@material-ui/core/Typography';
+import {withStyles} from "@mui/styles";
+import Typography from '@mui/material/Typography';
 import Styles from "../../styles/styles"
-import Grid from "@material-ui/core/Grid/Grid";
-import ListItem from "@material-ui/core/ListItem/ListItem";
+import Grid from "@mui/material/Grid/Grid";
+import ListItem from "@mui/material/ListItem/ListItem";
 import {Link} from "react-router-dom";
-import Paper from '@material-ui/core/Paper';
-import Chip from '@material-ui/core/Chip';
-import Avatar from "@material-ui/core/Avatar/Avatar";
+import Paper from '@mui/material/Paper';
+import Chip from '@mui/material/Chip';
+import Avatar from "@mui/material/Avatar/Avatar";
 import moment from 'moment';
 
 class MainContentItem extends Component {
 
   render() {
     const ignoreCategories = ["News", "PERSON", "ORGANIZATION", "LOCATION", "arbitrary-entities", "OrgChart-Level1"];
-    const {classes, imageUrl, title, subtitle, description, links, categories, vertical} = this.props;
+    const {classes, imageUrl, title, subtitle, description, categories, vertical} = this.props;
     if (vertical) {
       return (
         <Paper className={classes.paper}>
