@@ -20,3 +20,17 @@ export async function getResults(searchUrl, newSearch, result, page, setResults,
   }
   return true
 }
+
+export function getEntity(entityTitle, callback) {
+  fetch(process.env.REACT_APP_SERVER_URL + 'api/get/' + entityTitle, {
+    method: 'GET'
+  }).then(results => {
+    if (results.status === 200) {
+      return results.json();
+    }
+    return null
+  }).then(data => {
+    callback(data);
+  });
+  return true
+}

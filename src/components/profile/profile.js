@@ -12,10 +12,11 @@ import InfiniteList from "../infiniteList/infiniteList";
 import Chip from "@mui/material/Chip/Chip";
 import extractHostname from "../../functions/extractHostnames";
 import {useParams} from "react-router-dom";
-import {getResults} from "../../functions/api/getQueries";
+import {getEntity, getResults} from "../../functions/api/getQueries";
 import {Locale} from "../constants/locale";
-import {translateValue} from "../../functions/translator/translate";
+import {translateEntityContent, translateText} from "../../functions/translator/translate";
 import {Facebook} from 'react-content-loader'
+import {appendStateObj} from "../../functions/appendStateObj";
 
 function Profile(props) {
   const {classes, locale} = props;
@@ -28,88 +29,45 @@ function Profile(props) {
   const [relatedLinks, setRelatedLinks] = useState([]);
   const [relatedPage, setRelatedPage] = useState(0);
 
-  function appendStateObj(currentState, setStateFunction, key, value) {
-    let currentStateObj = {...currentState};
-    currentStateObj[key] = value;
-    setStateFunction(currentStateObj);
+
+  async function updateEntityState(data) {
+    setLoadedEntity(data);
+    setTranslatedTitle({[Locale.en]: data.title});
+    setTranslatedContent({[Locale.en]: data.attributes.content ? data.attributes.content.values : []});
+    await getInternalLinks(true);
+    await getRelatedResults(true);
   }
 
-  function getEntity(entityTitle) {
-    fetch(process.env.REACT_APP_SERVER_URL + 'api/get/' + entityTitle, {
-      method: 'GET'
-    }).then(results => {
-      if (results.status === 200) {
-        return results.json();
-      }
-      return null
-    }).then(data => {
-      setLoadedEntity(data);
-      setTranslatedTitle({[Locale.en]:data.title});
-      setTranslatedContent({[Locale.en]:data.attributes.content.values});
-    }).then(
-      end => {
-        getInternalLinks(true);
-        getRelatedResults(true);
-      }
-    );
-    return true
+
+  async function updateTranslatedStates(text, lang) {
+    const translatedText = await translateText(text, lang);
+    appendStateObj(translatedTitle, setTranslatedTitle, lang, translatedText);
   }
 
-  async function translateValues(values) {
-    if (loadedEntity.attributes && values) {
-      let contentArray = JSON.parse(JSON.stringify(values));
-      for (let item of contentArray) {
-        item.value_string = await translateValue(item.value_string, locale);
-      }
-      return contentArray;
-    }
-    return values;
-  }
-
-  async function translateText(text, lang) {
-    if (lang !== Locale.en) {
-      let translatorUrl = 'translate?lang=' + lang;
-      const requestOptions = {
-        method: 'POST',
-        headers: {'Content-Type': 'application/text'},
-        body: text
-      };
-      const response = await fetch(translatorUrl, requestOptions);
-
-      const translated_text = await response.json();
-      appendStateObj(translatedTitle, setTranslatedTitle, lang, translated_text);
-    }
-
-  }
-
-  function getInternalLinks(initialSearch) {
+  async function getInternalLinks(initialSearch) {
     let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/links/' + encodeURI(title) + "?";
-    return getResults(searchUrl, initialSearch, internalLinks, internalPage, setInternalLinks, setInternalPage, 15);
+    await getResults(searchUrl, initialSearch, internalLinks, internalPage, setInternalLinks, setInternalPage, 15);
   }
 
-  function getRelatedResults(initialSearch) {
+  async function getRelatedResults(initialSearch) {
     let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/relations/' + encodeURI(title) + "?";
-    return getResults(searchUrl, initialSearch, relatedLinks, relatedPage, setRelatedLinks, setRelatedPage, 15);
+    await getResults(searchUrl, initialSearch, relatedLinks, relatedPage, setRelatedLinks, setRelatedPage, 15);
   }
 
-  async function translateContent() {
-    let values = [];
-    if (loadedEntity.attributes && loadedEntity.attributes.content) {
-      values = loadedEntity.attributes.content.values;
-      const translated_values = await translateValues(values);
-      appendStateObj(translatedContent, setTranslatedContent, locale, translated_values);
-    }
+  async function updateTranslatedContent(entity, lang) {
+    const translated_values = await translateEntityContent(entity, lang);
+    appendStateObj(translatedContent, setTranslatedContent, locale, translated_values);
   }
 
   useEffect(() => {
     if (!loadedEntity || loadedEntity.title !== title) {
       console.log("get profile entity:", title);
-      getEntity(title);
+      getEntity(title, updateEntityState);
     }
     if (loadedEntity) {
       if (!(locale in translatedTitle)) {
-        translateText(title, locale);
-        translateContent();
+        updateTranslatedStates(title, locale);
+        updateTranslatedContent(loadedEntity, locale);
       }
     }
 
