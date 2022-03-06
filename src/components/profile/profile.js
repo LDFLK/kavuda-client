@@ -20,11 +20,17 @@ function Profile(props) {
   const {title} = useParams();
   const [loadedEntity, setLoadedEntity] = useState(null);
   const [translatedContent, setTranslatedContent] = useState([]);
-  const [translatedTitle, setTranslatedTitle] = useState({[Locale.en]:title});
+  const [translatedTitle, setTranslatedTitle] = useState({[Locale.en]: title});
   const [internalLinks, setInternalLinks] = useState([]);
   const [internalPage, setInternalPage] = useState(0);
   const [relatedLinks, setRelatedLinks] = useState([]);
   const [relatedPage, setRelatedPage] = useState(0);
+
+  function appendStateObj(currentState, setStateFunction, key, value) {
+    let currentStateObj = {...currentState};
+    currentStateObj[key] = value;
+    setStateFunction(currentStateObj);
+  }
 
   function getEntity(entityTitle) {
     fetch(process.env.REACT_APP_SERVER_URL + 'api/get/' + entityTitle, {
@@ -37,9 +43,7 @@ function Profile(props) {
     }).then(data => {
       setLoadedEntity(data);
       setTranslatedContent(data.attributes.content ? data.attributes.content.values : []);
-      let translatedTitles ={...translatedTitle};
-      translatedTitles[locale]=data.title;
-      setTranslatedTitle(translatedTitles);
+      appendStateObj(translatedTitle, setTranslatedTitle, locale, data.title)
     }).then(
       end => {
         getInternalLinks(true);
@@ -47,6 +51,43 @@ function Profile(props) {
       }
     );
     return true
+  }
+
+  async function translateValues(values) {
+    if (loadedEntity.attributes && values) {
+      let contentArray = JSON.parse(JSON.stringify(values));
+      for (let item of contentArray) {
+        item.value_string = await this.translateValue(item.value_string);
+      }
+      return contentArray;
+    }
+    return values;
+  }
+
+
+  async function translateText(text, lang) {
+    let values = [];
+    if (loadedEntity.attributes && loadedEntity.attributes.content) {
+      values = loadedEntity.attributes.content.values;
+    }
+
+    if (lang !== Locale.en) {
+      let translatorUrl = 'translate?lang=' + lang;
+      const requestOptions = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/text'},
+        body: text
+      };
+      const response = await fetch(translatorUrl, requestOptions);
+
+      const translated_text = await response.json();
+      appendStateObj(translatedTitle, setTranslatedTitle, lang, translated_text)
+
+      // const translated_values = await translateValues(values);
+
+      // this.setState({translatedTitle: translated_text, title: text, language: lang, content: translated_values})
+    }
+
   }
 
   function getInternalLinks(initialSearch) {
@@ -63,6 +104,14 @@ function Profile(props) {
     if (!loadedEntity || loadedEntity.title !== title) {
       console.log("get profile entity:", title);
       getEntity(title);
+    }
+    if (loadedEntity) {
+      if (translatedTitle[Locale.en] !== loadedEntity.title) {
+        setTranslatedTitle({[Locale.en]: loadedEntity.title});
+      }
+      if (!(locale in translatedTitle)) {
+        translateText(title, locale);
+      }
     }
   });
 
