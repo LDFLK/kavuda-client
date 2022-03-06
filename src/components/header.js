@@ -7,38 +7,26 @@ import BeatLoader from 'react-spinners/BeatLoader';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, useLocation} from "react-router-dom";
 
 function Header(props) {
   const [searchKey, setSearchKey] = useState("");
-  const {classes} = props;
-  const navigate= useNavigate();
-
-  const [isLoading, setIsLoading] = useState(false);
-
-  function startLoading() {
-    if (!isLoading) {
-      setIsLoading(true)
-    }
-  }
-
-  function endLoading() {
-    if (isLoading) {
-      setIsLoading(false)
-    }
-  }
+  const {classes, isLoading, setIsLoading} = props;
+  const navigate = useNavigate();
+  const location = useLocation();
 
   function HandleSubmit(event) {
     event.preventDefault();
-
-    if (searchKey.length > 1) {
-      startLoading();
-      navigate(`/search/` + searchKey);
-      endLoading();
+    const routePath = '/search/';
+    const url = routePath + encodeURI(searchKey);
+    if (searchKey.length > 1 && url !== location.pathname) {
+      setIsLoading(true);
+      navigate(url);
     }
   }
+
   return (
-    <AppBar className={classes.appBar} style={{backgroundColor:'#282c34'}} position="sticky">
+    <AppBar className={classes.appBar} style={{backgroundColor: '#282c34'}} position="sticky">
       <Grid container width={1} style={{textAlign: 'left'}}>
         <Grid item xs={3}>
           <Typography component={Link} to="/" style={{textDecoration: 'none'}}

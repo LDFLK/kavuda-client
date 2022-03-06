@@ -12,7 +12,7 @@ import {useParams} from "react-router-dom";
 function SearchResult(props) {
 
   const {searchKey} = useParams();
-  const {classes} = props;
+  const {classes, setIsLoading} = props;
   const [searchResults, setSearchResults] = useState(null);
   const [searchPage, setSearchPage] = useState(0);
   const [trendingResults, setTrendingResults] = useState(null);
@@ -24,7 +24,7 @@ function SearchResult(props) {
     getResults(searchUrl, false, trendingResults, trendingPage, setTrendingResults, setTrendingPage, 15);
   }
 
-  function getSearchResults(initialSearch) {
+  async function getSearchResults(initialSearch) {
     if (searchKey.length > 1) {
       let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=';
       if (searchKey.includes(":")) {
@@ -33,21 +33,17 @@ function SearchResult(props) {
       } else {
         searchUrl += searchKey;
       }
-      return getResults(searchUrl, initialSearch, searchResults, searchPage, setSearchResults, setSearchPage, 15);
+      let result= await getResults(searchUrl, initialSearch, searchResults, searchPage, setSearchResults, setSearchPage, 15);
+      setIsLoading(false);
+      return result
     }
     return false
   }
 
-  useEffect(() => {
-    if (!trendingResults) {
-      console.log("load trending results");
-      getTrendingResults();
-    }
-  });
-
   if (searchKey !== searchState) {
     console.log("loading search results:", searchKey);
     getSearchResults(true);
+    getTrendingResults();
     setSearchState(searchKey);
   }
 
