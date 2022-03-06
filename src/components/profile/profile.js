@@ -44,8 +44,8 @@ function Profile(props) {
       return null
     }).then(data => {
       setLoadedEntity(data);
-      appendStateObj(translatedTitle, setTranslatedTitle, locale, data.title);
-      appendStateObj(translatedContent, setTranslatedContent, locale, data.attributes.content.values);
+      setTranslatedTitle({[Locale.en]:data.title});
+      setTranslatedContent({[Locale.en]:data.attributes.content.values});
     }).then(
       end => {
         getInternalLinks(true);
@@ -110,9 +110,7 @@ function Profile(props) {
       if (!(locale in translatedTitle)) {
         translateText(title, locale);
         translateContent();
-
       }
-
     }
 
   });
