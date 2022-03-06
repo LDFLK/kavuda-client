@@ -5,8 +5,8 @@ import Grid from '@mui/material/Grid';
 import TrendingList from "../trending/trendingList";
 import MainContentList from "../latest/mainContentList"
 import Typography from "@mui/material/Typography/Typography";
-import InfiniteList from "../infinite-list/infinite-list";
-import {getResults} from "../../functions/entity";
+import InfiniteList from "../infiniteList/infiniteList";
+import {getResults} from "../../functions/api/getQueries";
 import {useParams} from "react-router-dom";
 
 function SearchResult(props) {

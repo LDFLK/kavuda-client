@@ -4,13 +4,13 @@ import {
   Routes,
 } from "react-router-dom";
 import './App.css';
-import Header from "./components/header";
-import Footer from "./components/footer";
-import Home from "./components/home";
+import Header from "./components/shared/header";
+import Footer from "./components/shared/footer";
+import Home from "./components/home/home";
 import SearchResult from "./components/search/searchResult";
 import Profile from "./components/profile/profile";
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import {Locale} from "./components/locale";
+import {Locale} from "./components/constants/locale";
 
 const darkTheme = createTheme({
   palette: {

@@ -8,13 +8,13 @@ import MainContentList from "../latest/mainContentList"
 import Typography from '@mui/material/Typography';
 import FormattedContent from "./formattedContent";
 import {Link} from "react-router-dom";
-import InfiniteList from "../infinite-list/infinite-list";
+import InfiniteList from "../infiniteList/infiniteList";
 import Chip from "@mui/material/Chip/Chip";
 import extractHostname from "../../functions/extractHostnames";
 import {useParams} from "react-router-dom";
-import {getResults} from "../../functions/entity";
-import {Locale} from "../locale";
-import {translateValue} from "../../functions/translate";
+import {getResults} from "../../functions/api/getQueries";
+import {Locale} from "../constants/locale";
+import {translateValue} from "../../functions/translator/translate";
 import {Facebook} from 'react-content-loader'
 
 function Profile(props) {

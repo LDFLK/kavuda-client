@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from "react";
 import {withStyles} from "@mui/styles";
-import Styles from "../styles/styles"
+import Styles from "../../styles/styles"
 import Grid from '@mui/material/Grid';
-import TrendingList from "./trending/trendingList";
-import MainContentList from "./latest/mainContentList";
+import TrendingList from "../trending/trendingList";
+import MainContentList from "../latest/mainContentList";
 import Typography from '@mui/material/Typography';
-import InfiniteList from "./infinite-list/infinite-list";
-import {getResults} from "../functions/entity";
+import InfiniteList from "../infiniteList/infiniteList";
+import {getResults} from "../../functions/api/getQueries";
 
 function Home(props) {
 
