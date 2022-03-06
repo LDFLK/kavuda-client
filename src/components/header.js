@@ -8,10 +8,11 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {Link, useNavigate, useLocation} from "react-router-dom";
+import {Locale} from "./locale";
 
 function Header(props) {
   const [searchKey, setSearchKey] = useState("");
-  const {classes, isLoading, setIsLoading} = props;
+  const {classes, isLoading, setIsLoading,locale, setLocale} = props;
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -62,11 +63,11 @@ function Header(props) {
         <Grid item xs={2} className={classes.headerColumn}>
           <Grid container width={1} justify="flex-end" style={{textAlign: 'right'}}>
             <Grid item>
-              <Button onClick={() => this.props.handleChange('language', 'en')} size="small" variant="outlined"
+              <Button onClick={() => setLocale(Locale.en)} size="small" variant="outlined"
                       style={{color: 'white'}}>English</Button>
-              <Button onClick={() => this.props.handleChange('language', 'sinhala')} size="small" variant="outlined"
+              <Button onClick={() => setLocale(Locale.sinhala)} size="small" variant="outlined"
                       style={{color: 'white'}}>සිංහල</Button>
-              <Button onClick={() => this.props.handleChange('language', 'tamil')} size="small" variant="outlined"
+              <Button onClick={() => setLocale(Locale.tamil)} size="small" variant="outlined"
                       style={{color: 'white'}}>
                 தமிழ்</Button>
             </Grid>

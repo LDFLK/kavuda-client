@@ -1,5 +1,4 @@
-async function TranslateValue(value) {
-  const lang = this.props.language;
+async function translateValue(value,lang) {
   let translatorUrl = 'translate?lang=' + lang;
   const requestOptions = {
     method: 'POST',
@@ -11,7 +10,7 @@ async function TranslateValue(value) {
   return await response.json();
 }
 
-async function TranslateValues(values) {
+async function translateValues(values) {
   if (this.props.loadedEntity.attributes && values) {
     let contentArray = JSON.parse(JSON.stringify(values));
     for (let item of contentArray) {
@@ -22,8 +21,7 @@ async function TranslateValues(values) {
   return values;
 }
 
-async function TranslateText(text) {
-  const lang = this.props.language;
+async function translateText(text,lang) {
   let values = [];
   if (this.props.loadedEntity.attributes && this.props.loadedEntity.attributes.content) {
     values = this.props.loadedEntity.attributes.content.values;
@@ -43,7 +41,7 @@ async function TranslateText(text) {
 
     const translated_text = await response.json();
 
-    const translated_values = await TranslateValues(values);
+    const translated_values = await translateValues(values);
 
     this.setState({translatedTitle: translated_text, title: text, language: lang, content: translated_values})
   }

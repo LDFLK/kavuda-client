@@ -13,12 +13,14 @@ import Chip from "@mui/material/Chip/Chip";
 import extractHostname from "../../functions/extractHostnames";
 import {useParams} from "react-router-dom";
 import {getResults} from "../../functions/entity";
+import {Locale} from "../locale";
 
 function Profile(props) {
+  const {classes, isLoading, setIsLoading, locale, setLocale} = props;
   const {title} = useParams();
   const [loadedEntity, setLoadedEntity] = useState(null);
   const [translatedContent, setTranslatedContent] = useState([]);
-  const [translatedTitle, setTranslatedTitle] = useState(title);
+  const [translatedTitle, setTranslatedTitle] = useState({[Locale.en]:title});
   const [internalLinks, setInternalLinks] = useState([]);
   const [internalPage, setInternalPage] = useState(0);
   const [relatedLinks, setRelatedLinks] = useState([]);
@@ -35,7 +37,9 @@ function Profile(props) {
     }).then(data => {
       setLoadedEntity(data);
       setTranslatedContent(data.attributes.content ? data.attributes.content.values : []);
-      setTranslatedTitle(data.title);
+      let translatedTitles ={...translatedTitle};
+      translatedTitles[locale]=data.title;
+      setTranslatedTitle(translatedTitles);
     }).then(
       end => {
         getInternalLinks(true);
@@ -63,9 +67,8 @@ function Profile(props) {
   });
 
 
-
-  const ignoreCategories = ["News", "PERSON", "ORGANIZATION", "LOCATION", "arbitrary-entities", "OrgChart-Level1"];
-  const {classes} = props;
+  // const ignoreCategories = ["News", "PERSON", "ORGANIZATION", "LOCATION", "arbitrary-entities", "OrgChart-Level1"];
+  const ignoreCategories = [];
   if (loadedEntity) {
     return (
       <Grid className={classes.container} container width={1}>
@@ -88,7 +91,7 @@ function Profile(props) {
               {/*</Grid>*/}
               <Grid item xs={9}>
                 <Typography className={classes.mainContentItemTitle} variant='h4'>
-                  {translatedTitle}
+                  {translatedTitle[locale]}
                 </Typography>
                 {loadedEntity.source ?
                   <Typography variant="body2">
