@@ -1,14 +1,14 @@
 import React, {useState} from "react";
 import AppBar from "@mui/material/AppBar/AppBar";
 import {withStyles} from "@mui/styles";
-import Styles from "../../styles/styles"
+import Styles from "../../styles/Styles"
 import InputBase from "@mui/material/InputBase/InputBase";
 import BeatLoader from 'react-spinners/BeatLoader';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {Link, useNavigate, useLocation} from "react-router-dom";
-import {Locale} from "../constants/locale";
+import {Locale} from "../constants/Locale";
 
 function Header(props) {
   const [searchKey, setSearchKey] = useState("");

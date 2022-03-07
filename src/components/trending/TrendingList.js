@@ -2,8 +2,8 @@ import {Component} from "react";
 import React from "react";
 import List from "@mui/material/List/List";
 import {withStyles} from "@mui/styles";
-import Styles from "../../styles/styles";
-import TrendingListItem from "./trendingListItem";
+import Styles from "../../styles/Styles";
+import TrendingListItem from "./TrendingListItem";
 import Typography from "@mui/material/Typography/Typography";
 import Moment from "moment";
 

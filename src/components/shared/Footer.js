@@ -1,7 +1,7 @@
 import React from "react";
 import {withStyles} from "@mui/styles";
 import Typography from '@mui/material/Typography';
-import Styles from "../../styles/styles"
+import Styles from "../../styles/Styles"
 
 function Footer(props) {
 

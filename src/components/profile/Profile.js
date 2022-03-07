@@ -1,22 +1,22 @@
 import React, {useEffect, useState} from "react";
 import {withStyles} from "@mui/styles";
-import Styles from "../../styles/styles"
+import Styles from "../../styles/Styles"
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import TrendingList from "../trending/trendingList";
-import MainContentList from "../latest/mainContentList"
+import TrendingList from "../trending/TrendingList";
+import MainContentList from "../latest/MainContentList"
 import Typography from '@mui/material/Typography';
-import FormattedContent from "./formattedContent";
+import FormattedContent from "./FormattedContent";
 import {Link} from "react-router-dom";
-import InfiniteList from "../infiniteList/infiniteList";
+import InfiniteList from "../infinite_list/InfiniteList";
 import Chip from "@mui/material/Chip/Chip";
-import extractHostname from "../../functions/extractHostnames";
+import extractHostname from "../../functions/ExtractHostnames";
 import {useParams} from "react-router-dom";
-import {getEntity, getResults} from "../../functions/api/getQueries";
-import {Locale} from "../constants/locale";
-import {translateEntityContent, translateText} from "../../functions/translator/translate";
+import {getEntity, getResults} from "../../functions/api/GetQueries";
+import {Locale} from "../constants/Locale";
+import {translateEntityContent, translateText} from "../../functions/translator/Translate";
 import {Facebook} from 'react-content-loader'
-import {appendStateObj} from "../../functions/appendStateObj";
+import {appendStateObj} from "../../functions/AppendStateObj";
 
 function Profile(props) {
   const {classes, locale} = props;

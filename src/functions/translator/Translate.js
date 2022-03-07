@@ -1,4 +1,4 @@
-import {Locale} from "../../components/constants/locale";
+import {Locale} from "../../components/constants/Locale";
 
 export async function translateValue(value, lang) {
   let translatorUrl = 'translate?lang=' + lang;

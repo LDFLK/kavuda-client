@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 import {withStyles} from "@mui/styles";
 import {Typography} from "@mui/material";
-import Styles from "../../styles/styles"
+import Styles from "../../styles/Styles"
 import List from "@mui/material/List/List";
-import MainContentItem from "./mainContentItem";
+import MainContentItem from "./MainContentItem";
 import Moment from 'moment';
 
 class MainContentList extends Component {

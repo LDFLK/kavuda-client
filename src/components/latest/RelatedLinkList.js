@@ -1,12 +1,12 @@
 import React, {Component} from "react";
 import Grid from "@mui/material/Grid/Grid";
-import RelatedLinkItem from "./relatedLinkItem";
+import RelatedLinkItem from "./RelatedLinkItem";
 import Typography from "@mui/material/Typography/Typography";
 import Avatar from "@mui/material/Avatar/Avatar";
 import Tooltip from "@mui/material/Tooltip/Tooltip";
 import {Link} from "react-router-dom";
 import {withStyles} from "@mui/styles";
-import Styles from "../../styles/styles";
+import Styles from "../../styles/Styles";
 
 class RelatedLinkList extends Component {
 

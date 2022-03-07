@@ -1,12 +1,12 @@
 import React, {useState} from "react";
 import {withStyles} from "@mui/styles";
-import Styles from "../../styles/styles"
+import Styles from "../../styles/Styles"
 import Grid from '@mui/material/Grid';
-import TrendingList from "../trending/trendingList";
-import MainContentList from "../latest/mainContentList"
+import TrendingList from "../trending/TrendingList";
+import MainContentList from "../latest/MainContentList"
 import Typography from "@mui/material/Typography/Typography";
-import InfiniteList from "../infiniteList/infiniteList";
-import {getResults} from "../../functions/api/getQueries";
+import InfiniteList from "../infinite_list/InfiniteList";
+import {getResults} from "../../functions/api/GetQueries";
 import {useParams} from "react-router-dom";
 
 function SearchResult(props) {
