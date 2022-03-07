@@ -16,7 +16,7 @@ function Header(props) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  function HandleSubmit(event) {
+  function handleSubmit(event) {
     event.preventDefault();
     const routePath = '/search/';
     const url = routePath + encodeURI(searchKey);
@@ -38,7 +38,7 @@ function Header(props) {
         </Grid>
         <Grid item xs={6} className={classes.headerColumn}>
           <div className={classes.search}>
-            <form id="search-form" onSubmit={HandleSubmit} noValidate autoComplete="off">
+            <form id="search-form" onSubmit={handleSubmit} noValidate autoComplete="off">
               <InputBase
                 name="search"
                 placeholder="Search…"
