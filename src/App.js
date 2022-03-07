@@ -47,6 +47,7 @@ function App() {
         </Routes>
         <Footer/>
 
+        //TODO: why this Dialog is needed?
         {/*<Dialog*/}
         {/*open={this.state.alertOpen}*/}
         {/*onClose={() => this.handleChange("alertOpen", false)}*/}
