@@ -12,7 +12,7 @@ import Profile from "./components/profile/Profile";
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {Locale} from "./components/constants/Locale";
 
-const darkTheme = createTheme({
+const appTheme = createTheme({
   palette: {
     mode: 'light',
   },
@@ -36,7 +36,7 @@ function App() {
 
   const app_props = {isLoading, setIsLoading,locale, setLocale};
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={appTheme}>
       <div className="App">
         <Header {...app_props}/>
         <Routes>

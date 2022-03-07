@@ -73,6 +73,7 @@ function Profile(props) {
 
   });
 
+  // ignore showing category chips for the following in kavuda
   const ignoreCategories = ["News", "PERSON", "ORGANIZATION", "LOCATION", "arbitrary-entities", "OrgChart-Level1"];
   if (loadedEntity) {
     return (
