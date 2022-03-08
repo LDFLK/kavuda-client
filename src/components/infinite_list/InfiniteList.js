@@ -4,7 +4,7 @@ import {Button} from "@mui/material";
 import Styles from "../../styles/Styles"
 import BeatLoader from "react-spinners/BeatLoader";
 import Tooltip from "@mui/material/Tooltip/Tooltip";
-import downArrow from "../../resources/images/down.png"
+import downArrow from "./resources/down.png"
 
 class InfiniteList extends Component {
 
@@ -17,19 +17,6 @@ class InfiniteList extends Component {
 
     this.loadResults = this.loadResults.bind(this);
   }
-
-  // componentDidMount() {
-  //   if (this.props.results && this.props.results.length === 0) {
-  //     this.props.getResultItems(this.props.searchParam);
-  //   }
-  // }
-  //
-  // componentDidUpdate(prevProps, prevState, snapshot) {
-  //   if (prevProps.searchParam !== this.props.searchParam) {
-  //     this.props.getResultItems(this.props.searchParam, true);
-  //     this.setState({listEnded: false})
-  //   }
-  // }
 
   async loadResults() {
     this.setState({isLoading: true});
