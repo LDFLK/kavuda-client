@@ -39,15 +39,15 @@ class InfiniteList extends Component {
     return (
       <div>
         {list}
-        {Array.isArray(listItems) ?
+        {Array.isArray(listItems) &&
           <div style={{textAlign: 'center'}}>
-            {isLoading ?
+            {isLoading &&
               <BeatLoader
                 sizeUnit={"px"}
                 size={14}
                 color={'#36D7B7'}
                 loading={this.props.loading}
-              /> : null}
+              />}
             {!(isLoading || listEnded) ?
               <Tooltip title={'view more'} aria-label="add">
               <Button style={{width: "100%"}} onClick={() => this.loadResults()}><img alt={"view more"} width={"15px"}
@@ -55,8 +55,7 @@ class InfiniteList extends Component {
               </Tooltip>
               : <Button style={{width: "100%"}}> </Button>
             }
-          </div>
-          : null}
+          </div>}
       </div>
     )
   }

@@ -7,7 +7,7 @@ import Home from "./components/home/Home";
 import SearchResult from "./components/search/SearchResult";
 import Profile from "./components/profile/Profile";
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import {Locale} from "./components/constants/Locale";
+import {Locales} from "./components/constants/Locales";
 
 const appTheme = createTheme({
   palette: {
@@ -25,7 +25,7 @@ function App() {
     return localStorage.getItem('kavuda-locale');
   }
   if (!getLocaleCookie()) {
-    localStorage.setItem('kavuda-locale', Locale.en);
+    localStorage.setItem('kavuda-locale', Locales.en);
   }
 
   const [isLoading, setIsLoading] = useState(false);
@@ -43,25 +43,6 @@ function App() {
           <Route path="*" element={<div>invalid url!</div>}/>
         </Routes>
         <Footer/>
-
-        {/*//TODO: why this Dialog is needed?*/}
-        {/*<Dialog*/}
-        {/*open={this.state.alertOpen}*/}
-        {/*onClose={() => this.handleChange("alertOpen", false)}*/}
-        {/*aria-labelledby="alert-dialog-title"*/}
-        {/*aria-describedby="alert-dialog-description"*/}
-        {/*>*/}
-        {/*<DialogContent>*/}
-        {/*<Typography variant="body2" id="alert-dialog-description">*/}
-        {/*No items found!*/}
-        {/*</Typography>*/}
-        {/*</DialogContent>*/}
-        {/*<DialogActions style={{justifyContent: "center"}}>*/}
-        {/*<Button onClick={() => this.handleChange("alertOpen", false)} color="primary" autoFocus>*/}
-        {/*Ok*/}
-        {/*</Button>*/}
-        {/*</DialogActions>*/}
-        {/*</Dialog>*/}
       </div>
     </ThemeProvider>
   )

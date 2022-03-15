@@ -12,7 +12,7 @@ import InfiniteList from "../infinite_list/InfiniteList";
 import Chip from "@mui/material/Chip/Chip";
 import extractHostname from "../../functions/ExtractHostnames";
 import {getEntity, getResults} from "../../functions/api/GetQueries";
-import {Locale} from "../constants/Locale";
+import {Locale} from "../constants/Locales";
 import {translateEntityContent, translateText} from "../../functions/translator/Translate";
 import {Facebook} from 'react-content-loader'
 import {appendStateObj} from "../../functions/AppendStateObj";

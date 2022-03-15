@@ -8,7 +8,7 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {Link, useLocation, useNavigate} from "react-router-dom";
-import {Locale} from "../constants/Locale";
+import {Locale} from "../constants/Locales";
 
 function Header(props) {
   const [searchKey, setSearchKey] = useState("");
