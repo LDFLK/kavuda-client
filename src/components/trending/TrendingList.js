@@ -1,5 +1,4 @@
-import {Component} from "react";
-import React from "react";
+import React, {Component} from "react";
 import List from "@mui/material/List/List";
 import {withStyles} from "@mui/styles";
 import Styles from "../../styles/Styles";

@@ -7,11 +7,10 @@ import TrendingList from "../trending/TrendingList";
 import MainContentList from "../latest/MainContentList"
 import Typography from '@mui/material/Typography';
 import FormattedContent from "./FormattedContent";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import InfiniteList from "../infinite_list/InfiniteList";
 import Chip from "@mui/material/Chip/Chip";
 import extractHostname from "../../functions/ExtractHostnames";
-import {useParams} from "react-router-dom";
 import {getEntity, getResults} from "../../functions/api/GetQueries";
 import {Locale} from "../constants/Locale";
 import {translateEntityContent, translateText} from "../../functions/translator/Translate";
