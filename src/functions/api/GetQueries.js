@@ -9,19 +9,12 @@ export async function getResults(searchUrl, newSearch, result, page, setResults,
         setPage(1);
         return true
       } else {
-        if (json) {
-          setResults(result.concat(json));
-          setPage(page + 1);
-          return true
-        } else {
-          setResults([]);
-          setPage(0);
-          return false;
-        }
+        setResults(result.concat(json));
+        setPage(page + 1);
+        return true
       }
     }
   }
-  return false
 }
 
 export function getEntity(entityTitle, callback) {

@@ -16,9 +16,9 @@ const appTheme = createTheme({
 });
 
 function App() {
-  function setLocale(locale) {
-    localStorage.setItem('kavuda-locale', locale);
-    setLocaleState(locale);
+  function setLocale(value) {
+    localStorage.setItem('kavuda-locale', value);
+    setLocaleState(value);
   }
 
   function getLocaleCookie() {

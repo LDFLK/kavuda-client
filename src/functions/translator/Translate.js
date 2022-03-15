@@ -9,7 +9,7 @@ export async function translateValue(value, lang) {
   };
   const response = await fetch(translatorUrl, requestOptions);
 
-  return await response.json();
+  return response.json();
 }
 
 export async function translateValues(values, lang) {
@@ -30,7 +30,7 @@ export async function translateText(text, lang) {
     };
     const response = await fetch(translatorUrl, requestOptions);
 
-    return await response.json();
+    return response.json();
 
   }
   return text
@@ -41,6 +41,6 @@ export async function translateEntityContent(entity, lang) {
   let values = [];
   if (entity.attributes && entity.attributes.content) {
     values = entity.attributes.content.values;
-    return await translateValues(values, lang);
+    return translateValues(values, lang);
   }
 }

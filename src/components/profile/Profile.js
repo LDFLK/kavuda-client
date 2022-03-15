@@ -89,33 +89,24 @@ function Profile(props) {
         < Grid item xs={6} className={classes.mainContentColumn}>
           <Paper className={classes.profilePaper}>
             <Grid container width={1}>
-              {/*<Grid item xs={3}>*/}
-              {/*<img alt={loadedEntity.title}*/}
-              {/*src={loadedEntity.image_url === "" ? "avatar.png" : loadedEntity.image_url}*/}
-              {/*className={classes.profileAvatar}/>*/}
-              {/*</Grid>*/}
               <Grid item xs={9}>
                 <Typography className={classes.mainContentItemTitle} variant='h4'>
                   {translatedTitle[locale] ? translatedTitle[locale] : <Facebook/>}
                 </Typography>
-                {loadedEntity.source ?
-                  <Typography variant="body2">
-                    <a className={classes.link} href={loadedEntity.source}>
-                      {extractHostname(loadedEntity.source)}
-                    </a>
-                  </Typography> : null}
-                {loadedEntity.attributes ?
-                  <Typography variant="body2">
-                    {loadedEntity.attributes.author && loadedEntity.attributes.author.values[0].value_string ?
-                      loadedEntity.attributes.author.values[0].value_string
-                      : null}
-                    {loadedEntity.attributes.date && loadedEntity.attributes.date.values[0].value_string ?
-                      new Date(loadedEntity.attributes.date.values[0].value_string).toDateString()
-                      : null}
-                  </Typography> : null}
+                {loadedEntity?.source &&
+                <Typography variant="body2">
+                  <a className={classes.link} href={loadedEntity.source}>
+                    {extractHostname(loadedEntity.source)}
+                  </a>
+                </Typography>}
+                {loadedEntity?.attributes &&
+                <Typography variant="body2">
+                  {loadedEntity?.attributes?.author?.values[0]?.value_string}
+                  {new Date(loadedEntity?.attributes?.date?.values[0]?.value_string).toDateString()}
+                </Typography>}
                 <div style={{paddingTop: '10px'}}>
-                  {loadedEntity.categories ? loadedEntity.categories.map((category) => (
-                    ignoreCategories.includes(category) ? null :
+                  {loadedEntity?.categories?.map((category) => (
+                    ignoreCategories?.includes(category) ? null :
                       <Link key={category} className={classes.link} to={"/search/" + category + ":"}>
                         <Chip style={{cursor: 'pointer'}}
                               size="small"
@@ -123,7 +114,7 @@ function Profile(props) {
                               variant="outlined"
                         />
                       </Link>
-                  )) : null}
+                  ))}
                 </div>
               </Grid>
             </Grid>
