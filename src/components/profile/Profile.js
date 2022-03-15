@@ -12,7 +12,7 @@ import InfiniteList from "../infinite_list/InfiniteList";
 import Chip from "@mui/material/Chip/Chip";
 import extractHostname from "../../functions/ExtractHostnames";
 import {getEntity, getResults} from "../../functions/api/GetQueries";
-import {Locale} from "../constants/Locales";
+import {Locales} from "../constants/Locales";
 import {translateEntityContent, translateText} from "../../functions/translator/Translate";
 import {Facebook} from 'react-content-loader'
 import {appendStateObj} from "../../functions/AppendStateObj";
@@ -22,7 +22,7 @@ function Profile(props) {
   const {title} = useParams();
   const [loadedEntity, setLoadedEntity] = useState(null);
   const [translatedContent, setTranslatedContent] = useState({});
-  const [translatedTitle, setTranslatedTitle] = useState({[Locale.en]: title});
+  const [translatedTitle, setTranslatedTitle] = useState({[Locales.en]: title});
   const [internalLinks, setInternalLinks] = useState([]);
   const [internalPage, setInternalPage] = useState(0);
   const [relatedLinks, setRelatedLinks] = useState([]);
@@ -31,8 +31,8 @@ function Profile(props) {
 
   async function updateEntityState(data) {
     setLoadedEntity(data);
-    setTranslatedTitle({[Locale.en]: data.title});
-    setTranslatedContent({[Locale.en]: data.attributes.content ? data.attributes.content.values : []});
+    setTranslatedTitle({[Locales.en]: data.title});
+    setTranslatedContent({[Locales.en]: data.attributes.content ? data.attributes.content.values : []});
     await getInternalLinks(true);
     await getRelatedResults(true);
   }

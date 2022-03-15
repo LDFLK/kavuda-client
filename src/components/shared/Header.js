@@ -8,7 +8,7 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {Link, useLocation, useNavigate} from "react-router-dom";
-import {Locale} from "../constants/Locales";
+import {Locales} from "../constants/Locales";
 
 function Header(props) {
   const [searchKey, setSearchKey] = useState("");
@@ -63,11 +63,11 @@ function Header(props) {
         <Grid item xs={2} className={classes.headerColumn}>
           <Grid container width={1} justify="flex-end" style={{textAlign: 'right'}}>
             <Grid item>
-              <Button onClick={() => setLocale(Locale.en)} size="small" variant="outlined"
+              <Button onClick={() => setLocale(Locales.en)} size="small" variant="outlined"
                       style={{color: 'white'}}>English</Button>
-              <Button onClick={() => setLocale(Locale.sinhala)} size="small" variant="outlined"
+              <Button onClick={() => setLocale(Locales.sinhala)} size="small" variant="outlined"
                       style={{color: 'white'}}>සිංහල</Button>
-              <Button onClick={() => setLocale(Locale.tamil)} size="small" variant="outlined"
+              <Button onClick={() => setLocale(Locales.tamil)} size="small" variant="outlined"
                       style={{color: 'white'}}>
                 தமிழ்</Button>
             </Grid>

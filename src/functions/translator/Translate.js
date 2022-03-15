@@ -1,4 +1,4 @@
-import {Locale} from "../../components/constants/Locales";
+import {Locales} from "../../components/constants/Locales";
 
 export async function translateValue(value, lang) {
   let translatorUrl = 'translate?lang=' + lang;
@@ -21,7 +21,7 @@ export async function translateValues(values, lang) {
 }
 
 export async function translateText(text, lang) {
-  if (lang !== Locale.en) {
+  if (lang !== Locales.en) {
     let translatorUrl = 'translate?lang=' + lang;
     const requestOptions = {
       method: 'POST',
