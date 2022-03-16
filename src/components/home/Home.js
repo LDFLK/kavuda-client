@@ -7,6 +7,7 @@ import MainContentList from "../latest/MainContentList";
 import Typography from '@mui/material/Typography';
 import InfiniteList from "../infinite_list/InfiniteList";
 import {getResults} from "../../functions/api/GetQueries";
+import {ApiRoutes, getServerUrl} from "../../server";
 
 function Home(props) {
 
@@ -17,19 +18,19 @@ function Home(props) {
   const [trendingPage, setTrendingPage] = useState(0);
 
   function getHomeResults() {
-    let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=&categories=News';
+    let searchUrl = getServerUrl(ApiRoutes.search) + '&categories=News';
     return getResults(searchUrl, false, homeResults, homePage, setHomeResults, setHomePage, 15);
 
   }
 
   function getTrendingResults() {
-    let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=&categories=News';
+    let searchUrl = getServerUrl(ApiRoutes.search) + '&categories=News';
     getResults(searchUrl, false, trendingResults, trendingPage, setTrendingResults, setTrendingPage, 15);
 
   }
 
   useEffect(() => {
-    if (homeResults.length===0){
+    if (homeResults.length === 0) {
       console.log("loading home results");
       getHomeResults();
       getTrendingResults();

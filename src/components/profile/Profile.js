@@ -17,6 +17,7 @@ import {translateEntityContent, translateText} from "../../functions/translator/
 import {Facebook} from 'react-content-loader'
 import {appendStateObj} from "../../functions/AppendStateObj";
 import {AppRoutes} from "../../routes";
+import {ApiRoutes, getServerUrl} from "../../server";
 
 function Profile(props) {
   const {classes, locale} = props;
@@ -45,12 +46,12 @@ function Profile(props) {
   }
 
   async function getInternalLinks(initialSearch) {
-    let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/links/' + encodeURI(title) + "?";
+    let searchUrl = getServerUrl(ApiRoutes.links) + encodeURI(title) + "?";
     await getResults(searchUrl, initialSearch, internalLinks, internalPage, setInternalLinks, setInternalPage, 15);
   }
 
   async function getRelatedResults(initialSearch) {
-    let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/relations/' + encodeURI(title) + "?";
+    let searchUrl = getServerUrl(ApiRoutes.relations) + encodeURI(title) + "?";
     await getResults(searchUrl, initialSearch, relatedLinks, relatedPage, setRelatedLinks, setRelatedPage, 15);
   }
 

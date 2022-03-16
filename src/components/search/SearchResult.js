@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography/Typography";
 import InfiniteList from "../infinite_list/InfiniteList";
 import {getResults} from "../../functions/api/GetQueries";
 import {useParams} from "react-router-dom";
+import {ApiRoutes, getServerUrl} from "../../server";
 
 function SearchResult(props) {
 
@@ -20,20 +21,20 @@ function SearchResult(props) {
   const [searchState, setSearchState] = useState("");
 
   function getTrendingResults() {
-    let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=&categories=News';
+    let searchUrl = getServerUrl(ApiRoutes.search) + '&categories=News';
     getResults(searchUrl, false, trendingResults, trendingPage, setTrendingResults, setTrendingPage, 15);
   }
 
   async function getSearchResults(initialSearch) {
     if (searchKey.length > 1) {
-      let searchUrl = process.env.REACT_APP_SERVER_URL + 'api/search?query=';
+      let searchUrl = getServerUrl(ApiRoutes.search);
       if (searchKey.includes(":")) {
         let searchArray = searchKey.split(":", 2);
         searchUrl += searchArray[1] + '&categories=' + searchArray[0];
       } else {
         searchUrl += searchKey;
       }
-      let result= await getResults(searchUrl, initialSearch, searchResults, searchPage, setSearchResults, setSearchPage, 15);
+      let result = await getResults(searchUrl, initialSearch, searchResults, searchPage, setSearchResults, setSearchPage, 15);
       setIsLoading(false);
       return result
     }

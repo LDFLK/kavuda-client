@@ -1,7 +1,8 @@
 import {Locales} from "../../components/constants/Locales";
+import {getTranslatorUrl, translatorRoutes} from "../../server";
 
 export async function translateValue(value, lang) {
-  let translatorUrl = 'translate?lang=' + lang;
+  let translatorUrl = getTranslatorUrl(translatorRoutes.translate) + lang;
   const requestOptions = {
     method: 'POST',
     headers: {'Content-Type': 'application/text'},
@@ -22,7 +23,7 @@ export async function translateValues(values, lang) {
 
 export async function translateText(text, lang) {
   if (lang !== Locales.en) {
-    let translatorUrl = 'translate?lang=' + lang;
+    let translatorUrl = getTranslatorUrl(translatorRoutes.translate) + lang;
     const requestOptions = {
       method: 'POST',
       headers: {'Content-Type': 'application/text'},
