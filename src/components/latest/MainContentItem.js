@@ -9,6 +9,7 @@ import Paper from '@mui/material/Paper';
 import Chip from '@mui/material/Chip';
 import Avatar from "@mui/material/Avatar/Avatar";
 import moment from 'moment';
+import {AppRoutes} from "../../routes";
 
 class MainContentItem extends Component {
 
@@ -19,7 +20,7 @@ class MainContentItem extends Component {
       return (
         <Paper className={classes.paper}>
           <div style={{padding: '20px'}}>
-            <Link className={classes.itemLink} to={"/profile/" + title}>
+            <Link className={classes.itemLink} to={AppRoutes.entity + title}>
               <table width='100%'>
                 <tbody>
                 <tr>
@@ -38,7 +39,7 @@ class MainContentItem extends Component {
                 variant="body2"
                 color="textSecondary"
               >
-                {moment(subtitle,'DD  MMM YYYY h:mm A').fromNow()}
+                {moment(subtitle, 'DD  MMM YYYY h:mm A').fromNow()}
               </Typography>
               <Typography
                 className={"news-description"}
@@ -51,7 +52,7 @@ class MainContentItem extends Component {
             </Link>
             {categories ? categories.map((category) => (
               ignoreCategories.includes(category) ? null :
-                <Link key={category} className={classes.link} to={"/search/" + category + ":"}>
+                <Link key={category} className={classes.link} to={AppRoutes.search + category + ":"}>
                   <Chip style={{cursor: 'pointer'}}
                         size="small"
                         label={category}
@@ -68,20 +69,20 @@ class MainContentItem extends Component {
         <ListItem alignItems="flex-start">
           <Grid container width={1}>
             <Grid item md={5}>
-              <Link className={classes.itemLink} to={"/profile/" + title}>
+              <Link className={classes.itemLink} to={AppRoutes.entity + title}>
                 <img alt={title} src={imageUrl === "" ? "avatar.png" : imageUrl} className={classes.searchAvatar}/>
               </Link>
             </Grid>
             <Grid item md={7}>
               <div style={{padding: '20px'}}>
-                <Link className={classes.itemLink} to={"/profile/" + title}>
+                <Link className={classes.itemLink} to={AppRoutes.entity + title}>
                   <Typography className={classes.mainContentItemTitle} variant='h4'><span
                     className={"news-title"}>{title}</span></Typography>
                   <Typography
                     variant="body2"
                     color="textSecondary"
                   >
-                    {moment(subtitle,'DD  MMM YYYY h:mm A').fromNow()}
+                    {moment(subtitle, 'DD  MMM YYYY h:mm A').fromNow()}
                   </Typography>
                   <Typography
                     className={"news-description"}
@@ -95,14 +96,14 @@ class MainContentItem extends Component {
                 <div>
                   {categories ? categories.map((category) => (
                     ignoreCategories.includes(category) ? null :
-                      <Link key={category} className={classes.link} to={"/search/" + category + ":"}>
+                      <Link key={category} className={classes.link} to={AppRoutes.search + category + ":"}>
                         <Chip style={{cursor: 'pointer'}}
                               size="small"
                               label={category}
                               variant="outlined"
                         />
                       </Link>
-                    )) : null}
+                  )) : null}
                 </div>
                 {/*<RelatedLinkList links={links}/>*/}
               </div>

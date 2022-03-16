@@ -7,6 +7,7 @@ import {withStyles} from "@mui/styles";
 import Styles from "../../styles/Styles";
 import Typography from "@mui/material/Typography/Typography";
 import moment from "moment";
+import {AppRoutes} from "../../routes";
 
 class TrendingListItem extends Component {
 
@@ -22,11 +23,11 @@ class TrendingListItem extends Component {
     return (
         <ListItem alignItems="flex-start">
           <ListItemAvatar>
-            <Link className={classes.itemLink} to={"/profile/" + title}>
+            <Link className={classes.itemLink} to={AppRoutes.entity + title}>
               <Avatar alt={title} src={imageUrl === "" ? defaultImageUrl : imageUrl}/>
             </Link>
           </ListItemAvatar>
-          <Link className={classes.itemLink} to={"/profile/" + title}>
+          <Link className={classes.itemLink} to={AppRoutes.entity + title}>
             <Typography className={classes.trendingItemTitle} variant='h6'><span className={"news-title"}>{title}</span></Typography>
             <Typography
               variant="body2"

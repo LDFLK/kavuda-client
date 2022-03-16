@@ -16,6 +16,7 @@ import {Locales} from "../constants/Locales";
 import {translateEntityContent, translateText} from "../../functions/translator/Translate";
 import {Facebook} from 'react-content-loader'
 import {appendStateObj} from "../../functions/AppendStateObj";
+import {AppRoutes} from "../../routes";
 
 function Profile(props) {
   const {classes, locale} = props;
@@ -107,7 +108,7 @@ function Profile(props) {
                 <div style={{paddingTop: '10px'}}>
                   {loadedEntity?.categories?.map((category) => (
                     ignoreCategories?.includes(category) ? null :
-                      <Link key={category} className={classes.link} to={"/search/" + category + ":"}>
+                      <Link key={category} className={classes.link} to={AppRoutes.search + category + ":"}>
                         <Chip style={{cursor: 'pointer'}}
                               size="small"
                               label={category}
