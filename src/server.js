@@ -1,5 +1,5 @@
 export const ApiRoutes = {
-  images: '/images',
+  images: 'images',
   search: 'api/search?query=',
   links: 'api/links/',
   relations: 'api/relations/',
@@ -11,9 +11,9 @@ export function getServerUrl(url) {
 }
 
 export const translatorRoutes = {
-  translate: '/translate'
+  translate: 'translate'
 };
 
 export function getTranslatorUrl(url) {
-  return process.env.TRANSLATOR_URL + url + '?lang='
+  return process.env.REACT_APP_TRANSLATOR_URL + url + '?lang='
 }
