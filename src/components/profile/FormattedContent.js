@@ -74,7 +74,7 @@ class FormattedContent extends Component {
     const {content, key} = this.props;
     return (
       <div className={"mainContent"} key={key}>
-       {this.formatValues(content)}
+        {this.formatValues(content)}
       </div>
     );
   }

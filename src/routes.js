@@ -1,5 +1,5 @@
-export const AppRoutes={
-  home:'/',
-  search:'/search/',
-  entity:'/profile/',
+export const AppRoutes = {
+  home: '/',
+  search: '/search/',
+  entity: '/profile/',
 };

@@ -5,12 +5,12 @@ import Styles from "../../styles/Styles"
 
 function Footer(props) {
 
-    const {classes} = props;
-    return (
-        <Typography className={classes.footer} component="p" color="textSecondary">
-          A Social Network of High Profile Personals and Organizations in Sri Lanka.
-        </Typography>
-    )
+  const {classes} = props;
+  return (
+    <Typography className={classes.footer} component="p" color="textSecondary">
+      A Social Network of High Profile Personals and Organizations in Sri Lanka.
+    </Typography>
+  )
 }
 
 export default withStyles(Styles)(Footer);

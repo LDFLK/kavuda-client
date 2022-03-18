@@ -40,22 +40,22 @@ class InfiniteList extends Component {
       <div>
         {list}
         {Array.isArray(listItems) &&
-          <div style={{textAlign: 'center'}}>
-            {isLoading &&
-              <BeatLoader
-                sizeUnit={"px"}
-                size={14}
-                color={'#36D7B7'}
-                loading={this.props.loading}
-              />}
-            {!(isLoading || listEnded) ?
-              <Tooltip title={'view more'} aria-label="add">
+        <div style={{textAlign: 'center'}}>
+          {isLoading &&
+          <BeatLoader
+            sizeUnit={"px"}
+            size={14}
+            color={'#36D7B7'}
+            loading={this.props.loading}
+          />}
+          {!(isLoading || listEnded) ?
+            <Tooltip title={'view more'} aria-label="add">
               <Button style={{width: "100%"}} onClick={() => this.loadResults()}><img alt={"view more"} width={"15px"}
                                                                                       src={downArrow}/></Button>
-              </Tooltip>
-              : <Button style={{width: "100%"}}> </Button>
-            }
-          </div>}
+            </Tooltip>
+            : <Button style={{width: "100%"}}> </Button>
+          }
+        </div>}
       </div>
     )
   }
