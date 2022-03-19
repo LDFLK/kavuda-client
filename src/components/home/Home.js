@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 import TrendingList from "../trending/TrendingList";
 import MainContentList from "../latest/MainContentList";
 import Typography from '@mui/material/Typography';
-import InfiniteList from "../infinite_list/InfiniteList";
+import InfiniteList from "../infinite-list/infinite-list";
 import {getResults} from "../../functions/api/GetQueries";
 import {ApiRoutes, getServerUrl} from "../../server";
 

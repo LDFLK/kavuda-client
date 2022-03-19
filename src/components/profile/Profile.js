@@ -8,7 +8,7 @@ import MainContentList from "../latest/MainContentList"
 import Typography from '@mui/material/Typography';
 import FormattedContent from "./FormattedContent";
 import {Link, useParams} from "react-router-dom";
-import InfiniteList from "../infinite_list/InfiniteList";
+import InfiniteList from "../infinite-list/infinite-list";
 import Chip from "@mui/material/Chip/Chip";
 import extractHostname from "../../functions/ExtractHostnames";
 import {getEntity, getResults} from "../../functions/api/GetQueries";
