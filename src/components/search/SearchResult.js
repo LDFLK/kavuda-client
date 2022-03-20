@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {withStyles} from "@mui/styles";
 import Styles from "../../styles/Styles"
 import Grid from '@mui/material/Grid';
-import TrendingList from "../trending/TrendingList";
+import TrendingList from "../trending-list/TrendingList";
 import MainContentList from "../latest/MainContentList"
 import Typography from "@mui/material/Typography/Typography";
 import InfiniteList from "../infinite-list/infinite-list";
