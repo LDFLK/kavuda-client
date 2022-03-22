@@ -26,14 +26,7 @@ function SearchResult(props) {
 
   async function getSearchResults(initialSearch) {
     if (searchKey.length > 1) {
-      let searchUrl = getServerUrl(ApiRoutes.search);
-      if (searchKey.includes(":")) {
-        let searchArray = searchKey.split(":", 2);
-        searchUrl += searchArray[1] + '&categories=' + searchArray[0];
-      } else {
-        searchUrl += searchKey;
-      }
-      let result = await getResults(searchUrl, initialSearch, searchResults, searchPage, setSearchResults, setSearchPage, 15);
+      let result = await getResults(searchKey, initialSearch, searchResults, searchPage, setSearchResults, setSearchPage, 15);
       setIsLoading(false);
       return result
     }
