@@ -3,7 +3,7 @@ import {withStyles} from "@mui/styles";
 import Styles from "../../styles/Styles"
 import Grid from '@mui/material/Grid';
 import TrendingList from "../trending-list/TrendingList";
-import {MainContentList, InfiniteList} from "@lsflk/gig-client-shared/components";
+import {InfiniteList, MainContentList} from "@lsflk/gig-client-shared/components";
 import Typography from '@mui/material/Typography';
 import {getResults} from "@lsflk/gig-client-shared/functions";
 import {ApiRoutes, getServerUrl} from "@lsflk/gig-client-shared/routes";
