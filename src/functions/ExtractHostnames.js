@@ -1,5 +1,5 @@
 export default function extractHostname(url) {
-  var hostname;
+  let hostname;
   //find & remove protocol (http, ftp, etc.) and get hostname
 
   if (url.indexOf("//") > -1) {

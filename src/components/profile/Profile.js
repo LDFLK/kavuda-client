@@ -4,20 +4,18 @@ import Styles from "../../styles/Styles"
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import TrendingList from "../trending-list/TrendingList";
-import MainContentList from "../latest/MainContentList"
+import {FormattedContentViewer, InfiniteList, MainContentList} from "@lsflk/gig-client-shared/components"
 import Typography from '@mui/material/Typography';
-import FormattedContent from "./FormattedContent";
 import {Link, useParams} from "react-router-dom";
-import InfiniteList from "../infinite-list/infinite-list";
 import Chip from "@mui/material/Chip/Chip";
 import extractHostname from "../../functions/ExtractHostnames";
-import {getEntity, getResults} from "../../functions/api/GetQueries";
+import {getEntity, getResults} from "@lsflk/gig-client-shared/functions";
 import {Locales} from "../constants/Locales";
 import {translateEntityContent, translateText} from "../../functions/translator/Translate";
 import {Facebook} from 'react-content-loader'
 import {appendStateObj} from "../../functions/AppendStateObj";
 import {AppRoutes} from "../../routes";
-import {ApiRoutes, getServerUrl} from "../../server";
+import {ApiRoutes, getServerUrl} from "@lsflk/gig-client-shared/routes";
 
 function Profile(props) {
   const {classes, locale} = props;
@@ -73,7 +71,7 @@ function Profile(props) {
     }
 
   });
-
+  
   // ignore showing category chips for the following in kavuda
   const ignoreCategories = ["News", "PERSON", "ORGANIZATION", "LOCATION", "arbitrary-entities", "OrgChart-Level1"];
   if (loadedEntity) {
@@ -122,9 +120,9 @@ function Profile(props) {
             </Grid>
             <br/>
             <img src={loadedEntity.image_url} alt={loadedEntity.title} width="100%"/>
-            {loadedEntity.attributes && loadedEntity.attributes.content && translatedContent[locale] ?
-              <FormattedContent key={loadedEntity.attributes.content.name}
-                                content={translatedContent[locale]}/>
+            {loadedEntity?.attributes?.content && translatedContent[locale] ?
+              <FormattedContentViewer key={loadedEntity?.attributes?.content?.name}
+                                      content={translatedContent[locale]}/>
               : <Facebook/>}
           </Paper>
         </Grid>
