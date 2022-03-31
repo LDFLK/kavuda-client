@@ -15,7 +15,7 @@ import {translateEntityContent, translateText} from "../../functions/translator/
 import {Facebook} from 'react-content-loader'
 import {appendStateObj} from "../../functions/AppendStateObj";
 import {AppRoutes} from "../../routes";
-import {ApiRoutes, getServerUrl} from "@lsflk/gig-client-shared/routes";
+import {ApiRoutes} from "@lsflk/gig-client-shared/routes";
 
 function Profile(props) {
   const {classes, locale} = props;
@@ -37,14 +37,36 @@ function Profile(props) {
     getRelatedResults(true);
   }
 
-  function getInternalLinks(initialSearch) {
-    let searchUrl = getServerUrl(ApiRoutes.links) + encodeURI(title) + "?";
-    getResults(title,ApiRoutes.links, initialSearch, internalLinks, internalPage, setInternalLinks, setInternalPage, 15);
+  function getInternalLinks(page = 1) {
+    getResults(title, ApiRoutes.links, page).then((data) => {
+      if (data === null && page === 1) {
+        setInternalLinks([]);
+        setInternalPage(1)
+      }
+      else if (page === 1 || !internalLinks) {
+        setInternalLinks(data);
+        setInternalPage(2)
+      } else {
+        setInternalLinks([...internalLinks, ...data]);
+        setInternalPage(internalPage + 1);
+      }
+    });
   }
 
-  function getRelatedResults(initialSearch) {
-    let searchUrl = getServerUrl(ApiRoutes.relations) + encodeURI(title) + "?";
-    getResults(searchUrl, initialSearch, relatedLinks, relatedPage, setRelatedLinks, setRelatedPage, 15);
+  function getRelatedResults(page = 1) {
+    getResults(title, ApiRoutes.relations, page).then((data) => {
+      if (data === null && page === 1) {
+        setRelatedLinks([]);
+        setRelatedPage(1)
+      }
+      else if (page === 1 || !relatedLinks) {
+        setRelatedLinks(data);
+        setRelatedPage(2)
+      } else {
+        setRelatedLinks([...relatedLinks, ...data]);
+        setRelatedPage(relatedPage + 1);
+      }
+    });
   }
 
   function updateTranslatedStates(text, lang) {
@@ -81,9 +103,9 @@ function Profile(props) {
         <Grid item xs={3} className={classes.leftContentColumn}>
           <Typography variant="h4" color="inherit" className={classes.headerText} noWrap>Article Mentions</Typography>
           <InfiniteList listItems={internalLinks}
-                        getResultItems={getInternalLinks}
+                        getResultItems={() => getInternalLinks(internalPage)}
                         searchParam={loadedEntity.title}
-                        list={<TrendingList listItems={internalLinks} getResults={getInternalLinks}
+                        list={<TrendingList listItems={internalLinks} getResults={() => getInternalLinks(internalPage)}
                         />}
           />
         </Grid>
@@ -102,7 +124,7 @@ function Profile(props) {
                 </Typography>}
                 {loadedEntity?.attributes &&
                 <Typography variant="body2">
-                  {loadedEntity?.attributes?.author?.values[0]?.value_string}
+                  {loadedEntity?.attributes?.author?.values[0]?.value_string} -
                   {new Date(loadedEntity?.attributes?.date?.values[0]?.value_string).toDateString()}
                 </Typography>}
                 <div style={{paddingTop: '10px'}}>
@@ -130,7 +152,7 @@ function Profile(props) {
         <Grid item xs={3} className={classes.rightContentColumn}>
           <Typography variant="h4" color="inherit" className={classes.headerText} noWrap>Related Articles</Typography>
           <InfiniteList listItems={relatedLinks}
-                        getResultItems={() => getRelatedResults(loadedEntity.title)}
+                        getResultItems={() => getRelatedResults(relatedPage)}
                         list={<MainContentList listItems={relatedLinks} vertical={true}/>}
           />
         </Grid>
