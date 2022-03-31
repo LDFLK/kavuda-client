@@ -33,8 +33,8 @@ function Profile(props) {
     setLoadedEntity(data);
     setTranslatedTitle({[Locales.en]: data.title});
     setTranslatedContent({[Locales.en]: data.attributes.content ? data.attributes.content.values : []});
-    getInternalLinks(true);
-    getRelatedResults(true);
+    getInternalLinks();
+    getRelatedResults();
   }
 
   function getInternalLinks(page = 1) {
@@ -82,18 +82,16 @@ function Profile(props) {
   }
 
   useEffect(() => {
-    if (!loadedEntity || loadedEntity.title !== title) {
-      console.log("get profile entity:", title);
-      getEntity(title, updateEntityState).then((result) => updateEntityState(result));
-    }
-    if (loadedEntity) {
-      if (!(locale in translatedTitle)) {
-        updateTranslatedStates(title, locale);
-        updateTranslatedContent(loadedEntity, locale);
-      }
-    }
+    console.log("get profile entity:", title);
+    getEntity(title).then((result) => updateEntityState(result));
+  }, [title]);
 
-  });
+  useEffect(() => {
+    if (!(locale in translatedTitle)) {
+      updateTranslatedStates(title, locale);
+      updateTranslatedContent(loadedEntity, locale);
+    }
+  }, [locale, loadedEntity]);
 
   // ignore showing category chips for the following in kavuda
   const ignoreCategories = ["News", "PERSON", "ORGANIZATION", "LOCATION", "arbitrary-entities", "OrgChart-Level1"];
@@ -153,7 +151,10 @@ function Profile(props) {
           <Typography variant="h4" color="inherit" className={classes.headerText} noWrap>Related Articles</Typography>
           <InfiniteList listItems={relatedLinks}
                         getResultItems={() => getRelatedResults(relatedPage)}
-                        list={<MainContentList listItems={relatedLinks} vertical={true}/>}
+                        list={<MainContentList listItems={relatedLinks}
+                                               entityRoute={AppRoutes.entity}
+                                               searchRoute={AppRoutes.search}
+                                               vertical={true}/>}
           />
         </Grid>
       </Grid>
