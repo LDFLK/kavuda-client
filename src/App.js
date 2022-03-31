@@ -38,7 +38,7 @@ function App() {
   }
 
   function getTrendingResults(page = 1) {
-    getResults('&categories=News', ApiRoutes.search, page).then((data) => {
+    getResults('News:', ApiRoutes.search, page).then((data) => {
       if (data === null && page === 1) {
         setTrendingResults([]);
         setTrendingPage(1)

@@ -16,7 +16,7 @@ function Home(props) {
   const [homePage, setHomePage] = useState(0);
 
   function getHomeResults(page = 1) {
-    getResults('&categories=News', ApiRoutes.search, page).then((data) => {
+    getResults('News:', ApiRoutes.search, page).then((data) => {
       if (data === null && page === 1) {
         setHomeResults([]);
         setHomePage(1)
