@@ -29,14 +29,6 @@ function Profile(props) {
   const [relatedPage, setRelatedPage] = useState(0);
 
 
-  function updateEntityState(data) {
-    setLoadedEntity(data);
-    setTranslatedTitle({[Locales.en]: data.title});
-    setTranslatedContent({[Locales.en]: data.attributes.content ? data.attributes.content.values : []});
-    getInternalLinks();
-    getRelatedResults();
-  }
-
   function getInternalLinks(page = 1) {
     getResults(title, ApiRoutes.links, page).then((data) => {
       if (data === null && page === 1) {
@@ -82,13 +74,21 @@ function Profile(props) {
   }
 
   useEffect(() => {
-    console.log("get profile entity:", title);
-    getEntity(title).then((result) => updateEntityState(result));
+    if (title !== loadedEntity?.title) {
+      console.log("get profile entity:", title);
+      getEntity(title).then((result) => {
+        setLoadedEntity(result);
+        setTranslatedTitle({[Locales.en]: result.title});
+        setTranslatedContent({[Locales.en]: result.attributes.content ? result.attributes.content.values : []});
+        getInternalLinks();
+        getRelatedResults();
+      });
+    }
   }, [title]);
 
   useEffect(() => {
-    if (!(locale in translatedTitle)) {
-      updateTranslatedStates(title, locale);
+    if (!(locale in translatedTitle) && loadedEntity) {
+      updateTranslatedStates(loadedEntity.title, locale);
       updateTranslatedContent(loadedEntity, locale);
     }
   }, [locale, loadedEntity]);
