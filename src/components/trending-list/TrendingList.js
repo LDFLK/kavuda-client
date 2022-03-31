@@ -5,6 +5,7 @@ import Styles from "../../styles/Styles";
 import TrendingListItem from "./TrendingListItem";
 import Typography from "@mui/material/Typography/Typography";
 import Moment from "moment";
+import {AppDateFormat, ZeroDateString} from "../constants/DateFormats";
 
 class TrendingList extends Component {
 
@@ -16,9 +17,9 @@ class TrendingList extends Component {
           listItems.map((item) => (
             <TrendingListItem key={item.title}
                               imageUrl={item.image_url} title={item.title}
-                              subtitle={item.source_date !== "0001-01-01T00:00:00Z" ?
-                                Moment(item.source_date).format('DD  MMM YYYY h:mm A') :
-                                Moment(item.updated_at).format('DD  MMM YYYY h:mm A')}
+                              subtitle={item.source_date !== ZeroDateString ?
+                                Moment(item.source_date).format(AppDateFormat) :
+                                Moment(item.updated_at).format(AppDateFormat)}
                               categories={item.categories}
             />
 

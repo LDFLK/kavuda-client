@@ -29,39 +29,40 @@ function Profile(props) {
   const [relatedPage, setRelatedPage] = useState(0);
 
 
-  async function updateEntityState(data) {
+  function updateEntityState(data) {
     setLoadedEntity(data);
     setTranslatedTitle({[Locales.en]: data.title});
     setTranslatedContent({[Locales.en]: data.attributes.content ? data.attributes.content.values : []});
-    await getInternalLinks(true);
-    await getRelatedResults(true);
+    getInternalLinks(true);
+    getRelatedResults(true);
   }
 
-
-  async function updateTranslatedStates(text, lang) {
-    const translatedText = await translateText(text, lang);
-    appendStateObj(translatedTitle, setTranslatedTitle, lang, translatedText);
-  }
-
-  async function getInternalLinks(initialSearch) {
+  function getInternalLinks(initialSearch) {
     let searchUrl = getServerUrl(ApiRoutes.links) + encodeURI(title) + "?";
-    await getResults(searchUrl, initialSearch, internalLinks, internalPage, setInternalLinks, setInternalPage, 15);
+    getResults(title,ApiRoutes.links, initialSearch, internalLinks, internalPage, setInternalLinks, setInternalPage, 15);
   }
 
-  async function getRelatedResults(initialSearch) {
+  function getRelatedResults(initialSearch) {
     let searchUrl = getServerUrl(ApiRoutes.relations) + encodeURI(title) + "?";
-    await getResults(searchUrl, initialSearch, relatedLinks, relatedPage, setRelatedLinks, setRelatedPage, 15);
+    getResults(searchUrl, initialSearch, relatedLinks, relatedPage, setRelatedLinks, setRelatedPage, 15);
   }
 
-  async function updateTranslatedContent(entity, lang) {
-    const translated_values = await translateEntityContent(entity, lang);
-    appendStateObj(translatedContent, setTranslatedContent, locale, translated_values);
+  function updateTranslatedStates(text, lang) {
+    translateText(text, lang).then((translatedText) =>
+      appendStateObj(translatedTitle, setTranslatedTitle, lang, translatedText)
+    )
+  }
+
+  function updateTranslatedContent(entity, lang) {
+    translateEntityContent(entity, lang).then((translated_values) =>
+      appendStateObj(translatedContent, setTranslatedContent, locale, translated_values)
+    )
   }
 
   useEffect(() => {
     if (!loadedEntity || loadedEntity.title !== title) {
       console.log("get profile entity:", title);
-      getEntity(title, updateEntityState);
+      getEntity(title, updateEntityState).then((result) => updateEntityState(result));
     }
     if (loadedEntity) {
       if (!(locale in translatedTitle)) {
@@ -71,7 +72,7 @@ function Profile(props) {
     }
 
   });
-  
+
   // ignore showing category chips for the following in kavuda
   const ignoreCategories = ["News", "PERSON", "ORGANIZATION", "LOCATION", "arbitrary-entities", "OrgChart-Level1"];
   if (loadedEntity) {

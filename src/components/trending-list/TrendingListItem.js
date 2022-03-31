@@ -8,23 +8,26 @@ import Styles from "../../styles/Styles";
 import Typography from "@mui/material/Typography/Typography";
 import moment from "moment";
 import {AppRoutes} from "../../routes";
+import {AppDateFormat} from "../constants/DateFormats";
+import {EntityTypes} from "../constants/EntityTypes";
+import defaultImage from "../../resources/images/unknown.png"
 
 class TrendingListItem extends Component {
 
   render() {
     const {classes, title, subtitle, imageUrl, categories} = this.props;
-    let defaultImageUrl = "unknown.png";
-    if (categories.includes("PERSON")) {
-      defaultImageUrl = "avatar.png"
-    } else if (categories.includes("ORGANIZATION")) {
-      defaultImageUrl = "organization.png"
+    let entityImage = defaultImage;
+    for (let entityType of Object.entries(EntityTypes)) {
+      if (categories.includes(entityType.value)) {
+        return entityImage = entityType.image;
+      }
     }
 
     return (
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
           <Link className={classes.itemLink} to={AppRoutes.entity + title}>
-            <Avatar alt={title} src={imageUrl === "" ? defaultImageUrl : imageUrl}/>
+            <Avatar alt={title} src={imageUrl === "" ? entityImage : imageUrl}/>
           </Link>
         </ListItemAvatar>
         <Link className={classes.itemLink} to={AppRoutes.entity + title}>
@@ -34,7 +37,7 @@ class TrendingListItem extends Component {
             variant="body2"
             color="textSecondary"
           >
-            {moment(subtitle, 'DD  MMM YYYY h:mm A').fromNow()}
+            {moment(subtitle, AppDateFormat).fromNow()}
           </Typography>
         </Link>
       </ListItem>
