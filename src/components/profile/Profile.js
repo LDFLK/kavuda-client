@@ -4,7 +4,7 @@ import Styles from "../../styles/Styles"
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import TrendingList from "../trending-list/TrendingList";
-import {FormattedContentViewer, InfiniteList, MainContentList} from "@lsflk/gig-client-shared/components"
+import {FormattedContentViewer, InfiniteList} from "@lsflk/gig-client-shared/components"
 import Typography from '@mui/material/Typography';
 import {Link, useParams} from "react-router-dom";
 import Chip from "@mui/material/Chip/Chip";
@@ -100,11 +100,14 @@ function Profile(props) {
       <Grid className={classes.container} container width={1}>
         <Grid item xs={3} className={classes.leftContentColumn}>
           <Typography variant="h4" color="inherit" className={classes.headerText} noWrap>Article Mentions</Typography>
-          <InfiniteList listItems={internalLinks}
-                        getResultItems={() => getInternalLinks(internalPage)}
-                        searchParam={loadedEntity.title}
-                        list={<TrendingList listItems={internalLinks} getResults={() => getInternalLinks(internalPage)}
-                        />}
+          <InfiniteList
+            searchKey={loadedEntity.title}
+            getResults={(page = 1) => getResults(loadedEntity.title, ApiRoutes.links, page)}
+            list={(results) => <TrendingList
+              elevation={3}
+              listItems={results}
+              entityRoute={AppRoutes.entity}
+              searchRoute={AppRoutes.search}/>}
           />
         </Grid>
         < Grid item xs={6} className={classes.mainContentColumn}>
@@ -149,13 +152,16 @@ function Profile(props) {
         </Grid>
         <Grid item xs={3} className={classes.rightContentColumn}>
           <Typography variant="h4" color="inherit" className={classes.headerText} noWrap>Related Articles</Typography>
-          <InfiniteList listItems={relatedLinks}
-                        getResultItems={() => getRelatedResults(relatedPage)}
-                        list={<MainContentList listItems={relatedLinks}
-                                               entityRoute={AppRoutes.entity}
-                                               searchRoute={AppRoutes.search}
-                                               vertical={true}/>}
+          <InfiniteList
+            searchKey={loadedEntity.title}
+            getResults={(page = 1) => getResults(loadedEntity.title, ApiRoutes.relations, page)}
+            list={(results) => <TrendingList
+              elevation={3}
+              listItems={results}
+              entityRoute={AppRoutes.entity}
+              searchRoute={AppRoutes.search}/>}
           />
+
         </Grid>
       </Grid>
     );

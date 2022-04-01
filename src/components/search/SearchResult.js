@@ -8,6 +8,7 @@ import {getResults} from "@lsflk/gig-client-shared/functions";
 import {useParams} from "react-router-dom";
 import {AppRoutes} from "../../routes";
 import {ApiRoutes} from "@lsflk/gig-client-shared/routes"
+import TrendingList from "../trending-list/TrendingList";
 
 function SearchResult(props) {
 
@@ -27,7 +28,7 @@ function SearchResult(props) {
         <InfiniteList
           searchKey={'News:'}
           getResults={(page = 1) => getResults('News:', ApiRoutes.search, page)}
-          list={(results) => <MainContentList
+          list={(results) => <TrendingList
             elevation={3}
             listItems={results}
             entityRoute={AppRoutes.entity}
