@@ -29,7 +29,6 @@ function Header(props) {
   }
 
   useEffect(() => {
-    console.log(searchParam);
     if (initialLoad && searchParam && searchKey === "") {
       setSearchKey(searchParam);
       setInitialLoad(false);
