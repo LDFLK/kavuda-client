@@ -14,6 +14,19 @@ const appTheme = createTheme({
   palette: {
     mode: 'light',
   },
+  typography: {
+    fontSize: 12,
+    h1: {
+      fontSize: 80
+    },
+    h3: {
+      marginLeft: 24,
+      fontSize: 30
+    },
+    h4: {
+      fontSize: 24
+    }
+  },
 });
 
 const localeToken = 'kavuda-locale';

@@ -16,7 +16,7 @@ function Home(props) {
   return (
     <Grid className={classes.container} container width={1}>
       <Grid item xs={3} className={classes.leftContentColumn}>
-        <Typography variant="h4" className={classes.headerText} noWrap>Most Viewed</Typography>
+        <Typography variant="h3" className={classes.headerText}>Most Viewed</Typography>
         <InfiniteList
           searchKey={'News:'}
           getResults={(page = 1) => getResults('News:', ApiRoutes.search, page)}

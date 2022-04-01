@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {withStyles} from "@mui/styles";
 import Styles from "../../styles/Styles"
 import Grid from '@mui/material/Grid';
@@ -24,7 +24,7 @@ function SearchResult(props) {
   return (
     <Grid className={classes.container} container width={1}>
       <Grid item xs={3} className={classes.leftContentColumn}>
-        <Typography variant="body2" color="inherit" className={classes.headerText} noWrap>Most Viewed</Typography>
+        <Typography variant="h3" className={classes.headerText}>Most Viewed</Typography>
         <InfiniteList
           searchKey={'News:'}
           getResults={(page = 1) => getResults('News:', ApiRoutes.search, page)}

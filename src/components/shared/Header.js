@@ -41,7 +41,7 @@ function Header(props) {
         <Grid container width={1} style={{textAlign: 'left'}}>
           <Grid item xs={3}>
             <Typography component={Link} to={AppRoutes.home}
-                        variant="h4"
+                        variant="h3"
                         color="inherit" noWrap>
               Kavuda.lk
             </Typography>

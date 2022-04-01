@@ -40,11 +40,6 @@ const Styles = theme => ({
         borderRadius: 16,
         minHeight: '100vh',
       },
-      headerText: {
-        color: '#000000DE',
-        marginLeft: theme.spacing(2),
-        fontSize: '18px',
-      },
       trendingContainer: {
         margin: 10,
         padding: theme.spacing(2),

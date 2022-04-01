@@ -99,7 +99,7 @@ function Profile(props) {
     return (
       <Grid className={classes.container} container width={1}>
         <Grid item xs={3} className={classes.leftContentColumn}>
-          <Typography variant="h4" color="inherit" className={classes.headerText} noWrap>Article Mentions</Typography>
+          <Typography variant="h3" color="inherit">Article Mentions</Typography>
           <InfiniteList
             searchKey={loadedEntity.title}
             getResults={(page = 1) => getResults(loadedEntity.title, ApiRoutes.links, page)}
@@ -114,7 +114,7 @@ function Profile(props) {
           <Paper className={classes.profilePaper}>
             <Grid container width={1}>
               <Grid item xs={9}>
-                <Typography className={classes.mainContentItemTitle} variant='h4'>
+                <Typography className={classes.mainContentItemTitle} variant='h2'>
                   {translatedTitle[locale] ? translatedTitle[locale] : <Facebook/>}
                 </Typography>
                 {loadedEntity?.source &&
@@ -151,7 +151,7 @@ function Profile(props) {
           </Paper>
         </Grid>
         <Grid item xs={3} className={classes.rightContentColumn}>
-          <Typography variant="h4" color="inherit" className={classes.headerText} noWrap>Related Articles</Typography>
+          <Typography variant="h3" color="inherit">Related Articles</Typography>
           <InfiniteList
             searchKey={loadedEntity.title}
             getResults={(page = 1) => getResults(loadedEntity.title, ApiRoutes.relations, page)}
