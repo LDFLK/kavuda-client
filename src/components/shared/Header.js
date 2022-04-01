@@ -40,7 +40,7 @@ function Header(props) {
       <AppBar className={classes.appBar} style={{backgroundColor: '#282c34'}} position="sticky">
         <Grid container width={1} style={{textAlign: 'left'}}>
           <Grid item xs={3}>
-            <Typography component={Link} to={AppRoutes.home} style={{textDecoration: 'none'}}
+            <Typography component={Link} to={AppRoutes.home}
                         variant="h4"
                         color="inherit" noWrap>
               Kavuda.lk
