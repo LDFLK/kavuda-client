@@ -37,6 +37,7 @@ jobs:
         npm run deploy
       env:
         REACT_APP_SERVER_URL: https://api.gigdemo.opensource.lk/
+        REACT_APP_TRANSLATOR_URL: https://gigtr.gigdemo.opensource.lk/
         PORT: 445
         user_name: 'github-actions[bot]'
         user_email: 'github-actions[bot]@users.noreply.github.com'
