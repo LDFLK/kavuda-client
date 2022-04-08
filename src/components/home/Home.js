@@ -2,11 +2,11 @@ import React from "react";
 import {withStyles} from "@mui/styles";
 import Styles from "../../styles/Styles"
 import Grid from '@mui/material/Grid';
-import {InfiniteList, MainContentList} from "@lsflk/gig-client-shared/components";
+import {InfiniteList, MainContentList} from "gig-client-shared/components";
 import Typography from '@mui/material/Typography';
-import {getResults} from "@lsflk/gig-client-shared/functions";
+import {getResults} from "gig-client-shared/functions";
 import {AppRoutes} from "../../routes";
-import {ApiRoutes} from "@lsflk/gig-client-shared/routes"
+import {ApiRoutes} from "gig-client-shared/routes"
 import TrendingList from "../trending-list/TrendingList";
 
 function Home(props) {

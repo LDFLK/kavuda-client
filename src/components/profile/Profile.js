@@ -4,18 +4,18 @@ import Styles from "../../styles/Styles"
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import TrendingList from "../trending-list/TrendingList";
-import {FormattedContentViewer, InfiniteList} from "@lsflk/gig-client-shared/components"
+import {FormattedContentViewer, InfiniteList} from "gig-client-shared/components"
 import Typography from '@mui/material/Typography';
 import {Link, useParams} from "react-router-dom";
 import Chip from "@mui/material/Chip/Chip";
 import extractHostname from "../../functions/ExtractHostnames";
-import {getEntity, getResults} from "@lsflk/gig-client-shared/functions";
+import {getEntity, getResults} from "gig-client-shared/functions";
 import {Locales} from "../constants/Locales";
 import {translateEntityContent, translateText} from "../../functions/translator/Translate";
 import {Facebook} from 'react-content-loader'
 import {appendStateObj} from "../../functions/AppendStateObj";
 import {AppRoutes} from "../../routes";
-import {ApiRoutes} from "@lsflk/gig-client-shared/routes";
+import {ApiRoutes} from "gig-client-shared/routes";
 
 function Profile(props) {
   const {classes, locale} = props;
