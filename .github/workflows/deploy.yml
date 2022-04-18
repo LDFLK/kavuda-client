@@ -38,6 +38,7 @@ jobs:
         git remote set-url origin https://${github_token}@github.com/${repository}
         npm run deploy
       env:
+        CI: false
         REACT_APP_SERVER_URL: https://api.gigdemo.opensource.lk/
         REACT_APP_TRANSLATOR_URL: https://gigtr.gigdemo.opensource.lk/
         PORT: 445
