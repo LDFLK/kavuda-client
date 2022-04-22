@@ -19,7 +19,7 @@ class TrendingListItem extends Component {
     let entityImage = defaultImage;
     for (let entityType of Object.entries(EntityTypes)) {
       if (categories.includes(entityType.value)) {
-        return entityImage = entityType.image;
+        entityImage = entityType.image;
       }
     }
 
