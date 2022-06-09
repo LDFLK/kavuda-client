@@ -22,7 +22,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.DOCKER_PASSWORD_79D031E2_872E_4D0C_A1ED_F42C49F38880 }}
       - name: Build the Docker image
-        run: docker build --tag ${SERVICE_NAME}:${{steps.event-version.outputs.SOURCE_TAG }} --file Dockerfile .
+        run: docker build --tag ${SERVICE_NAME}:${{steps.event-version.outputs.SOURCE_TAG }} --file Dockerfile --build-arg SERVER_URL=${{secrets.GIG_API}} --build-arg TRANSLATOR_URL=${{secrets.GIG_TR_API}}.
       - name: GitHub Image Push
         run: docker push $SERVICE_NAME:${{steps.event-version.outputs.SOURCE_TAG }}
       - name: Platformer Deploy
